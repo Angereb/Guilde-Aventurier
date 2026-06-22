@@ -1,0 +1,26 @@
+CREATE DATABASE guilde_aventurier;
+
+USE guilde_aventurier;
+
+CREATE TABLE utilisateurs (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    uuid CHAR(36) NOT NULL UNIQUE,
+    pseudo VARCHAR(64) NOT NULL UNIQUE,
+    nomCompagnie VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    motDePasse VARCHAR(255) NOT NULL,
+    roles JSON NOT NULL,
+    creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modifierLe DATETIME NULL DEFAULT NULL
+);
+
+CREATE TABLE annonces(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    titre VARCHAR(128) NOT NULL,
+    contenu TEXT NOT NULL,
+    publierLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    creerParId BIGINT NOT NULL, 
+    FOREIGN KEY (creerParId)
+        REFERENCES utilisateurs(id) 
+        ON DELETE CASCADE
+);
