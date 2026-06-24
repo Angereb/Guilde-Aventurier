@@ -1,19 +1,19 @@
 <?php
 
-$page = $_GET['page'] ?? 'accueil';
+$page = $_GET['page'] ?? 'entree';
 
 switch ($page)
 {
-    case 'accueil':
-        require_once __DIR__ . '/Site/Controleurs/accueilcontroleur.php';
+    case 'entree':
+        require_once __DIR__ . '\Site\Controleurs\Accueil\entreecontroleur.php';
         break;
 
     case 'secretariat':
-        require_once __DIR__ . '/Site/Controleurs/secretariatcontroleur.php';
+        require_once __DIR__ . '\Site\Controleurs\Secretariat\secretariatcontroleur.php';
         break;
 
     case 'hall':
-        require_once __DIR__ . '/Site/Controleurs/hallcontroleur.php';
+        require_once __DIR__ . '\Site\Controleurs\Hall\hallcontroleur.php';
         break;
 
     default:
