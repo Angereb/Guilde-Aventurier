@@ -1,0 +1,60 @@
+.entree-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.entree-titre {
+    margin-top: 60px;
+}
+
+.entree-porte {
+    width: 100%;
+    max-width: 320px;
+
+    aspect-ratio: 1/2;
+
+    display: flex;
+    justify-content: center;
+}
+
+.porte-gauche-entree {
+    flex: 1;
+
+    background-image: url("../../Images/Porte\ Gauche.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+}
+
+.porte-droite-entree {
+    flex: 1;
+
+    background-image: url("../../Images/Porte\ Droite.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+}
+
+.panneau-information {
+    width: 75%;
+    aspect-ratio: 1/2;
+
+    background-image: url("../../Images/Panneau\ Information.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+
+    left: 13%;
+    top: 35%;
+}

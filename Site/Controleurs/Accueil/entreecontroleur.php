@@ -2,6 +2,11 @@
 
 $titre = "Entrée";
 
+$css = [
+    "style.css",
+    "Accueil/entree.css"
+];
+
 /*Ouvre une mémoire tampon pour stocker le contenu de la page*/
 ob_start();
 

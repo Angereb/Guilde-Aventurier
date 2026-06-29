@@ -8,6 +8,10 @@ switch ($page)
         require_once __DIR__ . '\Site\Controleurs\Accueil\entreecontroleur.php';
         break;
 
+    case 'information':
+        require_once __DIR__ . '\Site\Controleurs\Accueil\informationcontroleur.php';
+        break;
+
     case 'secretariat':
         require_once __DIR__ . '\Site\Controleurs\Secretariat\secretariatcontroleur.php';
         break;
