@@ -1,16 +1,23 @@
+body {
+    height: 100vh;
+    padding: 2%;
+}
+
 .entree-page {
+    height: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .entree-titre {
-    margin-top: 60px;
+    justify-content: center;
+    text-align: center;
 }
 
 .entree-porte {
-    width: 100%;
-    max-width: 320px;
+    height: 100%;
 
     aspect-ratio: 1/2;
 
