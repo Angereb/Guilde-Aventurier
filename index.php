@@ -16,6 +16,14 @@ switch ($page)
         require_once __DIR__ . '\Site\Controleurs\Secretariat\secretariatcontroleur.php';
         break;
 
+    case 'inscription':
+        require_once __DIR__ . '\Site\Controleurs\Secretariat\inscriptioncontroleur.php';
+        break;
+
+    case 'connexion':
+        require_once __DIR__ . '\Site\Controleurs\Secretariat\connexioncontroleur.php';
+        break;
+
     case 'hall':
         require_once __DIR__ . '\Site\Controleurs\Hall\hallcontroleur.php';
         break;

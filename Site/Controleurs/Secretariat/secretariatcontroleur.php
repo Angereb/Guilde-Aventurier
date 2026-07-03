@@ -2,6 +2,11 @@
 
 $titre = "Secrétariat";
 
+$css = [
+    "style.css",
+    "Secretariat/secretariat.css"
+];
+
 ob_start();
 
 require __DIR__ . '/../../Vus/Secretariat/secretariat.php';

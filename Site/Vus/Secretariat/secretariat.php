@@ -1,5 +1,27 @@
-<h1>Secrétariat</h1>
+<main class="secretariat-page">
+    <header class="secretariat-titre">
+        <h1>
+            <span>Secrétariat</span>
+        </h1>
+    </header>
 
-<p>Bienvenue au secrétariat de la Guilde.</p>
+    <section class="secretariat-bureau">
 
-<a href="?page=hall">Accéder au hall</a>
+        <div class="plateau-bureau">
+            <section class="secretariat-livre">
+
+                <aside class="secretariat-inscription">
+                    <a href="?page=inscription">Inscription</a>
+                </aside>
+
+                <aside class="secretariat-connexion">
+                    <a href="?page=connexion">Connexion</a>
+                </aside>
+
+            </section>
+        </div>
+
+        <div class="pied-bureau"></div>
+
+    </section>
+</main>
