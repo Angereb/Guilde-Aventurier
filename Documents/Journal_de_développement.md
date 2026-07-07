@@ -195,6 +195,19 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 07 Juillet 2026
+
+### Objectifs
+
+- Création de la page d'inscription et de connexion
+
+### Réalisations
+
+- Modification de inscription.php et connexion.php
+- Création des styles pour inscription.css et connexion.css
+
+---
+
 ## Prochaine etape
 
 - Développement du module d'inscription utilisateur.
