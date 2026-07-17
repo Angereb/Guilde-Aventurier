@@ -8,15 +8,15 @@
             </h1>
         </header>
 
-        <form class="inscription-formulaire">
+        <form id="formulaireInscription" class="inscription-formulaire" method="post">
             <div class="inscription-champ">
-                <label for="nomInput" class="inscription-label">Nom :</label>
-                <input type="text" class="inscription-input" id="nomInput" placeholder="Votre nom" name="nom" required>
+                <label for="pseudoInput" class="inscription-label">Pseudo :</label>
+                <input type="text" class="inscription-input" id="pseudoInput" placeholder="Votre nom" name="pseudo" required>
             </div>
 
             <div class="inscription-champ">
                 <label for="nomDeCompagnieInput" class="inscription-label">Nom de la compagnie :</label>
-                <input type="text" class="inscription-input" id="nomDeCompagnieInput" placeholder="Nom de votre compagnie" name="nom_de_compagnie" required>
+                <input type="text" class="inscription-input" id="nomDeCompagnieInput" placeholder="Nom de votre compagnie" name="nomDeCompagnie" required>
             </div>
 
             <div class="inscription-champ">
@@ -26,19 +26,25 @@
 
             <div class="inscription-champ">
                 <label for="motDePasseInput" class="inscription-label">Mot de passe :</label>
-                <input type="password" class="inscription-input" id="motDePasseInput" placeholder="Votre mot de passe" name="mot_de_passe" required>
+                <input type="password" class="inscription-input" id="motDePasseInput" placeholder="Votre mot de passe" name="motDePasse" required>
             </div>
 
             <div class="inscription-champ">
                 <label for="verificationMotDePasseInput" class="inscription-label">Vérification du mot de passe :</label>
-                <input type="password" class="inscription-input" id="verificationMotDePasseInput" placeholder="Confirmez votre mot de passe" name="verification_mot_de_passe" required>
+                <input type="password" class="inscription-input" id="verificationMotDePasseInput" placeholder="Confirmez votre mot de passe" name="verificationMotDePasse" required>
             </div>
         </form>
+
+        <?php if ($messageErreur !== null): ?>
+            <div class="message-erreur">
+                <?= htmlspecialchars($messageErreur) ?>
+            </div>
+        <?php endif; ?>
         
         <div class="inscription-navigation">
             <a href="?page=secretariat" class="retour-secretariat"></a>
 
-            <a href="?page=hall" class="signature-inscription">Signature</a>
+            <button type="submit" form="formulaireInscription" class="signature-inscription">Signature</button>
         </div>
         
     </section>

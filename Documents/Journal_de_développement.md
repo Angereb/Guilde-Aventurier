@@ -208,6 +208,30 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## Prochaine etape
+## 08 au 17 Juillet 2026
 
-- Développement du module d'inscription utilisateur.
+### Objectifs
+
+- Développement du système d'authentification
+
+### Réalisation
+
+- Création de la connexion à la BDD
+- Création du fichier de configuration pour la connexion à la BDD
+- Création du Modèle de classe utilisateur
+- Création du Modèle de clasqe utilisateurModele contenant le CRUD d'utilisateur 
+- Modification des controleurs des pages d'inscription et de connexion pour intégration de l'authentification
+
+### Difficultés
+
+- Mauvaise comprehension des méthodes employer par des frameworks tel Symfony pour gérer les modèles
+
+### Solutions
+
+- Réalisation d'un exercice guider pour décortiquer la gestion des modèles pour créer une version du système artisanal adaptée au projet
+
+---
+
+## Prochaine étape
+
+- Développement du Hall

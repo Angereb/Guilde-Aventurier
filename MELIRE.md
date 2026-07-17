@@ -32,13 +32,13 @@ Dans le cadre de ma formation en Développeur web full stack, j'ai décider de c
 - Page Entrée
 - Page Informations
 - Page Secrétariat
-
-### En cours
 - Inscription
 - Connexion
 
-### A Venir
+### En cours
 - Hall
+
+### A Venir
 - Taverne
 - Dortoir
 - Bibliothèque
