@@ -4,7 +4,8 @@ $titre = "Entrée";
 
 $css = [
     "style.css",
-    "Accueil/entree.css"
+    "Accueil/entree.css",
+    "Composants/entete.css"
 ];
 
 /*Ouvre une mémoire tampon pour stocker le contenu de la page*/

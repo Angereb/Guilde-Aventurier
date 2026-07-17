@@ -6,7 +6,8 @@ $titre = "Connexion";
 
 $css = [
     "style.css",
-    "Secretariat/connexion.css"
+    "Secretariat/connexion.css",
+    "Composants/entete.css"
 ];
 
 $messageErreur = null;

@@ -4,7 +4,8 @@ $titre = "Secrétariat";
 
 $css = [
     "style.css",
-    "Secretariat/secretariat.css"
+    "Secretariat/secretariat.css",
+    "Composants/entete.css"
 ];
 
 ob_start();

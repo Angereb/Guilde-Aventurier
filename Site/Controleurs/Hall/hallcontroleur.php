@@ -4,7 +4,8 @@ $titre = "Hall";
 
 $css = [
     "style.css",
-    "Secretariat/connexion.css"
+    "Secretariat/connexion.css",
+    "Composants/entete.css"
 ];
 
 session_start();

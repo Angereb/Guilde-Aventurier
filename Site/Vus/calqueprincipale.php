@@ -23,6 +23,11 @@
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION["utilisateur"])) {
+        require __DIR__ . "/Composants/entete.php";
+    }
+    ?>
 
     <?= $contenu ?? '' ?>
 

@@ -6,7 +6,8 @@ $titre = "Inscription";
 
 $css = [
     "style.css",
-    "Secretariat/inscription.css"
+    "Secretariat/inscription.css",
+    "Composants/entete.css"
 ];
 
 $messageErreur = null;
