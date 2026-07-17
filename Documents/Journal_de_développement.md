@@ -216,22 +216,26 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ### Réalisation
 
-- Création de la connexion à la BDD
-- Création du fichier de configuration pour la connexion à la BDD
-- Création du Modèle de classe utilisateur
-- Création du Modèle de clasqe utilisateurModele contenant le CRUD d'utilisateur 
-- Modification des controleurs des pages d'inscription et de connexion pour intégration de l'authentification
+- Création de la connexion à la base de données.
+- Création du fichier de configuration de la connexion à la base de données.
+- Création de la classe `Utilisateur`.
+- Création de la classe `UtilisateurModele` contenant le CRUD des utilisateurs.
+- Modification des contrôleurs des pages d'inscription et de connexion afin d'intégrer le système d'authentification.
+- Mise en place de l'inscription des utilisateurs.
+- Mise en place de la connexion des utilisateurs.
+- Redirection des utilisateurs authentifiés vers le Hall.
+- Validation du bon fonctionnement du parcours d'authentification.
 
 ### Difficultés
 
-- Mauvaise comprehension des méthodes employer par des frameworks tel Symfony pour gérer les modèles
+- Compréhension des méthodes utilisées par des frameworks tels que Symfony pour gérer les modèles.
 
 ### Solutions
 
-- Réalisation d'un exercice guider pour décortiquer la gestion des modèles pour créer une version du système artisanal adaptée au projet
+- Réalisation d'un exercice guidé afin de décortiquer le fonctionnement des modèles et de créer une version « artisanale » adaptée au projet.
 
 ---
 
 ## Prochaine étape
 
-- Développement du Hall
+- Développement du Hall.
