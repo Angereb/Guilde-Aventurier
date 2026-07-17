@@ -236,6 +236,21 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 17 Juillet 2026
+
+### Objectifs
+
+- Construction du header
+
+### Réalisation
+
+- Création d'un fichier Composant entete.php s'affichant uniquement si une session est ouverte
+- Création des liens de navigation vers de futur pages 
+- Création du système du déconnexion
+- Préparation du fichier entete.css
+
+---
+
 ## Prochaine étape
 
 - Développement du Hall.
