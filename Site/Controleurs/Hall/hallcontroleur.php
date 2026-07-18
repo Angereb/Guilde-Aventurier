@@ -4,7 +4,7 @@ $titre = "Hall";
 
 $css = [
     "style.css",
-    "Secretariat/connexion.css",
+    "Hall/hall.css",
     "Composants/entete.css"
 ];
 

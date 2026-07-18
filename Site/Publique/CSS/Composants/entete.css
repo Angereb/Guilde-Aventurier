@@ -1,0 +1,51 @@
+.entete {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.retour-hall, .administrateur, .amis, .messages, .deconnexion {
+    display: block;
+
+    height : 70px;
+
+    aspect-ratio: 1/1;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.retour-hall {
+    background-image: url("../../Images/Retour-hall-bt.png");
+}
+
+.administrateur {
+    background-image: url("../../Images/Admin-bt.png");
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.mon-compte {
+    background-image: url("../../Images/Compte-bt.png");
+}
+
+.amis {
+    background-image: url("../../Images/Friend-bt.png");
+}
+
+.messages {
+    background-image: url("../../Images/Messagerie-bt.png");
+}
+
+.deconnexion {
+    background-image: url("../../Images/Deconnection-bt.png");
+}

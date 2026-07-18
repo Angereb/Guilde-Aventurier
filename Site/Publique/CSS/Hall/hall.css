@@ -1,0 +1,76 @@
+.hall-page {
+    flex: 1;
+
+    display:grid;
+
+    grid-template-rows:
+        auto     /* navigation */
+        1fr;     /* panneau */
+}
+
+.navigation-hall {
+    display:grid;
+
+    grid-template-columns:
+        auto
+        1fr
+        auto;
+}
+
+.passage-gauche,
+.passage-droite {
+    display:grid;
+
+    grid-template-rows:
+        auto
+        auto;
+}
+
+.nav-bibliotheque, .nav-salle-de-guerre, .nav-taverne, .nav-dortoir {
+    display: block;
+
+    min-height : 75px;
+    width: clamp(90px, 18vw, 130px);
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position:relative;
+}
+
+.nav-bibliotheque {
+    background-image: url(../../Images/Bibliotheque-bt.png);
+}
+
+.nav-salle-de-guerre {
+    background-image: url(../../Images/Salle\ de\ guerre-bt.png);
+}
+.nav-taverne {
+    background-image: url(../../Images/Taverne-bt.png);
+}
+
+.nav-dortoir {
+    background-image: url(../../Images//Dortoir-bt.png);
+}
+
+.hall-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.information-hall {
+    justify-self: center;
+    
+    width: 60%;
+    max-width: 500px;
+
+    margin-top: 5%;
+
+    background-image: url(../../Images/Ecritaux.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}

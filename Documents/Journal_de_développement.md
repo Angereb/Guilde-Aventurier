@@ -251,6 +251,29 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 18 Juillet 2026
+
+### objectifs
+
+- Génération du visuel du bandeau de tête
+- Génération du visuel du hall
+
+### Réalisation
+
+- Création du style css pour l'entête
+- Création des boutons non prévu sur la maquette
+- Création du style css pour le hall
+
+### Difficultés
+
+- Problème de gestion des boites css avec le flex
+
+### Solutions
+
+- Passage en gestion grid du style css
+
+---
+
 ## Prochaine étape
 
 - Développement du Hall.
