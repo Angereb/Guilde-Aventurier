@@ -48,12 +48,12 @@ class UtilisateurModele {
         // Génération d'un UUID
         $uuid = $this->genererUuid();
         
-        //Vérification de la disponibilité du pseudo
+        // Vérification de la disponibilité du pseudo
         if ($this->pseudoExiste($utilisateur->getPseudo())){
             throw new Exception("Ce pseudo est déjà utilisé.");
         }
 
-        //Vérification de la disponibilité de l'email
+        // Vérification de la disponibilité de l'email
         if ($this->emailExiste($utilisateur->getEmail())){
             throw new Exception("Cette adresse e-mail est déjà utilisée.");
         }

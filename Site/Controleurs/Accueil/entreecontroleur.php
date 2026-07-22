@@ -8,6 +8,8 @@ $css = [
     "Composants/entete.css"
 ];
 
+$javascript = [];
+
 /*Ouvre une mémoire tampon pour stocker le contenu de la page*/
 ob_start();
 

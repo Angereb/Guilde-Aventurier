@@ -10,6 +10,8 @@ $css = [
     "Composants/entete.css"
 ];
 
+$javascript = [];
+
 $messageErreur = null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -28,8 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         }
 
         //Si tout est OK ouverture de session
-        session_start();
-
         $_SESSION["utilisateur"] = ["id" => $utilisateur->getId(),"uuid" => $utilisateur->getUuid(),"pseudo" => $utilisateur->getPseudo(),"roles" => $utilisateur->getRoles()];
 
         //Redirection vers le hall

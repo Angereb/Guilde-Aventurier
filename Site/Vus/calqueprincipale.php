@@ -2,6 +2,7 @@
 /**@var string $titre */
 /**@var string $contenu */
 /**@var array $css */
+/**@var array $javascript */
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +20,10 @@
 
         <link rel="stylesheet" href="Site/Publique/css/<?= $fichierCSS ?>">
 
+    <?php endforeach; ?>
+
+    <?php foreach($javascript as $script): ?>
+        <script defer src="Site/Publique/JS/<?= $script ?>"></script>
     <?php endforeach; ?>
 </head>
 

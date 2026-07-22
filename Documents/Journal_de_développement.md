@@ -214,7 +214,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 - Développement du système d'authentification
 
-### Réalisation
+### Réalisations
 
 - Création de la connexion à la base de données.
 - Création du fichier de configuration de la connexion à la base de données.
@@ -242,7 +242,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 - Construction du header
 
-### Réalisation
+### Réalisations
 
 - Création d'un fichier Composant entete.php s'affichant uniquement si une session est ouverte
 - Création des liens de navigation vers de futur pages 
@@ -253,12 +253,12 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ## 18 Juillet 2026
 
-### objectifs
+### Objectifs
 
 - Génération du visuel du bandeau de tête
 - Génération du visuel du hall
 
-### Réalisation
+### Réalisations
 
 - Création du style css pour l'entête
 - Création des boutons non prévu sur la maquette
@@ -274,6 +274,25 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 19 au 22 Juillet 2026
+
+### Objectifs
+
+- Finaliser le Hall
+- Afficher les annonces
+- Ajouter la lecture des annonces
+
+### Réalisations
+
+- Développement du modèle Annonce et de AnnonceModele contenant le CRUD
+- Création du système de récupération des annonces depuis la base de données
+- Limitation de l'affichage aux 6 annonces les plus récentes
+- Association du pseudo de l'auteur aux annonces
+- Création d'une modale JavaScript pour la création d'une annonce
+- Création d'une seconde modale pour la lecture d'une annonce
+- Mise en page des annonces sous forme de feuilles punaisées sur le panneau d'affichage
+- Finalisation de la première version fonctionnelle du Hall Principal
+
 ## Prochaine étape
 
-- Développement du Hall.
+- 

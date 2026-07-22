@@ -34,9 +34,10 @@ Dans le cadre de ma formation en Développeur web full stack, j'ai décider de c
 - Page Secrétariat
 - Inscription
 - Connexion
+- Hall
 
 ### En cours
-- Hall
+- 
 
 ### A Venir
 - Taverne

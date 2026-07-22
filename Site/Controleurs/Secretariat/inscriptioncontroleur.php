@@ -10,6 +10,8 @@ $css = [
     "Composants/entete.css"
 ];
 
+$javascript = [];
+
 $messageErreur = null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){

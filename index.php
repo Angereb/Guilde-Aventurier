@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $page = $_GET['page'] ?? 'entree';
 
 switch ($page)

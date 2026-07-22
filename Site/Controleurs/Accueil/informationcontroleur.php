@@ -8,6 +8,8 @@ $css = [
     "Composants/entete.css"
 ];
 
+$javascript = [];
+
 ob_start();
 
 require __DIR__ . '/../../Vus/Accueil/information.php';
