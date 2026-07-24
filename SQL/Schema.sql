@@ -11,7 +11,8 @@ CREATE TABLE utilisateurs (
     motDePasse VARCHAR(255) NOT NULL,
     roles JSON NOT NULL,
     creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    modifierLe DATETIME NULL DEFAULT NULL
+    modifierLe DATETIME NULL DEFAULT NULL,
+    estSupprimer TINYINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE annonces(
@@ -22,5 +23,4 @@ CREATE TABLE annonces(
     creerParId BIGINT NOT NULL, 
     FOREIGN KEY (creerParId)
         REFERENCES utilisateurs(id) 
-        ON DELETE CASCADE
 );

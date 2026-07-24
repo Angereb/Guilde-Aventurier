@@ -9,11 +9,12 @@ class Utilisateur {
     private array $roles;
     private ?DateTime $creerLe;
     private ?DateTime $modifierLe;
+    private bool $estSupprimer;
 
     public const ROLE_UTILISATEUR = "ROLE_UTILISATEUR";
     public const ROLE_ADMINISTRATEUR = "ROLE_ADMINISTRATEUR";
 
-    public function __construct(?int $id, ?string $uuid, string $pseudo, string $nomDeCompagnie, string $email, string $motDePasse, array $roles, ?DateTime $creerLe, ?DateTime $modifierLe, bool $motDePasseHashe = false)
+    public function __construct(?int $id, ?string $uuid, string $pseudo, string $nomDeCompagnie, string $email, string $motDePasse, array $roles, ?DateTime $creerLe, ?DateTime $modifierLe, bool $motDePasseHashe = false, bool $estSupprimer = false)
     {
         $this->id = $id;
         $this->uuid = $uuid;
@@ -31,6 +32,7 @@ class Utilisateur {
         $this->setRoles($roles);
         $this->creerLe = $creerLe;
         $this->setModifierLe($modifierLe);
+        $this->estSupprimer = $estSupprimer;
     }
 
     public function getId(): ?int {
@@ -160,6 +162,10 @@ class Utilisateur {
 
     public function setModifierLe(?DateTime $modifierLe): void {
         $this->modifierLe = $modifierLe;
+    }
+
+    public function getEstSupprimer(): bool {
+        return $this->estSupprimer;
     }
 }
 ?>

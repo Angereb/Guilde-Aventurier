@@ -293,6 +293,21 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Mise en page des annonces sous forme de feuilles punaisées sur le panneau d'affichage
 - Finalisation de la première version fonctionnelle du Hall Principal
 
+## 24 Juillet 2026
+
+### Objectifs
+
+- Modifier la banque de donnée pour une meilleur gestion des comptes
+- Modifier la méthode de connexion pour ajouter la possibilité de ce connecter via le pseudo
+
+### Réalisations
+
+- Suppression des tables Utilisateurs et Annonces au sein de la BDD
+- Mise à jour des tables et du Schema de la BDD
+- Modification de la classe Utilisateur
+- Modification de la classe UtilisateurModele pour la recherche et la suppression
+- Modification du contrôleur de connexion pour ajout du pseudo en tant qu'identifiant valide et vérification de l'état du compte
+
 ## Prochaine étape
 
 - 

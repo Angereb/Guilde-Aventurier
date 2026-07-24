@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         if ($motDePasse !== $verificationMotDePasse) {
             throw new Exception("Les deux mots de passe ne correspondent pas.");
         }
-        // Création du livre correspondant
+        // Création de l'utilisateur correspondant
         $utilisateur = new Utilisateur(
             $id,
             $uuid,

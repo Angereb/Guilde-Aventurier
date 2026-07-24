@@ -19,5 +19,6 @@ CREATE TABLE utilisateurs (
 
     -- Informations de suivi
     creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    modifierLe DATETIME NULL DEFAULT NULL
+    modifierLe DATETIME NULL DEFAULT NULL,
+    estSupprimer TINYINT NOT NULL DEFAULT 0
 );

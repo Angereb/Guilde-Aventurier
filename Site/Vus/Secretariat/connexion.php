@@ -10,9 +10,9 @@
 
         <form id="formulaireConnexion" class="connexion-formulaire" method="post">
             <div class="connexion-champ">
-                <label for="emailInput" class="connexion-label">Email :</label>
-                <input type="email" class="connexion-input" id="emailInput" placeholder="Votre email" name="email" required>
-            </div>
+                <label for="identifiantInput" class="connexion-label">Identifiant :</label>
+                <input type="text" class="connexion-input" id="identifiantInput" placeholder="Email ou Pseudo" name="identifiant" required>
+            </div> 
 
             <div class="connexion-champ">
                 <label for="motDePasseInput" class="connexion-label">Mot de passe :</label>

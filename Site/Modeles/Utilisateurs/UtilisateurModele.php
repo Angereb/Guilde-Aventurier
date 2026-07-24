@@ -103,12 +103,16 @@ class UtilisateurModele {
         // On vérifie si il y a une date de modification avant de tenter de la transformer en DateTime
         $modifierLe = null;
 
+        // On transforme l'état de suppression du compte en boolean
+        $estSupprimer = (bool) $donnees["estSupprimer"];
+
+
         if ($donnees["modifierLe"] !== null) {
             $modifierLe = new DateTime($donnees["modifierLe"]);
         }
 
         $utilisateur = new Utilisateur(
-            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true
+            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
         );
 
         return $utilisateur;
@@ -135,12 +139,14 @@ class UtilisateurModele {
 
         $modifierLe = null;
 
+        $estSupprimer = (bool) $donnees["estSupprimer"];
+
         if ($donnees["modifierLe"] !== null) {
             $modifierLe = new DateTime($donnees["modifierLe"]);
         }
 
         $utilisateur = new Utilisateur(
-            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true
+            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
         );
 
         return $utilisateur;
@@ -167,12 +173,14 @@ class UtilisateurModele {
 
         $modifierLe = null;
 
+        $estSupprimer = (bool) $donnees["estSupprimer"];
+
         if ($donnees["modifierLe"] !== null) {
             $modifierLe = new DateTime($donnees["modifierLe"]);
         }
 
         $utilisateur = new Utilisateur(
-            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true
+            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
         );
 
         return $utilisateur;
@@ -199,12 +207,14 @@ class UtilisateurModele {
 
         $modifierLe = null;
 
+        $estSupprimer = (bool) $donnees["estSupprimer"];
+
         if ($donnees["modifierLe"] !== null) {
             $modifierLe = new DateTime($donnees["modifierLe"]);
         }
 
         $utilisateur = new Utilisateur(
-            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true
+            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
         );
 
         return $utilisateur;
@@ -231,12 +241,14 @@ class UtilisateurModele {
 
         $modifierLe = null;
 
+        $estSupprimer = (bool) $donnees["estSupprimer"];
+
         if ($donnees["modifierLe"] !== null) {
             $modifierLe = new DateTime($donnees["modifierLe"]);
         }
 
         $utilisateur = new Utilisateur(
-            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true
+            $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
         );
 
         return $utilisateur;
@@ -331,12 +343,21 @@ class UtilisateurModele {
         ]);
     } 
 
-    public function supprimer(int $id): void {
-        $this->rechercherParId($id);
-        
-        $requete = $this->pdo->prepare("DELETE FROM utilisateurs WHERE id= ?");
+    public function modifierEstSupprimer(Utilisateur $utilisateur): void {
+        if ($utilisateur->getId() === null){
+            throw new Exception("Impossible de modifier un utilisateur inexistant.");
+        }
 
-        $requete->execute([$id]);
+        $this->rechercherParId($utilisateur->getId());
+        
+        $estSupprimer= (int) $utilisateur->getEstSupprimer();
+
+        $requete = $this->pdo->prepare("UPDATE utilisateurs SET estSupprimer = ?, modifierLe = NOW() WHERE id= ?");
+
+        $requete->execute([
+            $estSupprimer,
+            $utilisateur->getId()            
+        ]);
     }
 }
 ?>

@@ -12,6 +12,5 @@ CREATE TABLE annonces(
     creerParId BIGINT NOT NULL, 
         
     FOREIGN KEY (creerParId)
-        REFERENCES utilisateurs(id) 
-        ON DELETE CASCADE
+        REFERENCES utilisateurs(id)
 );
