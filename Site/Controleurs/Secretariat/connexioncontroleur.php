@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
         //Camparaison du mot de passe saisie avec la version hashé récupérer
         if (!password_verify($motDePasse, $utilisateur->getMotDePasse())) {
-            throw new Exception("Adresse mail ou mot de passe incorrect.");
+            throw new Exception("Identifiant ou mot de passe incorrect.");
         }
 
         //Si tout est OK ouverture de session

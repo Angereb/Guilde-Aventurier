@@ -293,6 +293,8 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Mise en page des annonces sous forme de feuilles punaisées sur le panneau d'affichage
 - Finalisation de la première version fonctionnelle du Hall Principal
 
+---
+
 ## 24 Juillet 2026
 
 ### Objectifs
@@ -308,6 +310,25 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Modification de la classe UtilisateurModele pour la recherche et la suppression
 - Modification du contrôleur de connexion pour ajout du pseudo en tant qu'identifiant valide et vérification de l'état du compte
 
+---
+
+## 25 et 27 Juillet 2026
+
+### Objectifs
+
+- Réalisation de la page "Mon Compte" permettant les modifications des informations utilisateur
+
+### Réalisations
+
+- Création de la vus, du contrôleur, du css et du JS de la page "Mon Compte"
+- Création d'un ensemble de formulaires pour la modification des informations de pseudo du compte, nom de la compagnie, email du compte et mot de passe du compte
+- Création d'un ensemble de modales obligeant la vérification via mot de passe pour modifier les informations sensibles du compte
+- Création des règles css de la page et des modales
+
+---
+
 ## Prochaine étape
 
-- 
+- Page administrateur
+- Page Amis
+- Page Messagerie

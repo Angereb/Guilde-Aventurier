@@ -30,6 +30,10 @@ switch ($page)
         require_once __DIR__ . '\Site\Controleurs\Hall\hallcontroleur.php';
         break;
 
+    case 'moncompte' :
+        require_once __DIR__ . '\Site\Controleurs\Compte\moncomptecontroleur.php';
+        break;
+
     case "deconnexion":
         require_once __DIR__ . '\Site\Controleurs\deconnexioncontroleur.php';
         break;    

@@ -1,5 +1,3 @@
-console.log("hall.js chargé");
-
 const boutonOuvrir = document.getElementById("ouvrirAnnonce");
 const boutonCreationFermer = document.getElementById("fermerCreationAnnonce");
 

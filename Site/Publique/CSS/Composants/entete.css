@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.retour-hall, .administrateur, .amis, .messages, .deconnexion {
+.retour-hall, .administrateur, .mon-compte, .amis, .messages, .deconnexion {
     display: block;
 
     height : 70px;

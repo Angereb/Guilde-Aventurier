@@ -17,7 +17,7 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
     </div>
 
     <div class="navigation">
-        <a href="?page=compte" class="mon-compte"></a>
+        <a href="?page=moncompte" class="mon-compte"></a>
 
         <a href="?page=amis" class="amis"></a>
 
