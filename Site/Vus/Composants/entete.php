@@ -12,7 +12,7 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
 
     <div>
         <?php if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)): ?>
-            <a href="?page=administration" class="administrateur"></a>
+            <a href="?page=administrateur" class="administrateur"></a>
         <?php endif; ?>
     </div>
 

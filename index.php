@@ -34,6 +34,10 @@ switch ($page)
         require_once __DIR__ . '\Site\Controleurs\Compte\moncomptecontroleur.php';
         break;
 
+    case 'administrateur' :
+        require_once __DIR__ . '\Site\Controleurs\Compte\administrateurcontroleur.php';
+        break;
+
     case "deconnexion":
         require_once __DIR__ . '\Site\Controleurs\deconnexioncontroleur.php';
         break;    

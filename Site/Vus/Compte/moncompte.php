@@ -38,6 +38,8 @@ require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
             <a href="#" class="modification-mot-de-passe" id="modifierMotDePasse">Modifier</a>
         </form>
 
+        <a href="#" class="suppression-compte" id="supprimerCompte">Supprimer</a>
+
         <?php if ($messageErreur !== null): ?>
             <div class="message-erreur">
                 <?= htmlspecialchars($messageErreur) ?>
@@ -87,6 +89,25 @@ require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
             <button type="submit" form="formulaireMotDePasse" class="envoyer-mot-de-passe" name="action" value="modifierMotDePasse">Modifier</button>
 
             <button type="button" id="fermerModifierMotDePasse" class="retour-modifier-mot-de-passe">Annuler</button>
+        </div>    
+    </section>
+</div>
+
+<div id="modaleSupprimerCompte" class="modale-cachee">
+    <section class="fenetre-verification-suppression">
+        <h2 class="suppression-titre">ATTENTION</h2>
+
+        <p class="text-avertissement">En cas de validation, votre compte ne sera plus accécible, et vos données d'aventuriers et de parties seront éffacées. Si vous souhaiter revenir sur le site, il vous faudrat contacter un administrateur.</p>
+
+        <form id="formulaireSupprimerCompte" class="formulaire-supprimer-compte" method="post">
+            <label for="verifInputSupprimerCompte" class="verif-mot-de-passe">Mot de Passe :</label>
+            <input type="password" class="verif-supprimer-compte-input" id="verifInputSupprimerCompte" placeholder="Mot de Passe" name="verificationMotDePasse" required>
+        </form>
+
+        <div class="verification-mot-de-passe-navigation">
+            <button type="submit" form="formulaireSupprimerCompte" class="supprimer-compte" name="action" value="supprimerCompte">Supprimer</button>
+
+            <button type="button" id="fermerSupprimerCompte" class="retour-supprimer-compte">Annuler</button>
         </div>    
     </section>
 </div>

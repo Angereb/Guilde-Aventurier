@@ -32,7 +32,7 @@ class Utilisateur {
         $this->setRoles($roles);
         $this->creerLe = $creerLe;
         $this->setModifierLe($modifierLe);
-        $this->estSupprimer = $estSupprimer;
+        $this->setEstSupprimer($estSupprimer);
     }
 
     public function getId(): ?int {
@@ -166,6 +166,10 @@ class Utilisateur {
 
     public function getEstSupprimer(): bool {
         return $this->estSupprimer;
+    }
+
+    public function setEstSupprimer(bool $estSupprimer): void {
+        $this->estSupprimer = $estSupprimer;
     }
 }
 ?>

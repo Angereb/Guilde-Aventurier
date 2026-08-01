@@ -327,8 +327,26 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 28, 30 et 31 Juillet 2026
+
+### Objectifs
+
+- Ajout de l'option de suppression dans la page mon compte
+- Réalisation de la page "Administration" permettant aux administrateur de gérer les rôles et les accès au site
+
+### Réalisations
+
+- Ajout du bouton "Supprimer" et de la modale de vérification avant suppression d'un compte, avec un message d'avertissement
+- Modifications du contrôleur pour ajouter la fonction de suppression de compte
+- Modification du Modèle Utiisateur pour ajouter le setteur de suppression
+- Ajout des règles css pour le bouton "Supprimer" et la modale de vérification avant suppression d'un compte
+- Ajout d'une nouvelle fonctionde recherche dans UtilisateursModèle, permettant de récupérer une liste de compagnie du même nom
+- Création de la page Administrateur, contenant un formulaire de recherche, et une modale de modification des rôles et du soft-delete via formulaires chekbox
+- Blocage des modifications en cas de tentative d'auto-modification d'un administrateur
+
+---
+
 ## Prochaine étape
 
-- Page administrateur
 - Page Amis
 - Page Messagerie

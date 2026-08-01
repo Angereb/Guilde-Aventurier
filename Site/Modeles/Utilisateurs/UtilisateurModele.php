@@ -254,6 +254,37 @@ class UtilisateurModele {
         return $utilisateur;
     }
 
+    public function rechercherToutesCompagnies(string $nomDeCompagnie): array {
+        $compagnies = [];
+
+        $requete = $this->pdo->prepare("SELECT * FROM utilisateurs WHERE nomCompagnie = ?");
+
+        $requete->execute([$nomDeCompagnie]);
+
+        while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)){
+            $roles = json_decode($donnees["roles"], true);
+
+            $creerLe = new DateTime($donnees["creerLe"]);
+
+            $modifierLe = null;
+
+            if ($donnees["modifierLe"] !== null) {
+                $modifierLe = new DateTime($donnees["modifierLe"]);
+            };
+
+            $estSupprimer = (bool) $donnees["estSupprimer"];
+
+            $compagnies[] = new Utilisateur(
+                $donnees["id"], $donnees["uuid"], $donnees["pseudo"], $donnees["nomCompagnie"], $donnees["email"], $donnees["motDePasse"], $roles, $creerLe, $modifierLe, true, $estSupprimer
+            );
+        };
+        if (empty($compagnies)){
+                throw new Exception("Aucun utilisateur trouvé ayant pour Compagnie $nomDeCompagnie.");
+            }
+
+        return $compagnies;
+    }
+
     public function modifierPseudo(Utilisateur $utilisateur): void {
         if ($utilisateur->getId() === null){
             throw new Exception("Impossible de modifier un utilisateur inexistant.");

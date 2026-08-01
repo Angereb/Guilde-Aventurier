@@ -10,6 +10,10 @@ const boutonModifMotDePasseOuvrir = document.getElementById("modifierMotDePasse"
 const modaleMotDePasse = document.getElementById("modaleMotDePasse");
 const boutonModifMotDePasseFermer = document.getElementById("fermerModifierMotDePasse");
 
+const boutonSupprimerCompteOuvrir = document.getElementById("supprimerCompte");
+const modaleSupprimerCompte = document.getElementById("modaleSupprimerCompte");
+const boutonSupprimerCompteFermer = document.getElementById("fermerSupprimerCompte");
+
 if (boutonModifPseudoOuvrir) {
     boutonModifPseudoOuvrir.addEventListener("click", function(event){
         event.preventDefault();
@@ -55,5 +59,21 @@ if (boutonModifMotDePasseFermer) {
     boutonModifMotDePasseFermer.addEventListener("click", function(){
         modaleMotDePasse.classList.remove("modale-visible");
         modaleMotDePasse.classList.add("modale-cachee");
+    });
+}
+
+if (boutonSupprimerCompteOuvrir) {
+    boutonSupprimerCompteOuvrir.addEventListener("click", function(event){
+        event.preventDefault();
+
+        modaleSupprimerCompte.classList.remove("modale-cachee");
+        modaleSupprimerCompte.classList.add("modale-visible");
+    });
+} 
+
+if (boutonSupprimerCompteFermer) {
+    boutonSupprimerCompteFermer.addEventListener("click", function(){
+        modaleSupprimerCompte.classList.remove("modale-visible");
+        modaleSupprimerCompte.classList.add("modale-cachee");
     });
 }

@@ -71,6 +71,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                 $utilisateurModele->modifierMotDePasse($utilisateur);
                 break;
 
+            case 'supprimerCompte':
+                if (!password_verify($verificationMotDePasse, $utilisateur->getMotDePasse())) {
+                    throw new Exception("Ancien mot de passe incorrect.");
+                }
+
+                $utilisateur->setEstSupprimer(true);
+                $utilisateurModele->modifierEstSupprimer($utilisateur);
+
+                $_SESSION = [];
+
+                session_destroy();
+
+                header("Location: ?page=entree");
+                exit;
+
             default:
                 throw new Exception("Action inconnue.");
         }
