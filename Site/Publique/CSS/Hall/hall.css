@@ -170,7 +170,7 @@
     background:rgba(0,0,0,.5);
 }
 
-.fenetre-annonce {
+.fenetre-annonce, .fenetre-modification-annonce, .fenetre-suppression-annonce {
     position: relative;
 
     width: min(80vw, 600px);
@@ -208,8 +208,13 @@
     overflow-wrap: break-word;
 }
 
-.envoyer-annonce,
-.retour-annonce {
+.navigation-lecture-annonce{
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 1rem;
+}
+
+.envoyer-annonce, .retour-annonce, .ouvrir-modification-annonce, .ouvrir-suppression-annonce, .envoyer-modification-annonce, .retour-modification-annonce, .envoyer-suppression-annonce, .retour-suppression-annonce {
     border: 1px solid black;
     border-radius: 20px;
 
@@ -218,12 +223,18 @@
     width: auto;
     height: auto;
 
-    padding: 2%;
+    padding: 0.1rem 0.4rem;
+    line-height: 1.2;
 
     background-color: transparent;
     
     font: inherit;
     color: inherit;
+    font-size: clamp(0.1rem, 2vh, 2rem);
 
     cursor: pointer;
+}
+
+.ouvrir-suppression-annonce, .envoyer-suppression-annonce {
+    color: red;
 }

@@ -58,7 +58,7 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
         </form>
 
         <div class="annonce-edition-navigation">
-            <button type="submit" form="formulaireAnnonce" class="envoyer-annonce">Envoyer</button>
+            <button type="submit" form="formulaireAnnonce" class="envoyer-annonce" name="action" value="creerAnnonce">Envoyer</button>
 
             <button type="button" id="fermerCreationAnnonce" class="retour-annonce">Annuler</button>
         </div>    
@@ -75,6 +75,58 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
         <br><hr><br>
         <div class="lecture-contenu-annonce" id="lectureContenu"></div>
         <br><hr><br>
-        <button type="button" id="fermerLectureAnnonce" class="retour-annonce">Retour</button>
+        <aside class="navigation-lecture-annonce">
+            <?php if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)): ?>
+                <button type="button" id="ouvrirModificationAnnonce" class="ouvrir-modification-annonce">Modifier</button>
+            <?php endif; ?>
+            
+            <button type="button" id="fermerLectureAnnonce" class="retour-annonce">Retour</button>
+
+            <?php if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)): ?>
+                <button type="button" id="ouvrirSuppressionAnnonce" class="ouvrir-suppression-annonce">Supprimer</button>
+            <?php endif; ?>
+        </aside>
+    </section>
+</div>
+
+<div id="modaleModificationAnnonce" class="modale-cachee">
+    <section class="fenetre-modification-annonce">
+        <h2 class="entete-modification-annonce">Modifier l'annonce</h2>
+
+        <form id="formulaireModifierAnnonce" class="modifier-annonce-formulaire" method="post">
+            <input type="hidden" name="idCible" id="idCibleModifier">
+
+            <div class="modifier-annonce-champ">
+                <label for="titreModifierInput" class="modifier-annonce-label">Titre de l'annonce :</label>
+                <input type="text" class="modifier-annonce-input" id="titreModifierInput" name="titreModifier" required>
+            </div>
+
+            <div class="modifier-annonce-champ">
+                <label for="texteModifierInput" class="modifier-annonce-label">Contenu de l'annonce :</label>
+                <textarea class="annonce-area" id="texteModifierInput" name="contenuModifier" rows="10" maxlength="2500" required></textarea>
+            </div>
+        </form>
+
+        <div class="annonce-modification-navigation">
+            <button type="submit" form="formulaireModifierAnnonce" class="envoyer-modification-annonce" name="action" value="modifierAnnonce">Envoyer</button>
+
+            <button type="button" id="fermerModificationAnnonce" class="retour-modification-annonce">Annuler</button>
+        </div>    
+    </section>
+</div>
+
+<div id="modaleSuppressionAnnonce" class="modale-cachee"> 
+    <section class="fenetre-suppression-annonce">
+        <h2 class="entete-suppression-annonce">Suppression de l'annonce</h2>
+
+        <p class="texte-preventif-annonce">ATTENTION : êtes-vous sûr de vouloir supprimer cette annonce ?</p>
+
+        <form id="formulaireSupprimerAnnonce" class="supprimer-annonce-formulaire" method="post">
+            <input type="hidden" name="idCible" id="idCibleSupprimer">
+
+            <button type="submit" class="envoyer-suppression-annonce" name="action" value="supprimerAnnonce">Supprimer</button>
+
+            <button type="button" id="fermerSuppressionAnnonce" class="retour-suppression-annonce">Annuler</button>
+        </form>
     </section>
 </div>

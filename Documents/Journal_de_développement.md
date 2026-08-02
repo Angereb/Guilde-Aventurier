@@ -306,6 +306,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 - Suppression des tables Utilisateurs et Annonces au sein de la BDD
 - Mise à jour des tables et du Schema de la BDD
+- Recréation des tables Utilisateurs et Annonces suivant la nouvelle structure
 - Modification de la classe Utilisateur
 - Modification de la classe UtilisateurModele pour la recherche et la suppression
 - Modification du contrôleur de connexion pour ajout du pseudo en tant qu'identifiant valide et vérification de l'état du compte
@@ -343,6 +344,20 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Ajout d'une nouvelle fonctionde recherche dans UtilisateursModèle, permettant de récupérer une liste de compagnie du même nom
 - Création de la page Administrateur, contenant un formulaire de recherche, et une modale de modification des rôles et du soft-delete via formulaires chekbox
 - Blocage des modifications en cas de tentative d'auto-modification d'un administrateur
+
+---
+
+## 01 Aout 2026
+
+### Objectifs
+
+- Ajout des fonctionnalités de modification et de suppression des annonces dans le hall
+
+### Réalisations
+
+- Refonte de la logique de gestion des formulaires du contrôleur du hall
+- Ajout des boutons "Modifier" et "Supprimer" dans la modale de lecture des annonces
+- Ajout des modales de modification d'annonces et de suppression d'annonces
 
 ---
 

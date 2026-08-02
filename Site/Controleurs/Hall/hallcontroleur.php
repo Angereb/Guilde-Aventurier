@@ -32,22 +32,55 @@ $annonces = array_slice($annonces, 0, 6);
 $auteurs =[];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    $id= null;
-    $titreAnnonce= $_POST["titre"];
-    $contenu= $_POST["contenu"];
-    $idCreateur = $_SESSION["utilisateur"]["id"];
+    $formulaire = $_POST['action'] ?? null;
 
     try{
-        $annonce = new Annonce(
-            $id,
-            $titreAnnonce,
-            $contenu,
-            null,
-            $idCreateur
-        );
+        if (!in_array(Utilisateur::ROLE_ADMINISTRATEUR, $_SESSION["utilisateur"]["roles"])) {
+            throw new Exception("Vous n'avez pas les droits nécessaires pour effectuer cette action.");
+        }
 
-        $annonceModele->ajouter($annonce);
+        switch($formulaire){
+            case 'creerAnnonce':
+                $id= null;
+                $titreAnnonce= $_POST["titre"];
+                $contenu= $_POST["contenu"];
+                $idCreateur = $_SESSION["utilisateur"]["id"];
 
+                $annonce = new Annonce(
+                    $id,
+                    $titreAnnonce,
+                    $contenu,
+                    null,
+                    $idCreateur
+                );
+
+                $annonceModele->ajouter($annonce);
+                break;
+
+            case 'modifierAnnonce':
+                $idModification = (int) $_POST["idCible"];
+
+                $titreAnnonceModifier = $_POST["titreModifier"];
+                $contenuAnnonceModifier = $_POST["contenuModifier"];
+
+                $annonceModifier = $annonceModele->rechercherParId($idModification);
+
+                $annonceModifier->setTitre($titreAnnonceModifier);
+                $annonceModele->modifierTitre($annonceModifier);
+
+                $annonceModifier->setContenu($contenuAnnonceModifier);
+                $annonceModele->modifierContenu($annonceModifier);
+                break;
+
+            case 'supprimerAnnonce':
+                $idSuppression = (int) $_POST["idCible"];
+
+                $annonceModele->supprimer($idSuppression);
+                break;
+
+            default:
+                throw new Exception("Action non reconnue.");
+        }
         header("Location: ?page=hall");
         exit;
     }
