@@ -347,7 +347,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## 01 Aout 2026
+## 01 Août 2026
 
 ### Objectifs
 
@@ -358,6 +358,84 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Refonte de la logique de gestion des formulaires du contrôleur du hall
 - Ajout des boutons "Modifier" et "Supprimer" dans la modale de lecture des annonces
 - Ajout des modales de modification d'annonces et de suppression d'annonces
+
+---
+
+## 02 Août au 22 Septembre 2026
+
+- Le projet a été en pause pendant toute cette période pour la réalisation d'une évaluation en cours de formation (ECF) sur le sujet "Vite et Gourmand".
+- Je me suis servi des connaissances acquises sur le projet Guilde des Aventuriers comme base de travail pour réaliser l'ECF, et l'ECF m'a amené à m'améliorer sur le développement en pointant un certain nombre de lacunes.
+- Le projet Guide des Aventuriers va devoir subir une refonte technique suivant les connaissances et les retours de l'ECF.
+
+---
+
+## 23 au 25 Septembre 2026
+
+### Objectifs
+
+- Amélioration du cadrage du projet
+
+### Réalisations
+
+- Création d'un fichier de présentation du projet plus complet que le cahier des charges de départ
+- Tableau des fonctionnalités
+- Définition de certaines règles interne au projet dans les notes d'intentions 
+- Méthode Merise complet (MCD et MLD réalisés avec Looping, MPD à venir)
+- Trello de suivi du projet
+- Calendrier prévisionnel
+
+---
+
+## 27 au 30 Septembre 2026
+
+### Objectifs
+
+- Reprise du prototypage
+
+### Réalisations
+
+- Document de charte graphique complet
+- Mise à jour des mockups mobile déjà fait
+- Création des wireframes desktop et comparatif avec wareframe mobile pour les pages d'inscription/connexion, Hall et fiche de personnage
+- Création des mockups desktop
+
+---
+
+## 01 Octobre 2026
+
+### Objectifs
+
+- Refonte de la base de données suivant MCD revu et corrigé
+
+### Réalisations
+
+- Modifications des tables Utilisateurs et Annonces
+- Création de toutes les tables manquantes
+- Ajout de "CHECK" de vérifications des données
+
+---
+
+## 02 Octobre 2026
+
+### Objectifs
+
+- Test des tables en SQL
+
+### Réalisations
+
+- Création de plusieurs fichiers de tests des tables SQL avec des cas valides et des cas invalides
+- Test des tables sur phpMyAdmin
+- Prise de note des résultats pour les différents tests invalides
+
+### Difficultés
+
+- Lors d'un test de contenu d'une annonce vide, la base a validé le test car elle n'était pas en mode strict et a inscrit une chaîne vide alors que le contenu est défini en NOT NULL
+- Problèmes sur ma manière de nommer les tables, MariaDB ne prend pas en compte les majuscules
+
+### Solutions
+
+- Ajout d'un CHECK pour vérifier que la valeur n'est pas vide
+- Modification des noms des tables composés en snake_case
 
 ---
 

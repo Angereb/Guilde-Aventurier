@@ -1,9 +1,9 @@
 CREATE TABLE utilisateurs (
     
     -- Identifiant interne
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    utilisateurId BIGINT PRIMARY KEY AUTO_INCREMENT,
 
-    -- UUID publique
+    -- UUID public
     uuid CHAR(36) NOT NULL UNIQUE,
 
     -- Informations de base
@@ -14,11 +14,13 @@ CREATE TABLE utilisateurs (
     -- Informations de sécurité
     motDePasse VARCHAR(255) NOT NULL,
 
-    -- Authorisations
+    -- Autorisations
     roles JSON NOT NULL,
 
     -- Informations de suivi
     creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     modifierLe DATETIME NULL DEFAULT NULL,
-    estSupprimer TINYINT NOT NULL DEFAULT 0
-);
+    estSupprime BOOLEAN NOT NULL DEFAULT FALSE,
+    actif BOOLEAN NOT NULL DEFAULT TRUE
+    
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
