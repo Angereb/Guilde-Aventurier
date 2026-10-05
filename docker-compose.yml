@@ -1,0 +1,36 @@
+
+services:
+  site:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: ${DB_HOST}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - bdd
+
+  bdd:
+    image: mariadb:10.4
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - donnees_bdd:/var/lib/mysql
+      - ./SQL/Schema.sql:/docker-entrypoint-initdb.d/Schema.sql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    environment:
+      PMA_HOST: bdd
+    ports:
+      - "8081:80"
+
+volumes:
+  donnees_bdd:    

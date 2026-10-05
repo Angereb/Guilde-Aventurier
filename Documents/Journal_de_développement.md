@@ -439,6 +439,36 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 03 au 05 Octobre
+
+### Objectifs
+
+- Intégration de Docker
+
+### Réalisations
+
+- Suivi des cours sur les conteneurs sur la plateforme STUDI
+- Installation de Docker Desktop
+- Activation du WSL 2 nécessaire à Docker Desktop
+- Création du Dockerfile propre au projet
+- Création du docker-compose.yml (service site, service bdd et service phpmyadmin)
+- Création des variables d'environnement (non versionné) et modification de la configuration locale
+- Création d'un fichier d'exemple d'environnement
+
+### Difficultés
+
+- Virtualisation non détectée
+- Problème de chemin lié à Linux qui n'accepte pas les \
+- Documentation du cours erronée
+- Schéma non exécuté
+
+### Solutions
+
+- Activation de la fonctionnalité WSL de Windows
+- Changement des chemins avec des / remplaçant les \
+- Recherche de documentations sur internet
+- Analyse des logs du service de bdd et réinitialisation du volume
+
 ## Prochaine étape
 
 - Page Amis
