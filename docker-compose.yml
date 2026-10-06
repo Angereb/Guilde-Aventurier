@@ -6,6 +6,7 @@ services:
       - "8080:80"
     environment:
       DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
       MARIADB_DATABASE: ${MARIADB_DATABASE}
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}

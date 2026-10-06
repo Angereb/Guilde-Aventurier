@@ -469,6 +469,23 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Recherche de documentations sur internet
 - Analyse des logs du service de bdd et réinitialisation du volume
 
+---
+
+## 05 et 06 Octobre
+
+### Objectifs
+
+- Perfectionnement et modification des anciens modèles
+
+### Réalisations
+
+- Modification de la classe BaseDeDonnees pour adaptation à l'environnement Docker
+- Création d'un ModeleBase pour rassembler les fonctions communes aux modèles
+- Correction des modèles d'objets pour correspondre à la nouvelle base de données
+- Correction, factorisation et hydratation des modèles (fonction CRUD)
+
+---
+
 ## Prochaine étape
 
 - Page Amis

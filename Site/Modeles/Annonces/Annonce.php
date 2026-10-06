@@ -1,22 +1,22 @@
 <?php
 class Annonce {
-    private ?int $id;
+    private ?int $annonceId;
     private string $titre;
     private string $contenu;
-    private ?DateTime $creerLe;
-    private int $creerParId;
+    private ?DateTime $publierLe;
+    private int $publierParId;
 
-    public function __construct(?int $id, string $titre, string $contenu, ?DateTime $creerLe, int $creerParId)
+    public function __construct(?int $annonceId, string $titre, string $contenu, ?DateTime $publierLe, int $publierParId)
     {
-        $this->id = $id;
+        $this->annonceId = $annonceId;
         $this->setTitre($titre);
         $this->setContenu($contenu);
-        $this->creerLe = $creerLe;
-        $this->setCreerParId($creerParId);
+        $this->publierLe = $publierLe;
+        $this->setPublierParId($publierParId);
     }
 
-    public function getId(): ?int {
-        return $this->id;
+    public function getAnnonceId(): ?int {
+        return $this->annonceId;
     }
 
     public function getTitre(): string {
@@ -28,11 +28,9 @@ class Annonce {
         if ($titre === "") {
             throw new Exception("L'annonce doit avoir un titre.");
         }
-
         if (mb_strlen($titre) > 128) {
-            throw new Exception("Le titre de l'annonce ne peut excéder 128 cractères.");
+            throw new Exception("Le titre de l'annonce ne peut excéder 128 caractères.");
         }
-
         $this->titre = $titre;
     }
 
@@ -45,24 +43,25 @@ class Annonce {
         if ($contenu === "") {
             throw new Exception("L'annonce doit avoir un contenu.");
         }
-
         if (mb_strlen($contenu) > 2500) {
             throw new Exception("Le contenu de l'annonce ne doit pas dépasser 2500 caractères.");
         }
-
         $this->contenu = $contenu;
     }
 
-    public function getCreerLe(): ?DateTime {
-        return $this->creerLe;
+    public function getPublierLe(): ?DateTime {
+        return $this->publierLe;
     }
 
-    public function getCreerParId(): int {
-        return $this->creerParId;
+    public function getPublierParId(): int {
+        return $this->publierParId;
     }
 
-    public function setCreerParId(int $creerParId): void {
-        $this->creerParId = $creerParId;
+    public function setPublierParId(int $publierParId): void {
+        if ($publierParId < 1) {
+            throw new Exception("L'annonce doit être liée à un utilisateur valide.");
+        }
+        $this->publierParId = $publierParId;
     }
 }
 ?>
