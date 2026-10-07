@@ -50,12 +50,12 @@ CREATE TABLE equipements(
     descriptions TEXT NOT NULL,
     coutPC INT NOT NULL,
     CONSTRAINT verification_coutPC_equipement CHECK (coutPC > 0),
-    modifAttaque SMALLINT NOT NULL DEFAULT 0,
-    modifDefense SMALLINT NOT NULL DEFAULT 0,
-    modifPV SMALLINT NOT NULL DEFAULT 0,
-    modifPE SMALLINT NOT NULL DEFAULT 0,
-    modifInitiative SMALLINT NOT NULL DEFAULT 0,
-    modifMouvement SMALLINT NOT NULL DEFAULT 0
+    modifAttaque SMALLINT NULL DEFAULT NULL,
+    modifDefense SMALLINT NULL DEFAULT NULL,
+    modifPV SMALLINT NULL DEFAULT NULL,
+    modifPE SMALLINT NULL DEFAULT NULL,
+    modifInitiative SMALLINT NULL DEFAULT NULL,
+    modifMouvement SMALLINT NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE competences(
@@ -66,12 +66,12 @@ CREATE TABLE competences(
     CONSTRAINT verification_type_competence CHECK (types IN ('active', 'passive')),
     coutPE INT NOT NULL DEFAULT 0,
     CONSTRAINT verification_coutPE_competence CHECK ((types = 'active' AND coutPE > 0) OR (types = 'passive' AND coutPE = 0)),
-    modifAttaque SMALLINT NOT NULL DEFAULT 0,
-    modifDefense SMALLINT NOT NULL DEFAULT 0,
-    modifPV SMALLINT NOT NULL DEFAULT 0,
-    modifPE SMALLINT NOT NULL DEFAULT 0,
-    modifInitiative SMALLINT NOT NULL DEFAULT 0,
-    modifMouvement SMALLINT NOT NULL DEFAULT 0
+    modifAttaque SMALLINT NULL DEFAULT NULL,
+    modifDefense SMALLINT NULL DEFAULT NULL,
+    modifPV SMALLINT NULL DEFAULT NULL,
+    modifPE SMALLINT NULL DEFAULT NULL,
+    modifInitiative SMALLINT NULL DEFAULT NULL,
+    modifMouvement SMALLINT NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE aventuriers(
@@ -273,6 +273,7 @@ CREATE TABLE relations_utilisateurs(
     CONSTRAINT verification_difference_utilisateur CHECK (utilisateurId != contactId),
     creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     statut VARCHAR(32) NOT NULL,
+    CONSTRAINT verification_statut_relation CHECK (statut IN ('ami', 'rival', 'bloque', 'en_attente')),
     PRIMARY KEY (utilisateurId, contactId),
     FOREIGN KEY (utilisateurId)
         REFERENCES utilisateurs(utilisateurId)

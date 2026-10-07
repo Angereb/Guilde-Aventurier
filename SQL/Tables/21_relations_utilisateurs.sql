@@ -8,6 +8,7 @@ CREATE TABLE relations_utilisateurs(
     -- Compléments des liens
     creerLe DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     statut VARCHAR(32) NOT NULL,
+    CONSTRAINT verification_statut_relation CHECK (statut IN ('ami', 'rival', 'bloque', 'en_attente')),
 
     -- Clés
     PRIMARY KEY (utilisateurId, contactId),

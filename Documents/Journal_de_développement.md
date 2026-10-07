@@ -486,6 +486,20 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 07 Octobre
+
+### Objectifs
+
+- Création des modèles de classe d'objets (pour les nouveaux objets)
+
+### Réalisations
+
+- Création des classes d'objets pour les caractéristiques, les maîtrises, les équipements, les compétences, les aventuriers et les relations entre utilisateurs
+- Modification des tables équipements et compétences pour accepter la valeur null pour les modificateurs (la gestion du calcul gérera le cas du null)
+- Ajout du CHECK pour le statut des relations
+
+---
+
 ## Prochaine étape
 
 - Page Amis
