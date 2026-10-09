@@ -44,7 +44,7 @@ class AnnonceModele extends ModeleBase{
         $requete->execute([$titre]);
         while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)){
             $annonces[] = $this->creerAnnonceDepuisDonnees($donnees);
-        };
+        }
         if (empty($annonces)){
             throw new Exception("Aucune annonce trouvée ayant pour titre : $titre.");
         }

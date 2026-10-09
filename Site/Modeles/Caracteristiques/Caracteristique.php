@@ -10,7 +10,7 @@ class Caracteristique {
         $this->setDescriptions($descriptions);
     }
 
-    public function getCaracteristique(): ?int {
+    public function getCaracteristiqueId(): ?int {
         return $this->caracteristiqueId;
     }
 

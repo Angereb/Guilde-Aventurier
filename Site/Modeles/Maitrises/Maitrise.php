@@ -10,7 +10,7 @@ class Maitrise {
         $this->setDescriptions($descriptions);
     }
 
-    public function getMaitrise(): ?int {
+    public function getMaitriseId(): ?int {
         return $this->maitriseId;
     }
 

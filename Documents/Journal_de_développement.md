@@ -500,6 +500,20 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 08 et 09 Octobre
+
+### Objectifs
+
+- Création des modèles CRUD 
+
+### Réalisations
+
+- Création d'une classe de base pour les modèles de liaison ayant 0 ou 1 paramètre supplémentaire
+- Création des classes de modèle de liaison
+- Création des classes de modèle pour les objets
+
+---
+
 ## Prochaine étape
 
 - Page Amis
