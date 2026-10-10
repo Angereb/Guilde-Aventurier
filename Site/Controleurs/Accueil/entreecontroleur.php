@@ -2,11 +2,7 @@
 
 $titre = "Entrée";
 
-$css = [
-    "style.css",
-    "Accueil/entree.css",
-    "Composants/entete.css"
-];
+$css = ["Accueil/entree.css"];
 
 $javascript = [];
 

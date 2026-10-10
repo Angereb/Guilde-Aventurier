@@ -10,20 +10,17 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $titre ?? 'Guilde des Aventuriers' ?></title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Joti+One&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="/Site/Publique/CSS/style.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/style.css") ?>">
+    <link rel="stylesheet" href="/Site/Publique/CSS/Composants/entete.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/Composants/entete.css") ?>">
     <?php foreach($css as $fichierCSS): ?>
-
-        <link rel="stylesheet" href="Site/Publique/css/<?= $fichierCSS ?>">
-
+        <link rel="stylesheet" href="/Site/Publique/CSS/<?= $fichierCSS ?>?v=<?= filemtime(__DIR__ . "/../Publique/CSS/" . $fichierCSS) ?>">
     <?php endforeach; ?>
 
     <?php foreach($javascript as $script): ?>
-        <script defer src="Site/Publique/JS/<?= $script ?>"></script>
+        <script defer src="/Site/Publique/JS/<?= $script ?>?v=<?= filemtime(__DIR__ . "/../Publique/JS/" . $script) ?>"></script>
     <?php endforeach; ?>
 </head>
 

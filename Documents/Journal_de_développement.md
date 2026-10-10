@@ -514,6 +514,39 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 10 Octobre
+
+### Objectifs
+
+- Sécurisation des accès aux différents dossiers du site
+- Reprise de la page d'entrée du site
+
+### Réalisations
+
+- Ajout de la prise en compte des .htaccess dans Dockerfile
+- Création d'un .htaccess spécifique à la racine du projet
+- Création de plusieurs .htaccess en mode "Require all denied" pour tous les dossiers dont l'accès ne doit pas être possible directement
+- Modification du calqueprincipale.php pour y adjoindre la gestion du style.css et entete.css
+- Ajout d'un versionnement des fichiers css et js via filemtime()
+- Ajout de la balise viewport
+- Modification du style général avec les règles établies sur figma et les nouvelles polices téléchargées pour hébergement local
+- Création d'un fichier pour séparer le contenu des informations de l'accueil de son contenant
+- Modification de entree.php avec ajout des labels des liens et un aside réservé pour la version desktop
+- Modification du entree.css, passage en mode grid, passage des images en .svg, adaptation de l'ensemble, ajout d'une media query pour la version desktop
+- Modification de informations.php avec remplacement du texte par un lien vers le fichier de contenu et ajout du label pour le lien de retour vers l'entrée
+- Modification du informations.css, passage des images en .svg
+
+### Difficultés
+
+- Les images en .svg ne s'adaptaient pas correctement aux espaces
+
+### Solutions
+
+- Redimensionnement des portes sur Figma pour correspondre à hauteur = 4xlargeur
+- Annulation de la préservation du ratio pour le panneau d'information directement dans le svg
+
+---
+
 ## Prochaine étape
 
 - Page Amis
