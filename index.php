@@ -1,6 +1,22 @@
 <?php
 
+// Nom personnalisé du cookie de session
+session_name("guilde_session");
+
+// Sécurisation du cookie de session
+session_set_cookie_params([
+    "lifetime" => 0,
+    "path" => "/",
+    "httponly" => true,
+    "samesite" => "Lax",
+    "secure" => isset($_SERVER["HTTPS"]),
+]);
+
 session_start();
+
+if (empty($_SESSION["jetonCsrf"])) {
+    $_SESSION["jetonCsrf"] = bin2hex(random_bytes(32));
+}
 
 $page = $_GET['page'] ?? 'entree';
 
@@ -24,6 +40,10 @@ switch ($page)
 
     case 'connexion':
         require_once __DIR__ . '/Site/Controleurs/Secretariat/connexioncontroleur.php';
+        break;
+
+    case 'inscriptionetconnexion':
+        require_once __DIR__ . '/Site/Controleurs/Secretariat/inscriptionetconnexioncontroleur.php';
         break;
 
     case 'hall':

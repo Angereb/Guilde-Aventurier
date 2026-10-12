@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="/Site/Publique/CSS/<?= $fichierCSS ?>?v=<?= filemtime(__DIR__ . "/../Publique/CSS/" . $fichierCSS) ?>">
     <?php endforeach; ?>
 
+    <script defer src="/Site/Publique/JS/validation.js?v=<?= filemtime(__DIR__ . "/../Publique/JS/validation.js") ?>"></script>
     <?php foreach($javascript as $script): ?>
         <script defer src="/Site/Publique/JS/<?= $script ?>?v=<?= filemtime(__DIR__ . "/../Publique/JS/" . $script) ?>"></script>
     <?php endforeach; ?>

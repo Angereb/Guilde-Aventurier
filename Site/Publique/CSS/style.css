@@ -26,6 +26,7 @@
     --ecriteau: #191717;
     --papier: #DED8A3;
     --cuir: #856B47;
+    --alerte: #850000;
 }
 
 *{
@@ -74,4 +75,8 @@ img {
     outline: 2px solid white;
     outline-offset: 2px;
     box-shadow: 0 0 0 2px black;
+}
+
+input, button, textarea, select {
+    font: inherit;
 }

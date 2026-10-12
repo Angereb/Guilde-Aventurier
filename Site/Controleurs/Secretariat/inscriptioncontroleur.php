@@ -4,27 +4,35 @@ require_once __DIR__ . "/../../Modeles/Utilisateurs/UtilisateurModele.php";
 
 $titre = "Inscription";
 
-$css = [
-    "style.css",
-    "Secretariat/inscription.css",
-    "Composants/entete.css"
-];
+$css = ["Secretariat/inscription.css",];
 
-$javascript = [];
+$javascript = ["Secretariat/formulaireinscription.js"];
 
-$messageErreur = null;
+$messageErreurInscription = null;
+
+$messageErreurInscription = $_SESSION["messageErreurInscription"] ?? null;
+unset($_SESSION["messageErreurInscription"]);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     // Traiter le formulaire
+    $originePage = $_POST["origine"] ?? "";
     $id= null;
     $uuid= null;
-    $pseudo= $_POST["pseudo"];
-    $nomDeCompagnie= $_POST["nomDeCompagnie"];
-    $email= $_POST["email"];
-    $motDePasse= $_POST["motDePasse"];
-    $verificationMotDePasse= $_POST["verificationMotDePasse"];
+    $pseudo= $_POST["pseudo"] ?? "";
+    $nomDeCompagnie= $_POST["nomDeCompagnie"] ?? "";
+    $email= $_POST["email"] ?? "";
+    $motDePasse= $_POST["motDePasse"] ?? "";
+    $verificationMotDePasse= $_POST["verificationMotDePasse"] ?? "";
 
     try{
+        if (!in_array($originePage, ["inscription", "inscriptionetconnexion"], true)) {
+            $originePage = "inscription";
+        }
+
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
+        
         //Vérification du double mot de passe dans le formulaire
         if ($motDePasse !== $verificationMotDePasse) {
             throw new Exception("Les deux mots de passe ne correspondent pas.");
@@ -46,12 +54,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
         $utilisateurModele->ajouter($utilisateur);
 
-        //Redirection vers la page connexion et sortie de la méthode POST
-        header("Location: ?page=connexion");
+        //Redirection vers la page connexion ou la double page inscription/connexion et sortie de la méthode POST
+        if ($originePage === "inscription") {
+            header("Location: ?page=connexion");
+        } else {
+            header("Location: ?page=inscriptionetconnexion");
+        }
         exit;
     }
 
-    catch(Exception $e){$messageErreur = $e->getMessage();}
+    catch(Exception $e){
+        $_SESSION["messageErreurInscription"] = $e->getMessage();
+        header("Location: ?page=" . $originePage);
+        exit;
+        }
 }
 
 ob_start();

@@ -1,27 +1,23 @@
 <main class="secretariat-page">
     <header class="secretariat-titre">
-        <h1>
-            <span>Secrétariat</span>
-        </h1>
+        <h1>Secrétariat</h1>
     </header>
-
-    <section class="secretariat-bureau">
-
-        <div class="plateau-bureau">
-            <section class="secretariat-livre">
-
-                <aside class="secretariat-inscription">
-                    <a href="?page=inscription">Inscription</a>
-                </aside>
-
-                <aside class="secretariat-connexion">
-                    <a href="?page=connexion">Connexion</a>
-                </aside>
-
-            </section>
-        </div>
-
-        <div class="pied-bureau"></div>
-
-    </section>
+    <div class="zone-bureau">
+        <section class="secretariat-bureau">
+            <div class="plateau-bureau">
+                <nav class="secretariat-livre">
+                    <div class="secretariat-inscription">
+                        <a href="?page=inscription"><span>Inscription</span></a>
+                    </div>
+                    <div class="secretariat-connexion">
+                        <a href="?page=connexion"><span>Connexion</span></a>
+                    </div>
+                    <div class="secretariat-inscription-connexion">
+                        <a href="?page=inscriptionetconnexion"><span>Inscription</span><span>Connexion</span></a>
+                    </div>
+                </nav>
+            </div>
+            <div class="pied-bureau"></div>
+        </section>
+    </div>
 </main>

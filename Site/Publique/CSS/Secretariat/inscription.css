@@ -1,110 +1,102 @@
 body {
-    background-color: #8B4513;
-
+    background-color: var(--bois);
     height: 100vh;
-    width: 100vw;
 }
 
 .inscription-page {
-    height: 100%;
-    width: 100%;
-
-    display: flex;
-    flex-direction: column;
-
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
     padding: 10% 0% 10% 5%
 }
 
+.titre-general {
+    text-align: center;
+}
+
+.zone-livre {
+    container-type: size;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+}
+
 .inscription-livre {
-    display: flex;
-    flex-direction: column;
-
-    width: 90%;
-    max-width: 600px;
-    height: 100%;
-
-    margin-left: 10%;
-
-    background-image: url("../../Images/Livre.png");
+    width: min(100cqw, 100cqh * 143/201);
+    aspect-ratio: 143/201;
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr
+        auto;
+    padding-top: 10cqh;
+    background-image: url("../../Images/livre.svg");
     background-size: 185% 100%;
     background-repeat: no-repeat;
     background-position: left;
-
+    container-type: size;
 }
 
 .inscription-titre {
-    height: auto;
-    justify-content: center;
     text-align: center;
-    margin-top: 10%;
-    margin-bottom: 2%;
+    margin-bottom: 2cqh;
 }
 
 .inscription-formulaire {
-    flex: 1;
-
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+    overflow-y: auto;
 }
 
 .inscription-champ {
     height: auto;
-    margin-left: 14%;
-
+    margin-left: 14cqw;
     display: flex;
     flex-direction: column;
 }
 
 .inscription-input {
-    margin-right: 10%;
+    margin-right: 10cqw;
     background-color: transparent;
-    color: black;
-    font-size: clamp(0.2rem, 3vh, 3rem);
+}
+
+.message-champ {
+    margin-right: 10cqw;
+    color: var(--alerte);
 }
 
 .inscription-navigation {
     height: auto;
     width: auto;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    margin-top: auto;
-    margin-bottom: 15%;
+    margin-bottom: 15cqw;
 }
 
-.retour-secretariat {
+.retour-secretariat-inscription {
     display: block;
-
     width: 40px;
     height: 40px;
-
-    background-image: url("../../Images/Retour-bt.png");
+    background-image: url("../../Images/retour-bt.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-
-    margin-left: 10%;
+    margin-left: 10cqw;
 }
 
 .signature-inscription {
     border: 1px solid black;
     border-radius: 20px;
-
     display: inline-block;
-
     width: auto;
     height: auto;
-
-    padding: 2%;
-    margin-right: 10%;
-
+    padding: 0.3rem 1rem;
+    margin-right: 10cqw;
     background-color: transparent;
-
     font: inherit;
     color: inherit;
-
     cursor: pointer;
 }

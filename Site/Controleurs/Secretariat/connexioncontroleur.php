@@ -4,50 +4,70 @@ require_once __DIR__ . "/../../Modeles/Utilisateurs/UtilisateurModele.php";
 
 $titre = "Connexion";
 
-$css = [
-    "style.css",
-    "Secretariat/connexion.css",
-    "Composants/entete.css"
-];
+$css = ["Secretariat/connexion.css"];
 
-$javascript = [];
+$javascript = ["Secretariat/formulaireconnexion.js"];
 
-$messageErreur = null;
+$messageErreurConnexion = null;
+
+$messageErreurConnexion = $_SESSION["messageErreurConnexion"] ?? null;
+unset($_SESSION["messageErreurConnexion"]);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    $identifiant= $_POST["identifiant"];
-    $motDePasse= $_POST["motDePasse"];
+    $originePage = $_POST["origine"] ?? "";
+    $identifiant= $_POST["identifiant"] ?? "";
+    $motDePasse= $_POST["motDePasse"] ?? "";
 
     try{
+        if (!in_array($originePage, ["connexion", "inscriptionetconnexion"], true)) {
+            $originePage = "connexion";
+        }
+
+        // Vérification du jeton CSRF avec hash_equals pour éviter que les hackers comprennent où le jeton est faux
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
+
         $utilisateurModele = new UtilisateurModele();
         
         //Recherche d'un utilisateur correspondant soit à l'Email soit au Pseudo
-        if (filter_var($identifiant, FILTER_VALIDATE_EMAIL)) {
-            $utilisateur = $utilisateurModele->rechercherParEmail($identifiant);
-        }
-        else {
-            $utilisateur = $utilisateurModele->rechercherParPseudo($identifiant);
-        }
-
-        //Vérification de l'état du compte
-        if ($utilisateur->getEstSupprimer()) {
-            throw new Exception("Ce compte n'est plus actif, veuillez contacter un administrateur.");
+        try {
+            if (filter_var($identifiant, FILTER_VALIDATE_EMAIL)) {
+                $utilisateur = $utilisateurModele->rechercherParEmail($identifiant);
+            } else {
+                $utilisateur = $utilisateurModele->rechercherParPseudo($identifiant);
+            }
+        } catch (Exception $e) {
+            throw new Exception("Identifiant ou mot de passe incorrect.");
         }
 
-        //Camparaison du mot de passe saisie avec la version hashé récupérer
+        //Comparaison du mot de passe saisi avec la version hachée récupérée
         if (!password_verify($motDePasse, $utilisateur->getMotDePasse())) {
             throw new Exception("Identifiant ou mot de passe incorrect.");
         }
 
+        //Vérification de l'état du compte
+        if ($utilisateur->getEstSupprime()) {
+            throw new Exception("Identifiant ou mot de passe incorrect.");
+        }
+        if ($utilisateur->getActif() !== true) {
+            throw new Exception("Ce compte a été bloqué, veuillez contacter un administrateur.");
+        }
+
         //Si tout est OK ouverture de session
-        $_SESSION["utilisateur"] = ["id" => $utilisateur->getId(),"uuid" => $utilisateur->getUuid(),"pseudo" => $utilisateur->getPseudo(),"roles" => $utilisateur->getRoles()];
+        session_regenerate_id(true);
+        $_SESSION["utilisateur"] = ["id" => $utilisateur->getUtilisateurId(),"uuid" => $utilisateur->getUuid(),"pseudo" => $utilisateur->getPseudo(),"roles" => $utilisateur->getRoles()];
 
         //Redirection vers le hall
         header("Location: ?page=hall");
         exit;
     }
 
-    catch(Exception $e){$messageErreur = $e->getMessage();}    
+    catch(Exception $e){
+        $_SESSION["messageErreurConnexion"] = $e->getMessage();
+        header("Location: ?page=" . $originePage);
+        exit;
+        }  
 }
 
 ob_start();

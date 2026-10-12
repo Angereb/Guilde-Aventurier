@@ -1,0 +1,174 @@
+body {
+    background-color: var(--bois);
+    height: 100vh;
+}
+
+.inscription-connexion-page {
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
+    padding: 3% 0% 3% 0%
+}
+
+.titre-general {
+    text-align: center;
+}
+
+.zone-livre {
+    container-type: size;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+}
+
+.livre-ouvert {
+    width: min(100cqw, 100cqh * 265/201);
+    aspect-ratio: 265/201;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 10cqh;
+    background-image: url("../../Images/livre.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    container-type: size;
+}
+
+.inscription-livre {
+    height: 100%;
+    container-type: size;
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr
+        auto;
+    margin-left: 6cqw;
+}
+
+.inscription-titre {
+    text-align: center;
+    margin-bottom: 2cqh;
+}
+
+.inscription-formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    overflow-y: auto;
+}
+
+.inscription-champ {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.inscription-input {
+    margin-right: 10cqw;
+    background-color: transparent;
+}
+
+.message-champ {
+    margin-right: 10cqw;
+    color: var(--alerte);
+}
+
+.inscription-navigation {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 22cqw;
+}
+
+.retour-secretariat-inscription {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: url("../../Images/retour-bt.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.signature-inscription {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.3rem 1rem;
+    margin-right: 10cqw;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
+.connexion-livre {
+    height: 100%;
+    container-type: size;
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr
+        auto;
+    margin-right: 6cqw;
+}
+
+.connexion-titre {
+    text-align: center;
+    margin-bottom: 2cqh;
+}
+
+.connexion-formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    overflow-y: auto;
+}
+
+.connexion-champ {
+    height: auto;
+    margin-left: 10cqw;
+    display: flex;
+    flex-direction: column;
+}
+
+.connexion-input {
+    background-color: transparent;
+}
+
+.message-champ {
+    margin-right: 10cqw;
+    color: var(--alerte);
+}
+
+.connexion-navigation {
+    height: 40px;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 22cqw;
+}
+
+.retour-secretariat-connexion {
+    display: none
+}
+
+.signature-connexion {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.3rem 1rem;
+    background-color: transparent;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    margin-left: auto;
+}

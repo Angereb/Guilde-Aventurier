@@ -547,6 +547,31 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 11 et 12 Octobre
+
+### Objectifs
+
+- Reprise des pages liées au secrétariat
+
+### Réalisations
+
+- Réorganisation des formulaires sur des fichiers à part pour permettre l'import sur différentes pages (page simple et page double)
+- Ajout et configuration du jeton CSRF (httponly, samesite, secure)
+- Création d'un script JS général inclus dans le calque principal pour l'affichage et la suppression des messages d’erreur liés aux formulaires
+- Création des validations JS pour les formulaires de connexion et d'inscription
+- Mise à jour des styles CSS pour le secrétariat, la connexion et l'inscription, avec passage en .svg des images et media query pour le secrétariat
+- Création du style CSS pour la page rassemblant inscription et connexion pour la version desktop
+
+### Difficultés
+
+- les images SVG gardent leurs proportions et ne remplissent pas les zones prévues pour les anciens PNG (bureau, livres).
+
+### Solutions
+
+- Utilisation d'une zone mesurée (container-type)
+
+---
+
 ## Prochaine étape
 
 - Page Amis
