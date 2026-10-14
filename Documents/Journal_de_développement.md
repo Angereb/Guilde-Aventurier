@@ -572,6 +572,36 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 13 et 14 Octobre
+
+### Objectifs
+
+- Reprise de la page du hall
+- Reprise du menu du site
+
+### Réalisations
+
+- Ajout des vérifications de jeton CSRF pour les formulaires des annonces
+- Ajout des messages liés aux validations JS des champs
+- Réorganisation du fichier hall.js et ajout de la validation JS pour les formulaires du hall
+- Modification de l'agencement des divisions pour gestion des emplacements via un grid-template-areas
+- Mise à jour du css du hall avec les images en .svg et version desktop
+- Modification du menu avec passage de la déconnexion de lien vers un formulaire vérifiant le jeton CSRF avant déconnexion
+- Mise à jour du style du menu d'en-tête
+- Ajout d'un redirection vers le hall pour les utilisateurs connecté tentant d'accedé aux pages précédent la connexion
+
+### Difficultés
+
+- Problème de zonage des espaces entre mobile et desktop pour le hall
+- Chevauchement entre les boutons du menu et le retour au hall (en position absolue)
+
+### Solutions
+
+- Organisation des zones via grid-template-areas et nommage des zones pour définir leurs positions respectives entre mobile et desktop
+- Ajout d'un second media query pour les écrans les plus petits, reduisant la taille des icônes du menu
+
+---
+
 ## Prochaine étape
 
 - Page Amis

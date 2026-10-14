@@ -11,41 +11,32 @@ if (!isset($_SESSION["utilisateur"])) {
 
 $titre = "Hall";
 
-$css = [
-    "style.css",
-    "Hall/hall.css",
-    "Composants/entete.css"
-];
+$css = ["Hall/hall.css"];
 
-$javascript = [
-    "Hall/hall.js"
-];
+$javascript = ["Hall/hall.js"];
 
 $messageErreur = null;
 
 $annonceModele = new AnnonceModele();
-
-$annonces = $annonceModele->rechercherToutes();
-
-$annonces = array_slice($annonces, 0, 6);
+$annonces = $annonceModele->rechercherDernieres(6);
 
 $auteurs =[];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $formulaire = $_POST['action'] ?? null;
-
     try{
         if (!in_array(Utilisateur::ROLE_ADMINISTRATEUR, $_SESSION["utilisateur"]["roles"])) {
             throw new Exception("Vous n'avez pas les droits nécessaires pour effectuer cette action.");
         }
-
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
         switch($formulaire){
             case 'creerAnnonce':
                 $id= null;
-                $titreAnnonce= $_POST["titre"];
-                $contenu= $_POST["contenu"];
-                $idCreateur = $_SESSION["utilisateur"]["id"];
-
+                $titreAnnonce= $_POST["titre"] ?? "";
+                $contenu= $_POST["contenu"] ?? "";
+                $idCreateur = (int)($_SESSION["utilisateur"]["id"] ?? 0);
                 $annonce = new Annonce(
                     $id,
                     $titreAnnonce,
@@ -53,28 +44,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     null,
                     $idCreateur
                 );
-
                 $annonceModele->ajouter($annonce);
                 break;
 
             case 'modifierAnnonce':
-                $idModification = (int) $_POST["idCible"];
-
-                $titreAnnonceModifier = $_POST["titreModifier"];
-                $contenuAnnonceModifier = $_POST["contenuModifier"];
-
+                $idModification = (int)($_POST["idCible"] ?? 0);
+                $titreAnnonceModifier = $_POST["titreModifier"] ?? "";
+                $contenuAnnonceModifier = $_POST["contenuModifier"] ?? "";
                 $annonceModifier = $annonceModele->rechercherParId($idModification);
-
                 $annonceModifier->setTitre($titreAnnonceModifier);
-                $annonceModele->modifierTitre($annonceModifier);
-
                 $annonceModifier->setContenu($contenuAnnonceModifier);
-                $annonceModele->modifierContenu($annonceModifier);
+                $annonceModele->modifier($annonceModifier);
                 break;
 
             case 'supprimerAnnonce':
-                $idSuppression = (int) $_POST["idCible"];
-
+                $idSuppression = (int)($_POST["idCible"] ?? 0);
                 $annonceModele->supprimer($idSuppression);
                 break;
 
@@ -88,14 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 }
 
 $utilisateurModele = new UtilisateurModele();
-
 foreach ($annonces as $annonce) {
-
     $utilisateur = $utilisateurModele->rechercherParId(
-        $annonce->getCreerParId()
+        $annonce->getPublierParId()
     );
-
-    $auteurs[$annonce->getId()] = $utilisateur->getPseudo();
+    $auteurs[$annonce->getAnnonceId()] = $utilisateur->getPseudo();
 }
 
 ob_start();

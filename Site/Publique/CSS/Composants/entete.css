@@ -1,51 +1,68 @@
 .entete {
     width: 100%;
-
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    background-color: var(--pierre);
+    justify-content: flex-end;
 }
 
 .retour-hall, .administrateur, .mon-compte, .amis, .messages, .deconnexion {
     display: block;
-
-    height : 70px;
-
+    height : 55px;
     aspect-ratio: 1/1;
-
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.retour-hall {
-    background-image: url("../../Images/Retour-hall-bt.png");
+.retour {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
-.administrateur {
-    background-image: url("../../Images/Admin-bt.png");
+.retour-hall {
+    background-image: url("../../Images/retour-hall-bt.svg");
 }
 
 .navigation {
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.administrateur {
+    background-image: url("../../Images/admin-bt.svg");
 }
 
 .mon-compte {
-    background-image: url("../../Images/Compte-bt.png");
+    background-image: url("../../Images/compte-bt.svg");
 }
 
 .amis {
-    background-image: url("../../Images/Friend-bt.png");
+    background-image: url("../../Images/friend-bt.svg");
 }
 
 .messages {
-    background-image: url("../../Images/Messagerie-bt.png");
+    background-image: url("../../Images/messagerie-bt.svg");
 }
 
 .deconnexion {
-    background-image: url("../../Images/Deconnection-bt.png");
+    background-image: url("../../Images/deconnexion-bt.svg");
+    border: none;
+    padding: 0;
+}
+
+@media (max-width: 349px) {
+    .retour-hall, .administrateur, .mon-compte, .amis, .messages, .deconnexion {
+        height: 44px;
+    }
+}
+
+@media (min-width: 768px) {
+    .entete {
+        justify-content: center;
+    }
 }

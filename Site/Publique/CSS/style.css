@@ -79,4 +79,9 @@ img {
 
 input, button, textarea, select {
     font: inherit;
+    background-color: transparent;
+}
+
+.message-champ {
+    color: var(--alerte);
 }

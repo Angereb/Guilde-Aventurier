@@ -1,4 +1,8 @@
 <?php
+if (isset($_SESSION["utilisateur"])) {
+    header("Location: ?page=hall");
+    exit;
+}
 
 $titre = "Inscription et connexion";
 

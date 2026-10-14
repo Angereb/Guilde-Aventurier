@@ -66,12 +66,10 @@ body {
 
 .inscription-input {
     margin-right: 10cqw;
-    background-color: transparent;
 }
 
 .message-champ {
     margin-right: 10cqw;
-    color: var(--alerte);
 }
 
 .inscription-navigation {
@@ -101,7 +99,6 @@ body {
     height: auto;
     padding: 0.3rem 1rem;
     margin-right: 10cqw;
-    background-color: transparent;
     font: inherit;
     color: inherit;
     cursor: pointer;
@@ -137,13 +134,8 @@ body {
     flex-direction: column;
 }
 
-.connexion-input {
-    background-color: transparent;
-}
-
 .message-champ {
     margin-right: 10cqw;
-    color: var(--alerte);
 }
 
 .connexion-navigation {
@@ -166,7 +158,6 @@ body {
     width: auto;
     height: auto;
     padding: 0.3rem 1rem;
-    background-color: transparent;
     font: inherit;
     color: inherit;
     cursor: pointer;

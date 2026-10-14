@@ -2,6 +2,11 @@
 require_once __DIR__ . "/../../Modeles/Utilisateurs/Utilisateur.php";
 require_once __DIR__ . "/../../Modeles/Utilisateurs/UtilisateurModele.php";
 
+if (isset($_SESSION["utilisateur"])) {
+    header("Location: ?page=hall");
+    exit;
+}
+
 $titre = "Connexion";
 
 $css = ["Secretariat/connexion.css"];
