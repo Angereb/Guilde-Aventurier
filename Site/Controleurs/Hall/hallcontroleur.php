@@ -15,8 +15,6 @@ $css = ["Hall/hall.css"];
 
 $javascript = ["Hall/hall.js"];
 
-$messageErreur = null;
-
 $annonceModele = new AnnonceModele();
 $annonces = $annonceModele->rechercherDernieres(6);
 
@@ -45,6 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     $idCreateur
                 );
                 $annonceModele->ajouter($annonce);
+                $_SESSION["notificationMessage"] = "Votre annonce a bien été créée.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             case 'modifierAnnonce':
@@ -55,11 +55,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                 $annonceModifier->setTitre($titreAnnonceModifier);
                 $annonceModifier->setContenu($contenuAnnonceModifier);
                 $annonceModele->modifier($annonceModifier);
+                $_SESSION["notificationMessage"] = "L'annonce a bien été modifiée.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             case 'supprimerAnnonce':
                 $idSuppression = (int)($_POST["idCible"] ?? 0);
                 $annonceModele->supprimer($idSuppression);
+                $_SESSION["notificationMessage"] = "L'annonce a bien été supprimée.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             default:
@@ -68,7 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         header("Location: ?page=hall");
         exit;
     }
-    catch(Exception $e){$messageErreur = $e->getMessage();}
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+        header("Location: ?page=hall");
+        exit;
+    }
 }
 
 $utilisateurModele = new UtilisateurModele();

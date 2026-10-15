@@ -13,11 +13,6 @@ $css = ["Secretariat/connexion.css"];
 
 $javascript = ["Secretariat/formulaireconnexion.js"];
 
-$messageErreurConnexion = null;
-
-$messageErreurConnexion = $_SESSION["messageErreurConnexion"] ?? null;
-unset($_SESSION["messageErreurConnexion"]);
-
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $originePage = $_POST["origine"] ?? "";
     $identifiant= $_POST["identifiant"] ?? "";
@@ -63,13 +58,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         session_regenerate_id(true);
         $_SESSION["utilisateur"] = ["id" => $utilisateur->getUtilisateurId(),"uuid" => $utilisateur->getUuid(),"pseudo" => $utilisateur->getPseudo(),"roles" => $utilisateur->getRoles()];
 
+        //Notification de la réussite
+        $_SESSION["notificationMessage"] = "Bienvenue " . $utilisateur->getPseudo() . " !";
+        $_SESSION["typeNotification"] = "succes";
+
         //Redirection vers le hall
         header("Location: ?page=hall");
         exit;
     }
 
     catch(Exception $e){
-        $_SESSION["messageErreurConnexion"] = $e->getMessage();
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
         header("Location: ?page=" . $originePage);
         exit;
         }  

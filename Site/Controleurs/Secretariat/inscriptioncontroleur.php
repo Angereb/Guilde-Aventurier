@@ -13,11 +13,6 @@ $css = ["Secretariat/inscription.css",];
 
 $javascript = ["Secretariat/formulaireinscription.js"];
 
-$messageErreurInscription = null;
-
-$messageErreurInscription = $_SESSION["messageErreurInscription"] ?? null;
-unset($_SESSION["messageErreurInscription"]);
-
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     // Traiter le formulaire
     $originePage = $_POST["origine"] ?? "";
@@ -59,6 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
         $utilisateurModele->ajouter($utilisateur);
 
+        //Notification de la réussite
+        $_SESSION["notificationMessage"] = "Votre compte a bien été créé. Vous pouvez maintenant vous connecter.";
+        $_SESSION["typeNotification"] = "succes";
+
         //Redirection vers la page connexion ou la double page inscription/connexion et sortie de la méthode POST
         if ($originePage === "inscription") {
             header("Location: ?page=connexion");
@@ -69,7 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
     }
 
     catch(Exception $e){
-        $_SESSION["messageErreurInscription"] = $e->getMessage();
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
         header("Location: ?page=" . $originePage);
         exit;
         }

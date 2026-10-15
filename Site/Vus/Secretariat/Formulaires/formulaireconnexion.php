@@ -18,12 +18,7 @@
             <input type="password" class="connexion-input" id="connexionMotDePasseInput" placeholder="Votre mot de passe" name="motDePasse" aria-describedby="connexionMotDePasseErreur" required>
             <p id="connexionMotDePasseErreur" class="message-champ"></p>
         </div>
-    </form>
-    <?php if ($messageErreurConnexion !== null): ?>
-        <div class="message-erreur">
-            <?= htmlspecialchars($messageErreurConnexion) ?>
-        </div>
-    <?php endif; ?>        
+    </form>      
     <div class="connexion-navigation">
         <a href="?page=secretariat" class="retour-secretariat-connexion" aria-label="Retour au secrétariat"></a>
         <button type="submit" form="formulaireConnexion" class="signature-connexion">Signature</button>

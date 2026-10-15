@@ -1,0 +1,58 @@
+.notification {
+    position: fixed;
+    top: 65px;
+    width: fit-content;
+    max-width: min(80vw, 300px);
+    background-image: url("../../Images/rouleau-parchemin-notification.svg"), url("../../Images/plat-parchemin-notification.svg");
+    background-size: 15px 100%, calc(100% - 15px) 95%;
+    background-repeat: no-repeat;
+    background-position: right top, left bottom;
+    z-index: 1000;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    animation: deroulement 0.3s ease-out;
+}
+
+.notification.notification-succes {
+    left: 0px;
+    transform-origin: left;
+    padding: calc(0.5% + 5px) 0px 5px 5px;
+    grid-template-areas: 
+        "message croix";
+}
+
+.notification.notification-erreur {
+    right: 0px;
+    transform-origin: right;
+    background-position: left top, right bottom;
+    padding: calc(0.5% + 5px) 5px 5px 0px;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+        "croix message";
+}
+
+@keyframes deroulement {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.notification-message {
+    grid-area: message;
+}
+
+.fermer-notification {
+    grid-area: croix;
+    width: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notification {
+        animation: none;
+    }
+}

@@ -602,6 +602,21 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 14 et15 Octobre
+
+### Objectifs
+
+- Création d'un affichage spécifique pour les notifications de succès et d'érreur
+
+### Réalisations
+
+- Création d'un composants notification.php inclus dans le calque principal
+- Stylisation du composant de notification, avec animation de déroulement pour le parchemin et différenciation entre succès et érreur
+- Programmation d'un temps d'affichage maximum pour la notification de succès et d'une méthode de fermeture pour les deux notifications en JavaScript
+- Modification de la gestion des messages d'erreur dans les précédent contrôleur et ajout de messages de succès
+
+---
+
 ## Prochaine étape
 
 - Page Amis

@@ -38,11 +38,6 @@
             <p id="inscriptionVerificationMotDePasseErreur" class="message-champ"></p>
         </div>
     </form>
-    <?php if ($messageErreurInscription !== null): ?>
-        <div class="message-erreur">
-            <?= htmlspecialchars($messageErreurInscription) ?>
-        </div>
-    <?php endif; ?>
     <div class="inscription-navigation">
         <a href="?page=secretariat" class="retour-secretariat-inscription" aria-label="Retour au secrétariat"></a>
         <button type="submit" form="formulaireInscription" class="signature-inscription">Signature</button>

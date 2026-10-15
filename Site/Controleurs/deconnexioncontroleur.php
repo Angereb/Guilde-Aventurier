@@ -17,7 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         session_destroy();
         header("Location: ?page=entree");
         exit;
-    } catch(Exception $e){$messageErreur = $e->getMessage();}
+    } catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+    }
 }
 header("Location: ?page=hall");
 exit;
