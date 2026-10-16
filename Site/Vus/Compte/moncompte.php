@@ -1,7 +1,3 @@
-<?php
-require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
-?>
-
 <main class="mon-compte-page">
     <section class="feuille-compte">
         <h1 class="titre"><?= htmlspecialchars($utilisateur->getPseudo()) ?></h1>

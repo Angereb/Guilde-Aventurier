@@ -633,6 +633,22 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 16 Octobre
+
+### Objectifs
+
+- Reprise de la page Administration
+
+### Réalisations
+
+- Modification de la vue de la page Administration avec tableau pour le résultat des recherches, modification de l'intitulé de l'état, ajout du message de validation js pour la recherche, ajout des jetons CSRF
+- Ajout des libellés des rôles dans l'objet utilisateur
+- Modification du contrôleur de la page Administration avec tri des résultats de la recherche pour exclure les comptes supprimés, vérification des jetons CSRF, contrôle de l'état supprimé des comptes modifiés, ajout des messages d'erreur et de succès dans le système de notification, ajout du rôle utilisateur garanti
+- Modification du fichier JavaScript pour la page Administration avec validation js du champ de recherche, et adaptation des check sur l'état actif
+- Mise à jour de administrateur.css avec passage des images en .svg, media query pour le desktop, stylisation du tableau des utilisateurs trouvés
+
+---
+
 ## Prochaine étape
 
 - Page Amis

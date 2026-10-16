@@ -7,11 +7,9 @@ if (!isset($_SESSION["utilisateur"]) || !in_array(Utilisateur::ROLE_ADMINISTRATE
     exit;
 }
 
-$titre = "administrateur";
+$titre = "Administrateur";
 
 $css = [
-    "style.css",
-    "Composants/entete.css",
     "Compte/administrateur.css"
 ];
 
@@ -19,10 +17,7 @@ $javascript = [
     "Compte/administrateur.js"
 ];
 
-$messageErreur = null;
-
 $utilisateurModele = new UtilisateurModele();
-
 $utilisateurs = [];
 
 if (isset($_SESSION["rechercheAdmin"])){
@@ -35,7 +30,6 @@ if (isset($_SESSION["rechercheAdmin"])){
             }
             catch(Exception $e){}
         }
-
         if ($trouver === false){
             try{
                 $utilisateurs[] = $utilisateurModele->rechercherParPseudo($_SESSION["rechercheAdmin"]);
@@ -43,7 +37,6 @@ if (isset($_SESSION["rechercheAdmin"])){
             }
             catch(Exception $e){}
         }
-
         if ($trouver === false) {
             try{
                 $utilisateurs = $utilisateurModele->rechercherToutesCompagnies($_SESSION["rechercheAdmin"]);
@@ -51,53 +44,69 @@ if (isset($_SESSION["rechercheAdmin"])){
             }
             catch(Exception $e){}
         }
-
-        if ($trouver === false) {
-            throw new Exception("Aucun résultat de la recherche n\'a pu être trouver.");
+        $utilisateursRetenus = [];
+        foreach ($utilisateurs as $utilisateur) {
+            if (!$utilisateur->getEstSupprime()) {
+                $utilisateursRetenus[] = $utilisateur;
+            }
+        }
+        $utilisateurs = $utilisateursRetenus;
+        if (empty($utilisateurs)) {
+            throw new Exception("Aucun résultat n'a été trouvé pour cette recherche.");
         }
     }
-    catch(Exception $e){$messageErreur = $e->getMessage();}
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $formulaire = $_POST['action'] ?? null;
-
     try{
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
         switch($formulaire){
             case 'rechercherUtilisateur':
-                $recherche = $_POST["recherche"];
+                $recherche = $_POST["recherche"] ?? "";
                 $_SESSION["rechercheAdmin"] = $recherche;
                 break;
     
-            case 'modifierEstSupprimer' :
-                $id = (int) $_POST["idCible"];
-
+            case 'modifierActif' :
+                $id = (int)($_POST["idCible"] ?? 0);
                 if ($id === $_SESSION["utilisateur"]["id"]){
                     throw new Exception("Vous ne pouvez effectuer ce genre de modification sur ce compte.");
                 }
-
                 $utilisateur = $utilisateurModele->rechercherParId($id);
-
-                if (isset($_POST["estSupprimer"])){$estSupprimer = true;}
-                else {$estSupprimer = false;}
-
-                $utilisateur->setEstSupprimer($estSupprimer);
-                $utilisateurModele->modifierEstSupprimer($utilisateur);
+                if ($utilisateur->getEstSupprime()) {
+                    throw new Exception("Vous ne pouvez modifier l'état d'un compte supprimé.");
+                }
+                if (isset($_POST["bloquer"])){$actif = false;}
+                else {$actif = true;}
+                $utilisateur->setActif($actif);
+                $utilisateurModele->modifierActif($utilisateur);
+                $_SESSION["notificationMessage"] = "L'état du compte ciblé a bien été modifié.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             case 'modifierRoles' :
-                $id = (int) $_POST["idCible"];
-
+                $id = (int)($_POST["idCible"] ?? 0);
                 if ($id === $_SESSION["utilisateur"]["id"]){
                     throw new Exception("Vous ne pouvez effectuer ce genre de modification sur ce compte.");
                 }
-
                 $utilisateur = $utilisateurModele->rechercherParId($id);
-
+                if ($utilisateur->getEstSupprime()) {
+                    throw new Exception("Vous ne pouvez modifier les rôles d'un compte supprimé.");
+                }
                 $roles = $_POST["roles"] ?? [];
-
+                if (!in_array(Utilisateur::ROLE_UTILISATEUR, $roles, true)) {
+                    $roles[] = Utilisateur::ROLE_UTILISATEUR;
+                }
                 $utilisateur->setRoles($roles);
                 $utilisateurModele->modifierRoles($utilisateur);
+                $_SESSION["notificationMessage"] = "Les rôles du compte ciblé ont bien été mis à jour.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             default:
@@ -106,7 +115,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         header("Location: ?page=administrateur");
         exit;
     }
-    catch(Exception $e){$messageErreur = $e->getMessage();} 
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+        header("Location: ?page=administrateur");
+        exit;
+    } 
 }
 
 ob_start();

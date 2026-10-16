@@ -15,6 +15,10 @@ class Utilisateur {
     public const ROLE_UTILISATEUR = "ROLE_UTILISATEUR";
     public const ROLE_ADMINISTRATEUR = "ROLE_ADMINISTRATEUR";
     public const ROLES_VALIDES = [self::ROLE_UTILISATEUR, self::ROLE_ADMINISTRATEUR];
+    public const LIBELLES_ROLES = [
+        self::ROLE_UTILISATEUR => "Utilisateur",
+        self::ROLE_ADMINISTRATEUR => "Administrateur",
+    ];
 
     public function __construct(?int $utilisateurId, ?string $uuid, string $pseudo, string $nomCompagnie, string $email, string $motDePasse, array $roles, ?DateTime $creerLe, ?DateTime $modifierLe, bool $motDePasseHashe = false, bool $estSupprime = false, bool $actif = true)
     {
