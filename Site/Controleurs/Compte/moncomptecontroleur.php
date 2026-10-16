@@ -7,19 +7,15 @@ if (!isset($_SESSION["utilisateur"])) {
     exit;
 }
 
-$titre = "moncompte";
+$titre = "Mon compte";
 
 $css = [
-    "style.css",
-    "Composants/entete.css",
-    "Compte/moncompte.css"
+    "Compte/moncompte.css",
 ];
 
 $javascript = [
     "Compte/moncompte.js"
 ];
-
-$messageErreur = null;
 
 $utilisateurModele = new UtilisateurModele();
 
@@ -27,62 +23,60 @@ $utilisateur = $utilisateurModele->rechercherParId($_SESSION["utilisateur"]["id"
 
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $formulaire = $_POST['action'] ?? null;
-    $verificationMotDePasse = $_POST["verificationMotDePasse"] ?? null;
-
+    $verificationMotDePasse = $_POST["verificationMotDePasse"] ?? "";
     try{
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
         switch($formulaire){
-            case 'modifierPseudo':
-                $pseudo = $_POST["pseudo"];
-
+            case 'modifierGeneral':
+                $pseudo = $_POST["pseudo"] ?? "";
+                $email = $_POST["email"] ?? "";
+                $nomDeCompagnie = $_POST["nomDeCompagnie"] ?? "";
                 if (!password_verify($verificationMotDePasse, $utilisateur->getMotDePasse())) {
                     throw new Exception("Mot de passe incorrect.");
                 }
-
                 $utilisateur->setPseudo($pseudo);
-                $utilisateurModele->modifierPseudo($utilisateur);
-                $_SESSION["utilisateur"]["pseudo"] = $utilisateur->getPseudo();
-                break;
-
-            case 'modifierNomDeCompagnie':
-                $nomDeCompagnie = $_POST["nomDeCompagnie"];
-                $utilisateur->setNomDeCompagnie($nomDeCompagnie);
-                $utilisateurModele->modifierNomDeCompagnie($utilisateur);
-                break;
-
-            case 'modifierEmail':
-                $email = $_POST["email"];
-
-                if (!password_verify($verificationMotDePasse, $utilisateur->getMotDePasse())) {
-                    throw new Exception("Mot de passe incorrect.");
-                }
-
+                $utilisateur->setNomCompagnie($nomDeCompagnie);
                 $utilisateur->setEmail($email);
-                $utilisateurModele->modifierEmail($utilisateur);
+                $utilisateurModele->modifier($utilisateur);
+                $_SESSION["utilisateur"]["pseudo"] = $utilisateur->getPseudo();
+                $_SESSION["notificationMessage"] = "Votre compte a bien été modifié.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             case 'modifierMotDePasse':
-                $motDePasse = $_POST["motDePasse"];
-
+                $nouveauMotDePasse = $_POST["motDePasse"] ?? "";
+                $verificationNouveauMotDePasse = $_POST["verificationNouveauMotDePasse"] ?? "";
+                if ($nouveauMotDePasse !== $verificationNouveauMotDePasse) {
+                    throw new Exception("Les deux mots de passe ne correspondent pas.");
+                }
                 if (!password_verify($verificationMotDePasse, $utilisateur->getMotDePasse())) {
                     throw new Exception("Ancien mot de passe incorrect.");
                 }
-
-                $utilisateur->setMotDePasse($motDePasse);
+                $utilisateur->setMotDePasse($nouveauMotDePasse);
                 $utilisateurModele->modifierMotDePasse($utilisateur);
+                session_regenerate_id(true);
+                $_SESSION["notificationMessage"] = "Votre mot de passe a bien été modifié.";
+                $_SESSION["typeNotification"] = "succes";
                 break;
 
             case 'supprimerCompte':
                 if (!password_verify($verificationMotDePasse, $utilisateur->getMotDePasse())) {
-                    throw new Exception("Ancien mot de passe incorrect.");
+                    throw new Exception("Mot de passe incorrect.");
                 }
-
-                $utilisateur->setEstSupprimer(true);
-                $utilisateurModele->modifierEstSupprimer($utilisateur);
-
+                $utilisateurModele->anonymiser($utilisateur->getUtilisateurId());
                 $_SESSION = [];
-
+                $parametres = session_get_cookie_params();
+                setcookie(session_name(), "", [
+                    "expires" => time() - 3600,
+                    "path" => $parametres["path"],
+                    "domain" => $parametres["domain"],
+                    "secure" => $parametres["secure"],
+                    "httponly" => $parametres["httponly"],
+                    "samesite" => $parametres["samesite"],
+                ]);
                 session_destroy();
-
                 header("Location: ?page=entree");
                 exit;
 
@@ -93,7 +87,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         exit;
     }
 
-    catch(Exception $e){$messageErreur = $e->getMessage();} 
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+        header("Location: ?page=moncompte");
+        exit;
+    } 
 }
 
 ob_start();

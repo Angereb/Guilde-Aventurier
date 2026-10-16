@@ -602,18 +602,34 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## 14 et15 Octobre
+## 14 et 15 Octobre
 
 ### Objectifs
 
-- Création d'un affichage spécifique pour les notifications de succès et d'érreur
+- Création d'un affichage spécifique pour les notifications de succès et d'erreur
 
 ### Réalisations
 
-- Création d'un composants notification.php inclus dans le calque principal
-- Stylisation du composant de notification, avec animation de déroulement pour le parchemin et différenciation entre succès et érreur
+- Création d'un composant notification.php inclus dans le calque principal
+- Stylisation du composant de notification, avec animation de déroulement pour le parchemin et différenciation entre succès et erreur et respect de la réduction des animations des utilisateurs
 - Programmation d'un temps d'affichage maximum pour la notification de succès et d'une méthode de fermeture pour les deux notifications en JavaScript
-- Modification de la gestion des messages d'erreur dans les précédent contrôleur et ajout de messages de succès
+- Modification de la gestion des messages d'erreur dans les précédents contrôleurs et ajout de messages de succès
+
+---
+
+## 15 et 16 Octobre
+
+### Objectifs
+
+- Reprise de la page Mon compte
+
+### Réalisations
+
+- Modification de la vue de Mon compte avec rassemblement des modifications du pseudo, du nom de la compagnie et de l'adresse e-mail en un seul formulaire, suppression des modales inutiles, ajout des jetons CSRF, ajout des champs pour les messages de la validation js
+- Ajout d'une fonction pour anonymiser les comptes dans le modèle utilisateur via une transaction supprimant les aventuriers, les déblocages de compétences et les relations et modifiant le pseudo par "Anonyme-UUID", le nom de compagnie par "Compagnie dissoute", l'e-mail par "anonyme-uuid@guilde.invalid" et le mot de passe par une valeur alératoire hachée.
+- Modification du contrôleur de Mon compte, ajout de la vérification des jetons CSRF, fusion des modifications pseudo, nom de compagnie et adresse e-mail, ajout de la destruction du cookie de session, ajout des messages de réussite des formulaires, passage du message d'erreur dans le système de notification
+- Ajout des validations JS pour les différents champs des formulaires
+- Mise à jour de moncompte.css avec passage des images en .svg, media query pour le desktop et ajustement des modales
 
 ---
 

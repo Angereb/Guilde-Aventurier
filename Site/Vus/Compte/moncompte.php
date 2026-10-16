@@ -5,109 +5,86 @@ require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
 <main class="mon-compte-page">
     <section class="feuille-compte">
         <h1 class="titre"><?= htmlspecialchars($utilisateur->getPseudo()) ?></h1>
-        
-        <form id="formulairePseudo" class="formulaire-pseudo" method="post">
+        <form id="formulaireGeneral" class="formulaire-general" method="post" novalidate>
+            <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">
             <div class="formulaire-champ">
                 <label for="pseudoInput" class="modification-label">Pseudo : </label>
-                <input type="text" class="modification-input" id="pseudoInput" placeholder="<?= htmlspecialchars($utilisateur->getPseudo()) ?>" name="pseudo">
+                <input type="text" class="modification-input" id="pseudoInput" value="<?= htmlspecialchars($utilisateur->getPseudo()) ?>" name="pseudo" aria-describedby="modificationPseudoErreur">
+                <p id="modificationPseudoErreur" class="message-champ"></p>
             </div>
-            <a href="#" class="modification-pseudo" id="modifierPseudo">Modifier</a>
-        </form>
-
-        <form id="formulaireNomDeCompagnie" class="formulaire-nom-de-compagnie" method="post">
             <div class="formulaire-champ">
-                <label for="nomDeCompagnieInput" class="modification-label">Nom de Compagnie : </label>
-                <input type="text" class="modification-input" id="nomDeCompagnieInput" placeholder="<?= htmlspecialchars($utilisateur->getNomDeCompagnie()) ?>" name="nomDeCompagnie">
+                <label for="nomDeCompagnieInput" class="modification-label">Nom de compagnie : </label>
+                <input type="text" class="modification-input" id="nomDeCompagnieInput" value="<?= htmlspecialchars($utilisateur->getNomCompagnie()) ?>" name="nomDeCompagnie" aria-describedby="modificationNomCompagnieErreur">
+                <p id="modificationNomCompagnieErreur" class="message-champ"></p>
             </div>
-            <button type="submit" class="modification-nom-de-compagnie" name="action" value="modifierNomDeCompagnie">Modifier</button>
-        </form>
-
-        <form id="formulaireEmail" class="formulaire-email" method="post">
             <div class="formulaire-champ">
-                <label for="emailInput" class="modification-label">Email : </label>
-                <input type="email" class="modification-input" id="emailInput" placeholder="<?= htmlspecialchars($utilisateur->getEmail()) ?>" name="email">
+                <label for="emailInput" class="modification-label">Adresse e-mail : </label>
+                <input type="email" class="modification-input" id="emailInput" value="<?= htmlspecialchars($utilisateur->getEmail()) ?>" name="email" aria-describedby="modificationEmailErreur">
+                <p id="modificationEmailErreur" class="message-champ"></p>
             </div>
-            <a href="#" class="modification-email" id="modifierEmail">Modifier</a>
+            <button type="button" class="modification-general" id="modifierGeneral">Modifier</button>
         </form>
-
-        <form id="formulaireMotDePasse" class="formulaire-mot-de-passe" method="post">
+        <form id="formulaireMotDePasse" class="formulaire-mot-de-passe" method="post" novalidate>
+            <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">
             <div class="formulaire-champ">
-                <label for="motDePasseInput" class="modification-label">Mot De Passe : </label>
-                <input type="password" class="modification-input" id="motDePasseInput" placeholder="Nouveau mot de passe" name="motDePasse">
+                <label for="motDePasseInput" class="modification-label">Nouveau mot de passe : </label>
+                <input type="password" class="modification-input" id="motDePasseInput" placeholder="Nouveau mot de passe" name="motDePasse" aria-describedby="modificationMotDePasseErreur">
+                <p id="modificationMotDePasseErreur" class="message-champ"></p>
             </div>
-            <a href="#" class="modification-mot-de-passe" id="modifierMotDePasse">Modifier</a>
+            <div class="formulaire-champ">
+                <label for="modificationVerificationMotDePasseInput" class="modification-label">Vérification du nouveau mot de passe :</label>
+                <input type="password" class="modification-input" id="modificationVerificationMotDePasseInput" placeholder="Confirmez votre nouveau mot de passe" name="verificationNouveauMotDePasse" aria-describedby="modificationVerificationNouveauMotDePasseErreur">
+                <p id="modificationVerificationNouveauMotDePasseErreur" class="message-champ"></p>
+            </div>
+            <button type="button" class="modification-mot-de-passe" id="modifierMotDePasse">Modifier</button>
         </form>
-
-        <a href="#" class="suppression-compte" id="supprimerCompte">Supprimer</a>
-
-        <?php if ($messageErreur !== null): ?>
-            <div class="message-erreur">
-                <?= htmlspecialchars($messageErreur) ?>
-            </div>
-        <?php endif; ?>
+        <button type="button" class="suppression-compte" id="supprimerCompte">Supprimer</button>
     </section>
 </main>
 
-<div id="modalePseudo" class="modale-cachee">
+<div id="modaleGeneral" class="modale-cachee">
     <section class="fenetre-verification">
         <h2 class="verification-titre">Vérification du mot de passe</h2>
-
-        <label for="verifInputPseudo" class="verif-mot-de-passe">Mot de Passe :</label>
-        <input form="formulairePseudo" type="password" class="verif-mot-de-passe-input" id="verifInputPseudo" placeholder="Mot de Passe" name="verificationMotDePasse" required>
-
-        <div class="verification-mot-de-passe-navigation">
-            <button type="submit" form="formulairePseudo" class="envoyer-pseudo" name="action" value="modifierPseudo">Modifier</button>
-
-            <button type="button" id="fermerModifierPseudo" class="retour-modifier-pseudo">Annuler</button>
-        </div>    
-    </section>
-</div>
-
-<div id="modaleEmail" class="modale-cachee">
-    <section class="fenetre-verification">
-        <h2 class="verification-titre">Vérification du mot de passe</h2>
-
-        <label for="verifInputEmail" class="verif-mot-de-passe">Mot de Passe :</label>
-        <input form="formulaireEmail" type="password" class="verif-mot-de-passe-input" id="verifInputEmail" placeholder="Mot de Passe" name="verificationMotDePasse" required>
-
-        <div class="verification-mot-de-passe-navigation">
-            <button type="submit" form="formulaireEmail" class="envoyer-email" name="action" value="modifierEmail">Modifier</button>
-
-            <button type="button" id="fermerModifierEmail" class="retour-modifier-email">Annuler</button>
-        </div>    
+        <div class="formulaire-champ">
+            <label for="verifInputGeneral" class="verif-mot-de-passe">Mot de Passe :</label>
+            <input form="formulaireGeneral" type="password" class="verif-mot-de-passe-input" id="verifInputGeneral" placeholder="Mot de Passe" name="verificationMotDePasse" aria-describedby="modaleGeneralMotDePasseErreur" required>
+            <p id="modaleGeneralMotDePasseErreur" class="message-champ"></p>
+        </div>
+        <nav class="verification-mot-de-passe-navigation">
+            <button type="submit" form="formulaireGeneral" class="envoyer-general" name="action" value="modifierGeneral">Modifier</button>
+            <button type="button" id="fermerModifierGeneral" class="retour-modifier-general">Annuler</button>
+        </nav>    
     </section>
 </div>
 
 <div id="modaleMotDePasse" class="modale-cachee">
     <section class="fenetre-verification">
         <h2 class="verification-titre">Vérification du mot de passe</h2>
-
-        <label for="verifInputMotDePasse" class="verif-mot-de-passe">Mot de Passe :</label>
-        <input form="formulaireMotDePasse" type="password" class="verif-mot-de-passe-input" id="verifInputMotDePasse" placeholder="Mot de Passe" name="verificationMotDePasse" required>
-
-        <div class="verification-mot-de-passe-navigation">
+        <div class="formulaire-champ">
+            <label for="verifInputMotDePasse" class="verif-mot-de-passe">Mot de Passe :</label>
+            <input form="formulaireMotDePasse" type="password" class="verif-mot-de-passe-input" id="verifInputMotDePasse" placeholder="Mot de Passe" name="verificationMotDePasse" aria-describedby="modaleMotDePasseMotDePasseErreur" required>
+            <p id="modaleMotDePasseMotDePasseErreur" class="message-champ"></p>
+        </div>
+        <nav class="verification-mot-de-passe-navigation">
             <button type="submit" form="formulaireMotDePasse" class="envoyer-mot-de-passe" name="action" value="modifierMotDePasse">Modifier</button>
-
             <button type="button" id="fermerModifierMotDePasse" class="retour-modifier-mot-de-passe">Annuler</button>
-        </div>    
+        </nav>    
     </section>
 </div>
 
 <div id="modaleSupprimerCompte" class="modale-cachee">
     <section class="fenetre-verification-suppression">
         <h2 class="suppression-titre">ATTENTION</h2>
-
-        <p class="text-avertissement">En cas de validation, votre compte ne sera plus accécible, et vos données d'aventuriers et de parties seront éffacées. Si vous souhaiter revenir sur le site, il vous faudrat contacter un administrateur.</p>
-
-        <form id="formulaireSupprimerCompte" class="formulaire-supprimer-compte" method="post">
+        <p class="text-avertissement">En cas de validation, votre compte ne sera plus accessible, et vos données d'aventuriers et de parties seront effacées.</p>
+        <form id="formulaireSupprimerCompte" class="formulaire-supprimer-compte" method="post" novalidate>
+            <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">
             <label for="verifInputSupprimerCompte" class="verif-mot-de-passe">Mot de Passe :</label>
-            <input type="password" class="verif-supprimer-compte-input" id="verifInputSupprimerCompte" placeholder="Mot de Passe" name="verificationMotDePasse" required>
+            <input type="password" class="verif-supprimer-compte-input" id="verifInputSupprimerCompte" placeholder="Mot de Passe" name="verificationMotDePasse" aria-describedby="modaleSupprimerMotDePasseErreur" required>
+            <p id="modaleSupprimerMotDePasseErreur" class="message-champ"></p>
         </form>
-
-        <div class="verification-mot-de-passe-navigation">
+        <nav class="verification-mot-de-passe-navigation">
             <button type="submit" form="formulaireSupprimerCompte" class="supprimer-compte" name="action" value="supprimerCompte">Supprimer</button>
-
             <button type="button" id="fermerSupprimerCompte" class="retour-supprimer-compte">Annuler</button>
-        </div>    
+        </nav>    
     </section>
 </div>

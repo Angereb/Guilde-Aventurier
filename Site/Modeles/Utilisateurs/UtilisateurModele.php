@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../ModeleBase.php";
 require_once __DIR__ . "/Utilisateur.php";
+require_once __DIR__ . "/../Aventuriers/AventurierModele.php";
 
 class UtilisateurModele extends ModeleBase{
     private function genererUuid(): string {
@@ -205,11 +206,40 @@ class UtilisateurModele extends ModeleBase{
         ]);
     }
 
-    // TODO créer la fonction d'anonymisation
-    // - pseudo et e-mail : valeurs uniques (à partir de l'identifiant)
-    // - e-mail au format valide, avec le domaine réservé .invalid
-    // - mot de passe : hash d'une valeur aléatoire
-    // - supprimer les aventuriers, déblocages et relations (pas de cascade sans suppression réelle)
-    // - tout regrouper dans une transaction
+    public function anonymiser(int $utilisateurId): void {
+        $utilisateur = $this->rechercherParId($utilisateurId);
+        $this->pdo->beginTransaction();
+        try {
+            $aventurierModele = new AventurierModele;
+            $aventuriers = $aventurierModele->rechercherParCreerParId($utilisateurId);
+            foreach ($aventuriers as $aventurier) {
+                $aventurierModele->supprimer($aventurier->getAventurierId());
+            }
+            $requeteDeblocage = $this->pdo->prepare("DELETE FROM deblocage_competences_utilisateurs WHERE utilisateurId = ?");
+            $requeteDeblocage->execute([$utilisateurId]);
+            $requeteRelationUtilisateur = $this->pdo->prepare("DELETE FROM relations_utilisateurs WHERE utilisateurId = ?");
+            $requeteRelationUtilisateur->execute([$utilisateurId]);
+            $requeteRelationContact = $this->pdo->prepare("DELETE FROM relations_utilisateurs WHERE contactId = ?");
+            $requeteRelationContact->execute([$utilisateurId]);
+            $pseudoAnonymiser = "Anonyme-" . $utilisateur->getUuid();
+            $nomCompagnieAnonymiser = "Compagnie dissoute";
+            $emailAnonymiser = "anonyme-" . $utilisateur->getUuid() . "@guilde.invalid";
+            $motDePasseAnonymiser = password_hash(bin2hex(random_bytes(32)), PASSWORD_BCRYPT);
+            $requeteUtilisateur = $this->pdo->prepare("UPDATE utilisateurs SET pseudo = ?, nomCompagnie = ?, email = ?, motDePasse = ?, estSupprime = ?, actif = ?, modifierLe = NOW() WHERE utilisateurId= ?");
+            $requeteUtilisateur->execute([
+                $pseudoAnonymiser,
+                $nomCompagnieAnonymiser,
+                $emailAnonymiser,
+                $motDePasseAnonymiser,
+                1,
+                0,
+                $utilisateurId
+            ]);
+            $this->pdo->commit();
+        } catch (Exception $e){
+            $this->pdo->rollBack();
+            throw new Exception("Erreur lors de l'anonymisation : " . $e->getMessage());
+        } 
+    }
 }
 ?>

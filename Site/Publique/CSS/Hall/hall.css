@@ -1,3 +1,7 @@
+body {
+    height: 100vh;
+}
+
 .hall-page {
     flex: 1;
     display:grid;
@@ -86,6 +90,7 @@
 }
 
 .edition-information {
+    position: absolute;
     justify-self: right;
     width: 70px;
     height: 20px;
@@ -102,7 +107,7 @@
 .zone-annonces {
     width: 80cqw;
     height: 70cqh;
-    margin: 0cqh 10cqw 0cqh 10cqw;
+    margin: calc(9cqh + 20px) 10cqw 0cqh 10cqw;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
     gap: 1rem;
@@ -158,7 +163,7 @@
     position: relative;
     width: min(80vw, 600px);
     max-height: 90vh;
-    aspect-ratio: 41 / 63;
+    aspect-ratio: 40 / 63;
     border-radius:10px;
     padding:2rem;
     background-image: url(../../Images/parchemin-info.svg);
