@@ -14,7 +14,7 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
             <a href="?page=administrateur" class="administrateur" aria-label="Administration"></a>
         <?php endif; ?>
         <a href="?page=moncompte" class="mon-compte" aria-label="Mon compte"></a>
-        <a href="?page=amis" class="amis" aria-label="Amis"></a>
+        <a href="?page=listeami" class="amis" aria-label="Amis"></a>
         <a href="?page=messages" class="messages" aria-label="Messagerie"></a>
         <form id="formulaireDeconnexion" class="formulaire-deconnexion" method="post" action="?page=deconnexion">
             <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">

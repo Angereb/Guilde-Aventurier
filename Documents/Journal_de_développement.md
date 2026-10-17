@@ -649,7 +649,23 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 17 Octobre
+
+### Objectifs
+
+- Créer la page de gestion des relations
+
+### Réalisations
+
+- Ajout du chemin vers le contrôleur dans l'index
+- Création du contrôleur de la liste de contacts avec récupération automatique de tous les contacts de l'utilisateur de la session, gestion du formulaire pour sélectionner un pseudo à demander en ami ou à bloquer, des formulaires de modifications des états des relations
+- Pour une demande de contact vers un utilisateur ayant bloqué le demandeur de contact, ce dernier reçoit un message lui signifiant que la demande de contact a bien été envoyée, même si ce n'est pas réellement le cas pour protéger le choix de son contact de l'avoir bloqué
+- Création de la vue avec affichage d'un champ pour saisir un pseudo à demander en ami ou à bloquer, affichage d'un tableau comprenant toutes les relations du compte et des boutons conditionnés selon l'état de la relation et permettant de changer l'état de la relation, et affichage d'un message en cas où aucune relation n'est trouvée pour l'utilisateur
+- Création d'une validation js pour le champ de sélection des pseudos à demander en ami ou à bloquer
+- Création du style css de la page semblable à celui de la page administrateur
+
+---
+
 ## Prochaine étape
 
-- Page Amis
 - Page Messagerie

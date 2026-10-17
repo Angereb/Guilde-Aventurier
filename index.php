@@ -60,7 +60,11 @@ switch ($page)
 
     case "deconnexion":
         require_once __DIR__ . '/Site/Controleurs/deconnexioncontroleur.php';
-        break;    
+        break;
+
+    case "listeami":
+        require_once __DIR__ . '/Site/Controleurs/Amis/listeamicontroleur.php';
+        break;
 
     default:
         echo "Page introuvable";

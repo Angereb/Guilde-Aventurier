@@ -6,6 +6,12 @@ class RelationUtilisateur {
     private string $statut;
 
     public const STATUTS_VALIDES = ["ami", "rival", "bloque", "en_attente"];
+    public const LIBELLES_STATUTS = [
+        "ami" => "Ami",
+        "rival" => "Rival",
+        "bloque" => "Bloqué",
+        "en_attente" => "Demande reçue",
+    ];
 
     public function __construct(int $utilisateurId, int $contactId, ?DateTime $creerLe, string $statut) {
         $this->setRelation($utilisateurId, $contactId);

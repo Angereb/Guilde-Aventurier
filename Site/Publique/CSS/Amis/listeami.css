@@ -1,0 +1,117 @@
+body {
+    height: 100vh;
+}
+
+.liste-amis-page {
+    flex: 1;
+    display:grid;
+    grid-template-rows:
+        1fr;     
+    background-color: var(--bois);
+    padding: 5% 2% 5% 2%;
+    container-type: size;
+    min-height: 0;
+}
+
+.feuille-liste-amis {
+    width: min(100cqw, 100cqh * 40/63);
+    aspect-ratio: 40/63;
+    display: grid;
+    grid-template-rows: 
+        auto
+        auto
+        1fr;
+
+    background-image: url(../../Images/parchemin-info.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-self: center;
+    padding: 2cqh 5cqw 3cqh 5cqw;
+    container-type: size;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.formulaire-contact {
+    display: grid;
+    gap: 1cqh;
+    align-items: end;
+    padding-bottom: 1cqh;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    align-content: center;
+}
+
+.creer-contact-input {
+    width: 100%;
+    color: black;
+}
+
+.demande-contact, .blocage-contact {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.3em 1.5em 0.3em 1.5em;
+    cursor: pointer;
+}
+
+.zone-tableau {
+    min-height: 0;
+    overflow: auto;
+}
+
+.tableau-contact {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau-contact th,
+.tableau-contact td {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tableau-contact thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--papier);
+}
+
+.zone-bouton {
+    display: grid;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.valider-ami, .refus-ami, .changer-vers-rival, .changer-vers-ami, .retirer-contact, .debloquer-contact {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.3em 1.5em 0.3em 1.5em;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .feuille-liste-amis {
+        width: min(100cqw, 100cqh * 193 / 71);
+        aspect-ratio: 193 / 71;
+        align-self: center;
+        background-image: url(../../Images/carte.svg);
+        padding: 5cqh 10cqw 7cqh 10cqw;
+    }
+
+    .zone-bouton {
+        grid-auto-flow: column;
+    }
+}
