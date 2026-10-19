@@ -666,6 +666,26 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 19 Octobre
+
+### Objectifs
+
+- Ajout d'une base de données NoSQL MongoDB
+- Ajout des Modèles pour la messagerie
+
+### Réalisations
+
+- Ajout dans docker-compose.yml des services pour MongoDB et son lecteur Mongo-express
+- Ajout dans le Dockerfile des extensions pour MongoDB et Composer
+- Récupération de la bibliothèque de MongoDB
+- Protection des chemins d'accès des nouveaux éléments et mise sous .gitignore du dossier "vendor"
+- Création d'une classe pour la connexion à la base de données NoSQL
+- Création d'une classe d'objet Message avec validation via setteurs (nécessaire étant donné que MongoDB n'a pas de schéma ni de contrainte de données)
+- Création d'un modèle de classe MessageModele avec les fonctions permettant de créer, lire, modifier l'état de lecture et supprimer un ou plusieurs messages
+- Ajout dans la fonction anonymiser() de UtilisateurModele de la suppression de tous les messages dont l'utilisateur est le destinataire
+
+---
+
 ## Prochaine étape
 
 - Page Messagerie

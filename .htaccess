@@ -4,8 +4,9 @@ Options -Indexes
     Require all denied
 </FilesMatch>
 
-<FilesMatch "^(docker-compose\.yml|Dockerfile|README\.md)$">
+<FilesMatch "^(docker-compose\.yml|Dockerfile|README\.md|composer\.json|composer\.lock)$">
     Require all denied
 </FilesMatch>
 
 RedirectMatch 403 /\.git
+RedirectMatch 403 /vendor/

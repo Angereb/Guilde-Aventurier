@@ -2,6 +2,7 @@
 require_once __DIR__ . "/../ModeleBase.php";
 require_once __DIR__ . "/Utilisateur.php";
 require_once __DIR__ . "/../Aventuriers/AventurierModele.php";
+require_once __DIR__ . "/../Messagerie/MessageModele.php";
 
 class UtilisateurModele extends ModeleBase{
     private function genererUuid(): string {
@@ -239,6 +240,12 @@ class UtilisateurModele extends ModeleBase{
         } catch (Exception $e){
             $this->pdo->rollBack();
             throw new Exception("Erreur lors de l'anonymisation : " . $e->getMessage());
+        }
+        try {
+            $messageModele = new MessageModele;
+            $messageModele->supprimerTous($utilisateurId);
+        } catch (Exception $e) {
+            error_log("Messages non supprimés pour l'utilisateur $utilisateurId : " . $e->getMessage());
         } 
     }
 }
