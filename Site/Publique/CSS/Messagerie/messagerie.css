@@ -1,0 +1,123 @@
+body {
+    height: 100vh;
+}
+
+.messagerie-page {
+    flex: 1;
+    display:grid;
+    grid-template-rows:
+        1fr;     
+    background-color: var(--bois);
+    padding: 5% 2% 5% 2%;
+    container-type: size;
+    min-height: 0;
+}
+
+.feuille-messagerie {
+    width: min(100cqw, 100cqh * 40/63);
+    aspect-ratio: 40/63;
+    display: grid;
+    grid-template-rows: 
+        auto
+        auto
+        1fr;
+    background-image: url(../../Images/parchemin-info.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-self: center;
+    padding: 2cqh 5cqw 3cqh 5cqw;
+    container-type: size;
+}
+
+.titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.formulaire-envoie-message {
+    display: grid;
+    gap: 1cqh;
+    align-items: end;
+    padding-bottom: 1cqh;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    align-content: center;
+}
+
+.destinataire-input {
+    width: 100%;
+    color: black;
+}
+
+.ecrire-ouverture, .supprimer-message, .envoyer-message, .retour-redaction-message, .retour-lecture-message {
+    border: 1px solid black;
+    border-radius: 20px;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 0.3em 1.5em 0.3em 1.5em;
+    cursor: pointer;
+}
+
+.zone-tableau {
+    min-height: 0;
+    overflow: auto;
+}
+
+.tableau-message-recu {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau-message-recu th,
+.tableau-message-recu td {
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.tableau-message-recu thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--papier);
+}
+
+.ouverture-message {
+    border: none;
+    padding: 0;
+}
+
+.fenetre-redaction-message, .fenetre-lecture-message {
+    position: relative;
+    width: min(80vw, 600px, 90vh * 40 / 63);
+    aspect-ratio: 40 / 63;
+    border-radius:10px;
+    padding:2rem;
+    background-image: url(../../Images/parchemin-info.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .feuille-messagerie {
+        width: min(100cqw, 100cqh * 193 / 71);
+        aspect-ratio: 193 / 71;
+        align-self: center;
+        background-image: url(../../Images/carte.svg);
+        padding: 5cqh 10cqw 7cqh 10cqw;
+    }
+
+    .fenetre-redaction-message, .fenetre-lecture-message{
+        width: min(80vw, 600px, 60vh * 40 / 63);
+    }
+}

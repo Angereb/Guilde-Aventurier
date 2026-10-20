@@ -54,6 +54,12 @@ class RelationUtilisateurModele extends ModeleBase {
         return $relations;
     }
 
+    public function estBloque(int $utilisateurId, int $contactId): bool {
+        $requete = $this->pdo->prepare("SELECT COUNT(*) FROM relations_utilisateurs WHERE utilisateurId = ? AND contactId = ? AND statut = 'bloque'");
+        $requete->execute([$utilisateurId, $contactId]);
+        return $requete->fetchColumn() > 0;
+    }
+
     public function accepter(RelationUtilisateur $relation): void {
         if (!$this->valeurExisteDeja("utilisateurs", "utilisateurId", $relation->getUtilisateurId())){
             throw new Exception("L'utilisateur sélectionné n'existe pas.");

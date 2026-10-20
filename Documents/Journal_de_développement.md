@@ -686,6 +686,32 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 20 Octobre
+
+### Objectifs
+
+- Création de la page de messagerie
+
+### Réalisations
+
+- Ajout du chemin d'accès vers le contrôleur de la messagerie dans l'index
+- Création du contrôleur de la messagerie, avec récupération des amis et rivaux pour avoir un accès rapide à leurs pseudos, récupération des messages, gestion du formulaire de rédaction de message, du bouton de suppression de messages, et de la fonction javascript transformant l'état d'un message à la lecture
+- Création de la vue avec affichage d'un champ de saisie de pseudo pouvant récupérer les pseudos de la liste de contact (amis et rivaux), modale pour la rédaction du message, affichage des messages dans un tableau (expéditeur, titre, état) avec en plus un bouton pour la suppression du message, modale pour la lecture du message après clic sur le titre dans le tableau
+- Création d'un fichier javascript pour gestion des modales, validation js des champs de rédaction de message, remplissage de la modale de lecture, utilisation d'un fetch pour changement dynamique d'état des messages
+- Création du style css de la page de messagerie en récupérant la base de la page liste d'amis, et des modales de la page du hall avec correction du style des modales des quatre pages semblables (hall, mon compte, administration et messagerie)
+
+### Difficultés
+
+- Récupération de la réussite du changement d'état
+- Contrainte de protection de la vie privée
+
+### Solutions
+
+- Passage de la réussite de la gestion du contrôleur du formulaire de changement d'état en format JSON pour que le fetch puisse le lire et dynamiquement modifier l'état du message visible
+- Acceptation visuelle (message de succès) de l'envoi d'un message à une personne ayant bloqué l'expéditeur alors qu'aucun message n'est envoyé, et blocage de l'envoi vers un destinataire bloqué par l'expéditeur
+
+---
+
 ## Prochaine étape
 
-- Page Messagerie
+- Bibliothèque

@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     }
                 } catch(Exception $e) {
                     throw new Exception("Aucun joueur ne porte ce pseudo.");
-                    }
+                }
                 if ($contactTrouve->getUtilisateurId() === $_SESSION["utilisateur"]["id"]) {
                     throw new Exception("Vous ne pouvez pas vous demander en ami vous-même.");
                 }
@@ -213,7 +213,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     }
                 } catch(Exception $e) {
                     throw new Exception("Ce contact est introuvable.");
-                    }
+                }
                 if ($contactTrouve->getUtilisateurId() === $_SESSION["utilisateur"]["id"]) {
                     throw new Exception("Action impossible.");
                 }

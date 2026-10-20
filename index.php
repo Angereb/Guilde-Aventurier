@@ -66,6 +66,10 @@ switch ($page)
         require_once __DIR__ . '/Site/Controleurs/Amis/listeamicontroleur.php';
         break;
 
+    case "messages":
+        require_once __DIR__ . '/Site/Controleurs/Messagerie/messageriecontroleur.php';
+        break;
+
     default:
         echo "Page introuvable";
 }

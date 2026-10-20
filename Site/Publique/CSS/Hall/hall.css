@@ -146,34 +146,20 @@ body {
     overflow-y: auto;
 }
 
-.modale-cachee{
-    display:none;
-}
-
-.modale-visible{
-    display:flex;
-    position:fixed;
-    inset:0;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,.5);
-}
-
 .fenetre-annonce, .fenetre-modification-annonce, .fenetre-suppression-annonce {
     position: relative;
-    width: min(80vw, 600px);
-    max-height: 90vh;
+    width: min(80vw, 600px, 90vh * 40 / 63);
     aspect-ratio: 40 / 63;
     border-radius:10px;
     padding:2rem;
     background-image: url(../../Images/parchemin-info.svg);
-    background-size: 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    justify-content: safe center;
     text-align: center;
     overflow-y: auto;
 }
@@ -247,5 +233,9 @@ body {
 
     .nav-dortoir {
         background-image: url(../../Images/dortoir-passage-bt.svg);
+    }
+
+    .fenetre-annonce, .fenetre-modification-annonce, .fenetre-suppression-annonce {
+        width: min(80vw, 600px, 60vh * 40 / 63);
     }
 }
