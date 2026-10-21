@@ -66,7 +66,7 @@ class AnnonceModele extends ModeleBase{
 
     public function rechercherToutes(): array {
         $annonces = [];
-        $requete = $this->pdo->prepare("SELECT * FROM annonces ORDER BY publierLe DESC LIMIT");
+        $requete = $this->pdo->prepare("SELECT * FROM annonces ORDER BY publierLe DESC");
         $requete->execute();
         while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
             $annonces[] = $this->creerAnnonceDepuisDonnees($donnees);

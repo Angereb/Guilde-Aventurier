@@ -11,14 +11,15 @@ class Competence {
     private ?int $modifPE;
     private ?int $modifInitiative;
     private ?int $modifMouvement;
+    private ?int $zoneEffetId;
 
     public const TYPES_VALIDES = ["active", "passive"];
 
-    public function __construct(?int $competenceId, string $nom, string $descriptions, string $types, int $coutPE, ?int $modifAttaque = null, ?int $modifDefense = null, ?int $modifPV = null, ?int $modifPE = null, ?int $modifInitiative = null, ?int $modifMouvement = null) {
+    public function __construct(?int $competenceId, string $nom, string $descriptions, string $types, int $coutPE, ?int $zoneEffetId, ?int $modifAttaque = null, ?int $modifDefense = null, ?int $modifPV = null, ?int $modifPE = null, ?int $modifInitiative = null, ?int $modifMouvement = null) {
         $this->competenceId = $competenceId;
         $this->setNom($nom);
         $this->setDescriptions($descriptions);
-        $this->setTypesEtCoutPE($types, $coutPE);
+        $this->setTypesEtCoutEtZone($types, $coutPE, $zoneEffetId);
         $this->setModifAttaque($modifAttaque);
         $this->setModifDefense($modifDefense);
         $this->setModifPV($modifPV);
@@ -69,7 +70,11 @@ class Competence {
         return $this->coutPE;
     }
 
-    public function setTypesEtCoutPE(string $types, int $coutPE): void {
+    public function getZoneEffetId(): ?int {
+        return $this->zoneEffetId;
+    }
+
+    public function setTypesEtCoutEtZone(string $types, int $coutPE, ?int $zoneEffetId): void {
         $types = trim($types);
         if ($types === "") {
             throw new Exception("Le type de la compétence ne peut être vide.");
@@ -83,11 +88,18 @@ class Competence {
         if ($types === "active" && $coutPE < 1) {
             throw new Exception("Le coût en points d'endurance d'une compétence active ne peut être inférieur à 1.");
         }
+        if ($types === "active" && ($zoneEffetId === null || $zoneEffetId < 1)) {
+            throw new Exception("Une compétence active doit être liée à une zone d'effet existante.");
+        }
         if ($types === "passive" && $coutPE !== 0) {
             throw new Exception("Le coût en points d'endurance d'une compétence passive doit être de 0.");
         }
+        if ($types === "passive" && $zoneEffetId !== null) {
+            throw new Exception("Une compétence passive ne doit pas être liée à une zone d'effet.");
+        }
         $this->types = $types;
         $this->coutPE = $coutPE;
+        $this->zoneEffetId = $zoneEffetId;
     }
 
     public function getModifAttaque(): ?int {

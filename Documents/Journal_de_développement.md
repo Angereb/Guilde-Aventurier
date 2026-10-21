@@ -712,6 +712,22 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 21 au ... Octobre
+
+### Objectifs
+
+- Ajout d'une nouvelle sorte de données la zone d'effet des compétences
+- Création de la page bibliothèque
+
+### Réalisations
+
+- Ajout dans le schéma SQL d'une table zones_effets qui est liée à la table compétences en tant que clé étrangère de cette dernière
+- Création de l'objet ZoneEffet avec ses setters et guetters
+- Création du modèle ZoneEffetModele avec les fonctions nécessaires pour créer, lire, modifier et supprimer des zones d'effet de la base de données
+- Modification de l'objet Competence et du modèle CompetenceModele pour inclure l'obligation d'avoir une zoneEffetId pour les compétences actives uniquement
+
+---
+
 ## Prochaine étape
 
 - Bibliothèque

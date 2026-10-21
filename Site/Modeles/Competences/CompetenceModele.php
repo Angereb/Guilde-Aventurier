@@ -6,6 +6,10 @@ class CompetenceModele extends ModeleBase {
     private function creerCompetenceDepuisDonnees(array $donnees): Competence {
         $competenceId = (int)$donnees["competenceId"];
         $coutPE = (int)$donnees["coutPE"];
+        $zoneEffetId = null;
+        if ($donnees["zoneEffetId"] !== null) {
+            $zoneEffetId = (int)$donnees["zoneEffetId"];
+        }
         $modifAttaque = null;
         if ($donnees["modifAttaque"] !== null) {
             $modifAttaque = (int)$donnees["modifAttaque"];
@@ -37,6 +41,7 @@ class CompetenceModele extends ModeleBase {
             $donnees["descriptions"],
             $donnees["types"],
             $coutPE,
+            $zoneEffetId,
             $modifAttaque,
             $modifDefense,
             $modifPV,
@@ -51,7 +56,10 @@ class CompetenceModele extends ModeleBase {
         if ($this->valeurExisteDeja("competences", "nom", $competence->getNom())) {
             throw new Exception("Ce nom de compétence existe déjà.");
         }
-        $requete = $this->pdo->prepare("INSERT INTO competences (nom, descriptions, types, coutPE, modifAttaque, modifDefense, modifPV, modifPE, modifInitiative, modifMouvement) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($competence->getTypes() === "active" && !$this->valeurExisteDeja("zones_effets", "zoneEffetId", $competence->getZoneEffetId())) {
+            throw new Exception("Une compétence active doit être liée à une zone d'effet existante.");
+        }
+        $requete = $this->pdo->prepare("INSERT INTO competences (nom, descriptions, types, coutPE, modifAttaque, modifDefense, modifPV, modifPE, modifInitiative, modifMouvement, zoneEffetId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $requete->execute([
             $competence->getNom(),
             $competence->getDescriptions(),
@@ -62,7 +70,8 @@ class CompetenceModele extends ModeleBase {
             $competence->getModifPV(),
             $competence->getModifPE(),
             $competence->getModifInitiative(),
-            $competence->getModifMouvement()
+            $competence->getModifMouvement(),
+            $competence->getZoneEffetId()
             ]);
     }
 
@@ -108,8 +117,11 @@ class CompetenceModele extends ModeleBase {
         if ($this->valeurExisteDeja("competences", "nom", $competence->getNom(), $competence->getCompetenceId(), "competenceId")) {
             throw new Exception("Ce nom de compétence existe déjà.");
         }
+        if ($competence->getTypes() === "active" && !$this->valeurExisteDeja("zones_effets", "zoneEffetId", $competence->getZoneEffetId())) {
+            throw new Exception("Une compétence active doit être liée à une zone d'effet existante.");
+        }
         $this->rechercherParId($competence->getCompetenceId());
-        $requete = $this->pdo->prepare("UPDATE competences SET nom = ?, descriptions = ?, types = ?, coutPE = ?, modifAttaque = ?, modifDefense = ?, modifPV = ?, modifPE = ?, modifInitiative = ?, modifMouvement = ? WHERE competenceId = ?");
+        $requete = $this->pdo->prepare("UPDATE competences SET nom = ?, descriptions = ?, types = ?, coutPE = ?, modifAttaque = ?, modifDefense = ?, modifPV = ?, modifPE = ?, modifInitiative = ?, modifMouvement = ?, zoneEffetId = ? WHERE competenceId = ?");
         $requete->execute([
             $competence->getNom(),
             $competence->getDescriptions(),
@@ -121,6 +133,7 @@ class CompetenceModele extends ModeleBase {
             $competence->getModifPE(),
             $competence->getModifInitiative(),
             $competence->getModifMouvement(),
+            $competence->getZoneEffetId(),
             $competence->getCompetenceId()
         ]);
     }

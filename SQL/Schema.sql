@@ -58,6 +58,16 @@ CREATE TABLE equipements(
     modifMouvement SMALLINT NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE zones_effets(
+    zoneEffetId BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(64) NOT NULL UNIQUE,
+    directions SET('nord', 'nord-est', 'est', 'sud-est', 'sud', 'sud-ouest', 'ouest', 'nord-ouest') NOT NULL,
+    portee INT NOT NULL,
+    CONSTRAINT verification_portee_zone_effet CHECK (portee > 0),
+    icone MEDIUMBLOB,
+    typeIcone VARCHAR(32)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE competences(
     competenceId BIGINT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(64) NOT NULL UNIQUE,
@@ -71,7 +81,12 @@ CREATE TABLE competences(
     modifPV SMALLINT NULL DEFAULT NULL,
     modifPE SMALLINT NULL DEFAULT NULL,
     modifInitiative SMALLINT NULL DEFAULT NULL,
-    modifMouvement SMALLINT NULL DEFAULT NULL
+    modifMouvement SMALLINT NULL DEFAULT NULL,
+    zoneEffetId BIGINT,
+    CONSTRAINT verification_zoneEffetId_competence CHECK ((types = 'active' AND zoneEffetId IS NOT NULL) OR (types = 'passive' AND zoneEffetId IS null)),
+    FOREIGN KEY (zoneEffetId)
+        REFERENCES zones_effets(zoneEffetId)
+        ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE aventuriers(

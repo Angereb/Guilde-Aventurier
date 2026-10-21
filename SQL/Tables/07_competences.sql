@@ -17,6 +17,13 @@ CREATE TABLE competences(
     modifPV SMALLINT NULL DEFAULT NULL,
     modifPE SMALLINT NULL DEFAULT NULL,
     modifInitiative SMALLINT NULL DEFAULT NULL,
-    modifMouvement SMALLINT NULL DEFAULT NULL
+    modifMouvement SMALLINT NULL DEFAULT NULL,
+
+    -- Clé étrangère vers la zone d'effet pour les compétences actives
+    zoneEffetId BIGINT,
+    CONSTRAINT verification_zoneEffetId_competence CHECK ((types = 'active' AND zoneEffetId IS NOT NULL) OR (types = 'passive' AND zoneEffetId IS null)),
+    FOREIGN KEY (zoneEffetId)
+        REFERENCES zones_effets(zoneEffetId)
+        ON DELETE RESTRICT
         
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
