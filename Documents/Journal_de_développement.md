@@ -728,6 +728,21 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 22 Octobre
+
+### Objectifs
+
+- Mise à jour de sécurité
+
+### Réalisations
+
+- Découverte d'une faille de sécurité de PHP via un cas extérieur au site, prise de renseignement sur le problème de sécurité (failles CVE-2026-109618 et CVE-2026-109619, https://www.php.net/archive/2026.php#2026-10-21-5)
+- Modification de la version docker de PHP apache vers une version comblant la faille de sécurité et passage vers une version dont les mises à jour de sécurité iront au-delà du 31/12/2026 (passage de php:8.2.12-apache à php:8.4.27-apache)
+- Fixation de la version de l’extension MongoDB (2.5.5)
+- Tour complet des pages pour vérifications de compatibilité avec la nouvelle version de php
+
+---
+
 ## Prochaine étape
 
 - Bibliothèque
