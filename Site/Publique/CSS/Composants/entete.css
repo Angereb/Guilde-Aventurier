@@ -55,7 +55,7 @@
     padding: 0;
 }
 
-@media (max-width: 349px) {
+@media (max-width: 360px) {
     .retour-hall, .administrateur, .mon-compte, .amis, .messages, .deconnexion {
         height: 44px;
     }

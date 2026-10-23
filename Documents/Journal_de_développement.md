@@ -717,7 +717,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 ### Objectifs
 
 - Ajout d'une nouvelle sorte de données la zone d'effet des compétences
-- Création de la page bibliothèque
+- Création des pages bibliothèque
 
 ### Réalisations
 
@@ -725,6 +725,19 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création de l'objet ZoneEffet avec ses setters et guetters
 - Création du modèle ZoneEffetModele avec les fonctions nécessaires pour créer, lire, modifier et supprimer des zones d'effet de la base de données
 - Modification de l'objet Competence et du modèle CompetenceModele pour inclure l'obligation d'avoir une zoneEffetId pour les compétences actives uniquement
+- Création du contrôleur et de la vue d'entrée de la bibliothèque avec la navigation vers la création des données de la bibliothèque, la zone des équipements et la zone des compétences
+- Création du css de l'entrée de la bibliothèque avec découpe en grid-template-area pour séparer et nommer les zones
+- Création de la vue de la page de création de la bibliothèque avec une modale pour créer ou modifier les zones d'effets
+
+### Difficultés
+
+- Affichage des icônes récupérées en base de données pour les zones d'effets
+- Affichage de la sélection des directions des zones d'effets
+
+### Solutions
+
+- Vérifications de la présence d'une icône, suivie de la création d’une URI de données en base64
+- Définition des directions de la zone d'effet via un fieldset incluant des checkbox par direction valide
 
 ---
 

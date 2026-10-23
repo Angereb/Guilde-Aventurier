@@ -70,6 +70,14 @@ switch ($page)
         require_once __DIR__ . '/Site/Controleurs/Messagerie/messageriecontroleur.php';
         break;
 
+    case "bibliothequeentree":
+        require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequeentreecontroleur.php';
+        break;
+
+    case "bibliothequecreation":
+        require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequecreationcontroleur.php';
+        break;
+        
     default:
         echo "Page introuvable";
 }

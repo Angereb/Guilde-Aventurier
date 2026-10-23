@@ -11,7 +11,7 @@ $roles = $_SESSION["utilisateur"]["roles"] ?? [];
             <h1>Hall Principal</h1>
     </header>
     <nav class="passage-gauche" aria-label="Salles de gauche">
-        <a href="?page=bibliotheque" class="nav-bibliotheque" aria-label="Bibliothèque"></a>
+        <a href="?page=bibliothequeentree" class="nav-bibliotheque" aria-label="Bibliothèque"></a>
         <a href="?page=salledeguerre" class="nav-salle-de-guerre" aria-label="Salle de Guerre"></a>
     </nav>
     <nav class="passage-droite" aria-label="Salles de droite">

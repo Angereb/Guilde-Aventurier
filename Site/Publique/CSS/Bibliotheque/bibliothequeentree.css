@@ -1,0 +1,125 @@
+body {
+    height: 100vh;
+}
+
+.bibliotheque-entree-page {
+    height: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
+}
+
+.bibliotheque-entree-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.navigation-bibliotheque {
+    height: 90%;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 
+        minmax(0, 5fr)
+        minmax(0, 4fr)
+        minmax(0, 5fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-areas: 
+        "equipement  creation  competence";
+}
+
+.colonne-equipements,
+.colonne-creation,
+.colonne-competences {
+    min-height: 0;
+    container-type: size;
+    display: grid;
+    place-items: center;
+}
+
+.colonne-equipements {
+    grid-area: equipement;
+}
+
+.colonne-competences {
+    grid-area: competence;
+}
+
+.colonne-creation {
+    grid-area: creation;
+}
+
+.nav-bibliotheque-creation {
+    width: min(100cqw, 100cqh * 93 / 48);
+    aspect-ratio: 93/48;
+    background-image: url(../../Images/bibliotheque-reserve.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nav-bibliotheque-equipements {
+    width: min(100cqw, 100cqh * 121 / 505);
+    aspect-ratio: 121/505;
+    background-image: url(../../Images/bibliotheque-equipements.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nav-bibliotheque-competences {
+    width: min(100cqw, 100cqh * 121 / 505);
+    aspect-ratio: 121/505;
+    background-image: url(../../Images/bibliotheque-competences.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (min-width: 768px) {
+    .navigation-bibliotheque {
+        grid-template-columns: 
+            minmax(0, 1fr) 
+            minmax(0, 20vh) 
+            minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+        grid-template-areas: "equipement creation competence";
+    }
+
+    .colonne-competences, .colonne-equipements {
+        background-image: url(../../Images/meuble-bibliotheque.svg);
+        background-size: auto 70%;
+        background-repeat: repeat-x;
+    }
+
+    .colonne-equipements {
+        background-position: right bottom 40%;
+        justify-items: end;
+    }
+
+    .colonne-competences {
+        background-position: left bottom 40%;
+        justify-items: start;
+    }
+
+    .nav-bibliotheque-equipements,
+    .nav-bibliotheque-competences {
+        width: auto;
+        height: 50cqh;
+        aspect-ratio: 205 / 302;
+        align-self: end;
+    }
+
+    .nav-bibliotheque-equipements {
+        margin-right: 7cqh;
+        background-image: url(../../Images/bibliotheque-direction-equipement-desktop.svg);
+    }
+
+    .nav-bibliotheque-competences {
+        margin-left: 7cqh;
+        background-image: url(../../Images/bibliotheque-direction-competences-desktop.svg);
+    }
+}
