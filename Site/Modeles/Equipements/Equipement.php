@@ -13,6 +13,12 @@ class Equipement {
     private ?int $modifMouvement;
 
     public const CATEGORIES_VALIDES = ["arme", "secondaire", "armure", "bijou"];
+    public const LIBELLES_CATEGORIE = [
+        "arme" => "Arme",
+        "secondaire" => "Main secondaire",
+        "armure" => "Armure",
+        "bijou" => "Bijou",
+    ];
 
     public function __construct(?int $equipementId, string $nom, string $categorie, string $descriptions, int $coutPC, ?int $modifAttaque = null, ?int $modifDefense = null, ?int $modifPV = null, ?int $modifPE = null, ?int $modifInitiative = null, ?int $modifMouvement = null) {
         $this->equipementId = $equipementId;

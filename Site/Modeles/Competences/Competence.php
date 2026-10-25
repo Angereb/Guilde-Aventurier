@@ -14,6 +14,10 @@ class Competence {
     private ?int $zoneEffetId;
 
     public const TYPES_VALIDES = ["active", "passive"];
+    public const LIBELLES_TYPES = [
+        "active" => "Active",
+        "passive" => "Passive",
+    ];
 
     public function __construct(?int $competenceId, string $nom, string $descriptions, string $types, int $coutPE, ?int $zoneEffetId, ?int $modifAttaque = null, ?int $modifDefense = null, ?int $modifPV = null, ?int $modifPE = null, ?int $modifInitiative = null, ?int $modifMouvement = null) {
         $this->competenceId = $competenceId;

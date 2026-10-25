@@ -12,7 +12,7 @@ class RequisCaracteristiqueCompetenceModele extends ModeleLiaison {
             throw new Exception("La caractéristique sélectionnée n'existe pas.");
         }
         if (!$this->valeurExisteDeja("competences", "competenceId", $competenceId)){
-            throw new Exception("La compétence sélectionné n'existe pas.");
+            throw new Exception("La compétence sélectionnée n'existe pas.");
         }
         if ($this->lienExisteDeja($caracteristiqueId, $competenceId)){
             throw new Exception("Cette caractéristique est déjà associée à cette compétence.");

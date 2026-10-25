@@ -46,6 +46,16 @@ class MaitriseModele extends ModeleBase {
         return $maitrise;
     }
 
+    public function rechercherToutes(): array {
+        $maitrises = [];
+        $requete = $this->pdo->prepare("SELECT * FROM maitrises ORDER BY nom ASC");
+        $requete->execute();
+        while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $maitrises[] = $this->creerMaitriseDepuisDonnees($donnees);
+        }
+        return $maitrises;
+    }
+
     public function modifier(Maitrise $maitrise): void {
         if ($maitrise->getMaitriseId() === null) {
             throw new Exception("Impossible de modifier une maîtrise inexistante.");

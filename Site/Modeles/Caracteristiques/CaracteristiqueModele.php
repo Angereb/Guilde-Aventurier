@@ -51,6 +51,16 @@ class CaracteristiqueModele extends ModeleBase {
         return $caracteristique;
     }
 
+    public function rechercherToutes(): array {
+        $caracteristiques = [];
+        $requete = $this->pdo->prepare("SELECT * FROM caracteristiques ORDER BY nom ASC");
+        $requete->execute();
+        while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $caracteristiques[] = $this->creerCaracteristiqueDepuisDonnees($donnees);
+        }
+        return $caracteristiques;
+    }
+
     public function modifier(Caracteristique $caracteristique): void {
         if ($caracteristique->getCaracteristiqueId() === null) {
             throw new Exception("Impossible de modifier une caractéristique inexistante.");

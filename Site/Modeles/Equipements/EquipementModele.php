@@ -47,7 +47,7 @@ class EquipementModele extends ModeleBase {
         return $equipement;
     }
 
-    public function ajouter(Equipement $equipement): void {
+    public function ajouter(Equipement $equipement): int {
         if ($this->valeurExisteDeja("equipements", "nom", $equipement->getNom())) {
             throw new Exception("Ce nom d'équipement existe déjà.");
         }
@@ -64,6 +64,7 @@ class EquipementModele extends ModeleBase {
             $equipement->getModifInitiative(),
             $equipement->getModifMouvement()
             ]);
+        return (int) $this->pdo->lastInsertId(); 
     }
 
     public function rechercherParId(int $equipementId): Equipement {

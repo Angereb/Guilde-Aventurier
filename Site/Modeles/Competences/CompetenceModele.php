@@ -52,7 +52,7 @@ class CompetenceModele extends ModeleBase {
         return $competence;
     }
 
-    public function ajouter(Competence $competence): void {
+    public function ajouter(Competence $competence): int {
         if ($this->valeurExisteDeja("competences", "nom", $competence->getNom())) {
             throw new Exception("Ce nom de compétence existe déjà.");
         }
@@ -73,6 +73,7 @@ class CompetenceModele extends ModeleBase {
             $competence->getModifMouvement(),
             $competence->getZoneEffetId()
             ]);
+        return (int) $this->pdo->lastInsertId();
     }
 
     public function rechercherParId(int $competenceId): Competence {

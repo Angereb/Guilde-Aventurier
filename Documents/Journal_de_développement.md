@@ -716,23 +716,25 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ### Objectifs
 
-- Ajout d'une nouvelle sorte de données la zone d'effet des compétences
+- Ajout d'une nouvelle sorte de données : la zone d'effet des compétences
 - Création des pages bibliothèque
 
 ### Réalisations
 
 - Ajout dans le schéma SQL d'une table zones_effets qui est liée à la table compétences en tant que clé étrangère de cette dernière
-- Création de l'objet ZoneEffet avec ses setters et guetters
+- Création de l'objet ZoneEffet avec ses setters et getters
 - Création du modèle ZoneEffetModele avec les fonctions nécessaires pour créer, lire, modifier et supprimer des zones d'effet de la base de données
 - Modification de l'objet Competence et du modèle CompetenceModele pour inclure l'obligation d'avoir une zoneEffetId pour les compétences actives uniquement
 - Création du contrôleur et de la vue d'entrée de la bibliothèque avec la navigation vers la création des données de la bibliothèque, la zone des équipements et la zone des compétences
 - Création du css de l'entrée de la bibliothèque avec découpe en grid-template-area pour séparer et nommer les zones
-- Création de la vue de la page de création de la bibliothèque avec une modale pour créer ou modifier les zones d'effets
+- Création de la vue de la page de création de la bibliothèque avec une modale pour créer ou modifier les zones d'effet, une modale pour créer des équipements, une modale pour créer des maîtrises et une modale pour créer des compétences
+- Création d'un fichier javascript lié à la page de création qui vérifie les différents champs des formulaires de création, remplit les informations des zones d'effet à modifier avec une fonction particulière pour les directions, ajoute dynamiquement des champs, générés via un template, pour les prérequis et modificateurs principaux des équipements et des compétences et permet l'ouverture et la fermeture des modales
+- Création du contrôleur de la page de création avec gestion des formulaires, avec pour particularité la détection permettant de savoir si l'on crée une nouvelle zone d'effet ou si l'on modifie une zone d'effet existante, des transactions pour les équipements et les compétences avec des boucles sur les champs dynamiques
 
 ### Difficultés
 
-- Affichage des icônes récupérées en base de données pour les zones d'effets
-- Affichage de la sélection des directions des zones d'effets
+- Affichage des icônes récupérées en base de données pour les zones d'effet
+- Affichage de la sélection des directions des zones d'effet
 
 ### Solutions
 
