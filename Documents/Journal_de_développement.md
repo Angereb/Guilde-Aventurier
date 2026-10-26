@@ -730,6 +730,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création de la vue de la page de création de la bibliothèque avec une modale pour créer ou modifier les zones d'effet, une modale pour créer des équipements, une modale pour créer des maîtrises et une modale pour créer des compétences
 - Création d'un fichier javascript lié à la page de création qui vérifie les différents champs des formulaires de création, remplit les informations des zones d'effet à modifier avec une fonction particulière pour les directions, ajoute dynamiquement des champs, générés via un template, pour les prérequis et modificateurs principaux des équipements et des compétences et permet l'ouverture et la fermeture des modales
 - Création du contrôleur de la page de création avec gestion des formulaires, avec pour particularité la détection permettant de savoir si l'on crée une nouvelle zone d'effet ou si l'on modifie une zone d'effet existante, des transactions pour les équipements et les compétences avec des boucles sur les champs dynamiques
+- Création du fichier css pour la page de création avec comme particularité la disposition en cercle des directions pour la modale des zones d'effet, la transformation des boutons de livres (en mobile) vers des pupitres (en desktop) avec changement de disposition et remplacement visuel du champ de fichier par un label mis en forme comme un bouton, le champ restant accessible au clavier, avec le nom du fichier affiché en dessous par JavaScript pour une meilleure lisibilité
 
 ### Difficultés
 

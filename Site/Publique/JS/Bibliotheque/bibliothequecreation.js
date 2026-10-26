@@ -54,6 +54,7 @@ const caseDirection= document.querySelectorAll(".case-direction");
 const iconeZoneEffetImage = document.getElementById("iconeZoneEffetImage");
 const iconeZoneEffetAvertissement = document.getElementById("iconeZoneEffetAvertissement");
 const envoyerZoneEffet = document.getElementById("envoyerZoneEffet");
+const nomFichierZoneEffet = document.getElementById("nomFichierZoneEffet");
 
 const zoneRequisEquipement = document.getElementById("zoneRequisEquipement");
 const modeleLigneRequisEquipement = document.getElementById("modeleLigneRequisEquipement");
@@ -92,6 +93,8 @@ selectionZoneEffet.addEventListener("change", function() {
         iconeZoneEffetImage.hidden = true;
         iconeZoneEffetAvertissement.hidden = true;
         envoyerZoneEffet.textContent = "Créer";
+        iconeZoneEffet.value = "";
+        nomFichierZoneEffet.textContent = "Aucun fichier choisi";
     } else {
         nomZoneEffet.value = optionChoisie.dataset.zoneEffetNom;
         porteeZoneEffet.value = optionChoisie.dataset.zoneEffetPortee;
@@ -107,6 +110,8 @@ selectionZoneEffet.addEventListener("change", function() {
         }
         iconeZoneEffetAvertissement.hidden = false;
         envoyerZoneEffet.textContent = "Modifier";
+        iconeZoneEffet.value = "";
+        nomFichierZoneEffet.textContent = "Aucun fichier choisi";
     }
 })
 
@@ -154,6 +159,11 @@ function verifierPorteeZone() {
 
 function verifierIconeZone() {
     const fichier = iconeZoneEffet.files[0];
+    if (fichier === undefined) {
+        nomFichierZoneEffet.textContent = "Aucun fichier choisi";
+    } else {
+        nomFichierZoneEffet.textContent = fichier.name;
+    }
     if (fichier === undefined) {
         effacerErreur(iconeZoneEffet);
         return true;

@@ -1,3 +1,242 @@
 body {
     height: 100vh;
+    background-color: var(--bois);
+}
+
+.bibliotheque-creation-page {
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
+}
+
+.bibliotheque-creation-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.bibliotheque-creation-zonage {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    min-height: 0;
+    container-type: size;
+}
+
+.ouverture-modale-zone-effet, 
+.ouverture-modale-equipement,
+.ouverture-modale-maitrise,
+.ouverture-modale-competence {
+    border: none;
+    padding: 0;
+    background-image: url("../../Images/livre.svg");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 2cqh 0 2cqh 0;
+}
+
+.ouverture-modale-zone-effet span, 
+.ouverture-modale-equipement span,
+.ouverture-modale-maitrise span,
+.ouverture-modale-competence span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+    text-align: center;
+    font-family: "Joti One", cursive;
+}
+
+.fenetre-zone-effet, 
+.fenetre-equipement,
+.fenetre-maitrise,
+.fenetre-competence {
+    position: relative;
+    width: min(80vw, 600px, 90vh * 40 / 63);
+    aspect-ratio: 40 / 63;
+    border-radius:10px;
+    padding:2rem;
+    background-image: url(../../Images/parchemin-info.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    gap: 1vh;
+}
+
+.formulaire-zone-effet, 
+.formulaire-equipement,
+.formulaire-maitrise,
+.formulaire-competence {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.2rem;
+}
+
+.formulaire-zone-effet select,
+.formulaire-zone-effet input[type="file"] {
+    width: 100%;
+}
+
+.choix-directions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas:
+        "nordouest  nord    nordest"
+        "ouest      centre  est"
+        "sudouest   sud     sudest";
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.direction-nord { 
+    grid-area: nord;
+}
+
+.direction-nord-est {
+    grid-area: nordest;
+}
+
+.direction-est {
+    grid-area: est;
+}
+
+.direction-sud-est {
+    grid-area: sudest;
+}
+
+.direction-sud {
+    grid-area: sud;
+}
+
+.direction-sud-ouest {
+    grid-area: sudouest;
+}
+
+.direction-ouest {
+    grid-area: ouest;
+}
+
+.direction-nord-ouest {
+    grid-area: nordouest;
+}
+
+.zone-effet-image-input::file-selector-button {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.icone-zone-effet-image {
+    justify-self: center;
+    width: 4rem;
+}
+
+.visuellement-cache {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+.bouton-fichier, .envoyer-zone-effet, .retour-zone-effet, 
+.envoyer-equipement, .retour-equipement,
+.envoyer-maitrise, .retour-maitrise,
+.envoyer-competence, .retour-competence {
+    justify-self: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.3em 1.5em;
+    cursor: pointer;
+}
+
+.visuellement-cache:focus-visible + .bouton-fichier {
+    outline: 2px solid white;
+    box-shadow: 0 0 0 4px black;
+}
+
+.ligne-requis,
+.ligne-modificateur {
+    display: grid;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.ligne-requis label,
+.ligne-modificateur label {
+    display: grid;
+}
+
+@media (min-width: 768px) {
+    body {
+        background-color: var(--pierre);
+    }
+
+    .bibliotheque-creation-zonage {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: repeat(3, minmax(0, 1fr));
+        grid-template-areas: 
+            ".        zoneffet equipement .         "
+            "maitrise zoneffet equipement competence"
+            "maitrise .        .          competence";
+    }
+
+    .ouverture-modale-zone-effet,
+    .ouverture-modale-equipement,
+    .ouverture-modale-maitrise,
+    .ouverture-modale-competence {
+        height: 45cqh;
+        aspect-ratio: 143 / 347.5;
+        justify-self: center;
+        align-self: center;
+        margin: 0;
+        background-image: url("../../Images/pupitre.svg");
+        container-type: size;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ouverture-modale-zone-effet {
+        grid-area: zoneffet;
+    }
+
+    .ouverture-modale-equipement {
+        grid-area: equipement;
+    }
+
+    .ouverture-modale-maitrise {
+        grid-area: maitrise;
+    }
+
+    .ouverture-modale-competence {
+        grid-area: competence;
+    }
+
+    .ouverture-modale-zone-effet span,
+    .ouverture-modale-equipement span,
+    .ouverture-modale-maitrise span,
+    .ouverture-modale-competence span {
+        height: 13cqh;
+        margin-top: 13cqh;
+    }
+
+    .fenetre-zone-effet, 
+    .fenetre-equipement,
+    .fenetre-maitrise,
+    .fenetre-competence {
+        width: min(80vw, 600px, 60vh * 40 / 63);
+    }
 }

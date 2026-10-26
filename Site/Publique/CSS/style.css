@@ -102,3 +102,7 @@ input, button, textarea, select {
 [hidden] {
     display: none !important;
 }
+
+textarea {
+    vertical-align: top;
+}
