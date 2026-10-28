@@ -94,7 +94,7 @@ class EquipementModele extends ModeleBase {
         if (!in_array($categorie, Equipement::CATEGORIES_VALIDES, true)) {
             throw new Exception("La catégorie recherchée n'est pas valide.");
         }
-        $requete = $this->pdo->prepare("SELECT * FROM equipements WHERE categorie = ?");
+        $requete = $this->pdo->prepare("SELECT * FROM equipements WHERE categorie = ? ORDER BY nom ASC");
         $requete->execute([$categorie]);
         while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)){
             $equipements[] = $this->creerEquipementDepuisDonnees($donnees);

@@ -47,5 +47,9 @@ class RequisMaitriseEquipementModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($maitriseId, $equipementId);
     }
+
+    public function supprimerParEquipement(int $equipementId): void {
+        parent::supprimerLiaisonsParSecondId($equipementId);
+    }
 }
 ?>

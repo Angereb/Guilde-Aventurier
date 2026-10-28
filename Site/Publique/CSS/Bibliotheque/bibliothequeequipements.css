@@ -1,0 +1,114 @@
+body {
+    height: 100vh;
+}
+
+.bibliotheque-equipement-page {
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr
+        auto;
+    min-height: 0;
+}
+
+.bibliotheque-equipement-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.etageres-equipements {
+    width: min(100vw, 85vh * 349/562);
+    aspect-ratio: 349/562;
+    background-image: url(../../Images/grande-bibliotheque.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-self: center;
+    align-self: center;
+    container-type: size;
+    display: grid;
+    grid-template-rows: 64fr 99fr 129fr 123fr 120fr 27fr;
+    grid-template-areas: 
+        ".         "
+        "arme      "
+        "secondaire"
+        "armure    "
+        "bijou     "
+        ".         ";
+}
+
+.etagere-categorie {
+    width: 40cqw;
+    height: auto;
+    aspect-ratio: 150/50;
+    background-image: url("../../Images/affichage-bibliotheque.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    place-self: center;
+    cursor: pointer;
+}
+
+.etagere-categorie-arme {
+    grid-area: arme;
+}
+
+.etagere-categorie-secondaire {
+    grid-area: secondaire;
+}
+
+.etagere-categorie-armure {
+    grid-area: armure;
+}
+
+.etagere-categorie-bijou {
+    grid-area: bijou;
+}
+
+.panneau-categorie {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: white;
+}
+
+.retour-bibliotheque {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.retour-fleche-droite {
+    width: min(40vw, 10rem);
+    height: auto;
+    aspect-ratio: 97 / 24;
+    background-image: url(../../Images/fleche-directionnel.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transform: scaleX(-1);
+}
+
+@media (min-width: 768px) {
+    .etageres-equipements {
+        width: min(95vw, 75vh * 1570.5 / 515);
+        aspect-ratio: 1570.5/ 515;
+        background-image: url(../../Images/meuble-bibliotheque.svg);
+        background-size: calc(100%/4.5) 100%;
+        background-repeat: repeat-x;
+        background-position: right;
+        grid-template-columns: minmax(0, 0.5fr) repeat(4, minmax(0, 1fr));
+        grid-template-rows: minmax(0, 1fr);
+        grid-template-areas: ". arme secondaire armure bijou";
+        justify-self: start;
+    }
+
+    .etagere-categorie {
+        width: 17.5cqw;
+    }
+
+    .panneau-categorie {
+        font-size: 1.5cqw;
+    }
+}

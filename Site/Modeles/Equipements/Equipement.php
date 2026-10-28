@@ -1,5 +1,5 @@
 <?php
-class Equipement {
+class Equipement implements JsonSerializable {
     private ?int $equipementId;
     private string $nom;
     private string $categorie;
@@ -167,6 +167,22 @@ class Equipement {
             return;
         }
         $this->modifMouvement = $modifMouvement;
+    }
+
+    public function jsonSerialize(): array {
+        return [
+            "equipementId" => $this->equipementId,
+            "nom" => $this->nom,
+            "categorie" => $this->categorie,
+            "descriptions" => $this->descriptions,
+            "coutPC" => $this->coutPC,
+            "modifAttaque" => $this->modifAttaque,
+            "modifDefense" => $this->modifDefense,
+            "modifPV" => $this->modifPV,
+            "modifPE" => $this->modifPE,
+            "modifInitiative" => $this->modifInitiative,
+            "modifMouvement" => $this->modifMouvement
+        ];
     }
 }
 ?>

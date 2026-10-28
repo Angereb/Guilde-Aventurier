@@ -14,6 +14,9 @@
         <button type="button" class="ouverture-modale-maitrise" id="ouvertureModaleMaitrise"><span>Maîtrise</span></button>
         <button type="button" class="ouverture-modale-competence" id="ouvertureModaleCompetence"><span>Compétence</span></button>
     </div>
+    <nav class="retour-bibliotheque" aria-label="Retour">
+        <a href="?page=bibliothequeentree" class="retour-fleche-droite" aria-label="Retour vers l'entrée de la bibliothèque"></a>
+    </nav>
 </main>
 
 <div id="modaleZoneEffet" class="modale-cachee">

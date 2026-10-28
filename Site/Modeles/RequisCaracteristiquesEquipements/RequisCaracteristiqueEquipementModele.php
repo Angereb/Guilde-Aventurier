@@ -47,5 +47,9 @@ class RequisCaracteristiqueEquipementModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($caracteristiqueId, $equipementId);
     }
+
+    public function supprimerParEquipement(int $equipementId): void {
+        parent::supprimerLiaisonsParSecondId($equipementId);
+    }
 }
 ?>

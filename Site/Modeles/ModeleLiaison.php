@@ -64,5 +64,10 @@ abstract class ModeleLiaison extends ModeleBase {
             $secondId
         ]);
     }
-}
+
+    protected function supprimerLiaisonsParSecondId(int $secondId): void {
+        $requete = $this->pdo->prepare("DELETE FROM $this->table WHERE $this->secondeColonne = ?");
+        $requete->execute([$secondId]);
+    }
+    }
 ?>
