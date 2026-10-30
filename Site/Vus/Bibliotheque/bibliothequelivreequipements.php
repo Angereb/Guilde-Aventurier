@@ -18,13 +18,13 @@
                 <?php else : ?>
                     <?php foreach ($equipementsDetailles as $equipementDetaille) : ?>
                         <article class="zone-equipement">
-                            <?php if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)): ?>
-                                <button type="button" class="ouverture-modale-equipement" data-equipement="<?= htmlspecialchars(json_encode($equipementDetaille)) ?>" aria-label="Ouverture modification <?= htmlspecialchars($equipementDetaille["equipement"]->getNom()) ?>"></button>
-                            <?php endif; ?>
                             <?php foreach ($equipementDetaille["requis"] as $requisEquipement) : ?>
                                 <p class="affichage-requis"><?= htmlspecialchars($requisEquipement["nom"]) ?> : <?= htmlspecialchars($requisEquipement["valeur"]) ?></p>
                             <?php endforeach ?>
                             <div class="equipement-detaille">
+                                <?php if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)): ?>
+                                    <button type="button" class="ouverture-modale-equipement" data-equipement="<?= htmlspecialchars(json_encode($equipementDetaille)) ?>" aria-label="Ouverture modification <?= htmlspecialchars($equipementDetaille["equipement"]->getNom()) ?>"></button>
+                                <?php endif; ?>
                                 <h2 class="affichage-nom"><?= htmlspecialchars($equipementDetaille["equipement"]->getNom()) ?></h2>
                                 <p class="affichage-description"><?= htmlspecialchars($equipementDetaille["equipement"]->getDescriptions()) ?></p>
                                 <?php foreach ($equipementDetaille["modificateurs"] as $modificateurEquipement) : ?>
@@ -52,11 +52,11 @@
                             </div>
                         </article>
                     <?php endforeach ?>
-                <?php endif ?>
-                <nav class="retour-categorie" aria-label="Retour">
-                    <a href="?page=bibliothequeequipements" class="fleche-retour" aria-label="Retour vers le choix de catégorie"></a>
-                </nav>
+                <?php endif ?>                
             </div>
+            <nav class="retour-categorie" aria-label="Retour">
+                <a href="?page=bibliothequeequipements" class="fleche-retour" aria-label="Retour vers le choix de catégorie"></a>
+            </nav>
         </div>
     </div>
     <nav class="navigation-pages" aria-label="Pages du livre">

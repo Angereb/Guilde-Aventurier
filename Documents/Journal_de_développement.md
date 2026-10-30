@@ -731,18 +731,31 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création d'un fichier javascript lié à la page de création qui vérifie les différents champs des formulaires de création, remplit les informations des zones d'effet à modifier avec une fonction particulière pour les directions, ajoute dynamiquement des champs, générés via un template, pour les prérequis et modificateurs principaux des équipements et des compétences et permet l'ouverture et la fermeture des modales
 - Création du contrôleur de la page de création avec gestion des formulaires, avec pour particularité la détection permettant de savoir si l'on crée une nouvelle zone d'effet ou si l'on modifie une zone d'effet existante, des transactions pour les équipements et les compétences avec des boucles sur les champs dynamiques
 - Création du fichier css pour la page de création avec comme particularité la disposition en cercle des directions pour la modale des zones d'effet, la transformation des boutons de livres (en mobile) vers des pupitres (en desktop) avec changement de disposition et remplacement visuel du champ de fichier par un label mis en forme comme un bouton, le champ restant accessible au clavier, avec le nom du fichier affiché en dessous par JavaScript pour une meilleure lisibilité
-- Création de la page de choix de catégorie pour les équipements
-- Création de la page de visualisation des équipements
+- Création de la page de choix de catégorie des équipements, avec des liens générés à partir de la constante des catégories de l'objet Equipement, une bibliothèque à quatre étagères en mobile et une rangée de meubles répétés en desktop
+- Choix d'un contrôleur par livre (équipements et compétences) plutôt qu'un contrôleur commun, la logique des deux livres étant trop différente
+- Création du livre des équipements d'une catégorie, avec pour chaque équipement ses prérequis, ses modificateurs et ses caractéristiques secondaires, affiché en pages grâce aux colonnes CSS et feuilleté avec des flèches en JavaScript (une page en mobile, une double page en desktop)
+- Ajout d'une modale de modification et de suppression des équipements réservée aux administrateurs, pré-remplie à partir de données JSON (interface JsonSerializable sur l'objet Equipement), avec un fichier JavaScript chargé uniquement pour les administrateurs
+- Modification d'un équipement dans une transaction, en supprimant puis en recréant ses liaisons (ajout d'une fonction de suppression de toutes les liaisons dans ModeleLiaison), et suppression d'un équipement s'appuyant sur les ON DELETE CASCADE de la base
 
 ### Difficultés
 
 - Affichage des icônes récupérées en base de données pour les zones d'effet
 - Affichage de la sélection des directions des zones d'effet
+- Récupération des informations d'un objet aux propriétés privées pour le JavaScript
+- Affichage d'un nombre variable d'équipements par page selon la taille de l'écran
+- Décalage progressif des pages à chaque clic sur les flèches
+- Éléments positionnés (plume, flèche de retour) mal placés ou basculés sur une autre page du livre
+- Pages dépassant la hauteur de l'écran selon sa taille
 
 ### Solutions
 
 - Vérifications de la présence d'une icône, suivie de la création d’une URI de données en base64
 - Définition des directions de la zone d'effet via un fieldset incluant des checkbox par direction valide
+- Implémentation de l'interface JsonSerializable, avec une fonction jsonSerialize() indiquant les données à convertir
+- Envoi de tous les équipements de la catégorie, répartis en pages par les colonnes CSS (column-count, break-inside: avoid)
+- Mesure exacte de la largeur avec getBoundingClientRect() et calcul du numéro de page avant un scrollTo(), au lieu d'additionner des distances arrondies
+- Séparation du décor (le livre) et de la zone qui défile, et positionnement de chaque élément par rapport au bon parent
+- Ajout d'une niche (container-type: size) pour dimensionner les meubles sur la place réellement disponible, au lieu de la hauteur de l'écran
 
 ---
 

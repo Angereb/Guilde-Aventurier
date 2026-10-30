@@ -23,9 +23,9 @@ if (!in_array($categorie, Equipement::CATEGORIES_VALIDES, true)) {
 
 $titre = "Bibliothèque : Équipements-" . Equipement::LIBELLES_CATEGORIE[$categorie];
 
-$css = ["Bibliotheque/bibliothequelivre.css"];
+$css = ["Bibliotheque/bibliothequelivreequipements.css"];
 
-$javascript = ["Bibliotheque/bibliothequelivre.js"];
+$javascript = ["Bibliotheque/bibliothequelivreequipements.js"];
 if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)) {
     $javascript[] = "Bibliotheque/bibliothequelivremodalemodification.js";
 }
