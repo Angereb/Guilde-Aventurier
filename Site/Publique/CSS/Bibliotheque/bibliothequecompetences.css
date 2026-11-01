@@ -1,0 +1,187 @@
+body {
+    height: 100vh;
+}
+
+.bibliotheque-competence-page {
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr
+        auto
+        auto;
+    min-height: 0;
+    flex: 1;
+}
+
+.bibliotheque-competence-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.niche-etageres {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    container-type: size;
+    display: grid;
+    place-items: center;
+}
+
+.etageres-competences {
+    width: min(100cqw, 100cqh * 349 / 515);
+    aspect-ratio: 349/515;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.rangee-etageres {
+    display: contents;
+}
+
+.bibliotheque-competences {
+    flex: 0 0 100%;
+    height: 100%;
+    background-image: url(../../Images/meuble-bibliotheque.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    container-type: size;
+    display: grid;
+    grid-template-rows: 63.5fr 110.5fr 146.5fr 158.5fr 36fr;
+}
+
+.etagere-recueil:nth-child(1) { grid-row: 2; }
+.etagere-recueil:nth-child(2) { grid-row: 3; }
+.etagere-recueil:nth-child(3) { grid-row: 4; }
+
+.etagere-recueil {
+    width: 60cqw;
+    height: auto;
+    aspect-ratio: 150/50;
+    background-image: url("../../Images/affichage-bibliotheque.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    place-self: center;
+}
+
+.panneau-recueil {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    color: white;
+    font-size: 5cqw;
+}
+
+.navigation-bibliotheques {
+    width: min(100%, 30rem);
+    display: flex;
+    justify-self: center;
+    justify-content: space-around;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.bibliotheque-suivante, .bibliotheque-precedente {
+    width: min(40vw, 10rem);
+    height: auto;
+    aspect-ratio: 97 / 24;
+    background-image: url(../../Images/fleche-directionnel.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: none;
+    padding: 0;
+}
+
+.bibliotheque-suivante {
+    transform: scaleX(-1);
+}
+
+.retour-bibliotheque {
+    display: flex;
+    padding: 1rem;
+}
+
+.retour-fleche-gauche {
+    width: min(40vw, 10rem);
+    height: auto;
+    aspect-ratio: 97 / 24;
+    background-image: url(../../Images/fleche-directionnel.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+    .bibliotheque-competence-page {
+        display: grid;
+        grid-template-rows: 
+            auto
+            1fr
+            auto;
+        grid-template-columns: 
+            auto
+            1fr;
+        grid-template-areas: 
+            "titre     titre "
+            "navrangee rangee"
+            "retour    .     ";
+        min-height: 0;
+        flex: 1;
+    }
+
+    .bibliotheque-competence-titre {
+        grid-area: titre;
+    }
+
+    .niche-etageres {
+        grid-area: rangee;
+    }
+
+    .etageres-competences {
+        width: min(100cqw, 100cqh * 1396 / 515);
+        aspect-ratio: 1396 / 515;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .rangee-etageres {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        flex: 0 0 100%;
+    }
+
+    .panneau-recueil {
+        font-size: 5cqw;
+    }
+
+    .navigation-bibliotheques {
+        grid-area: navrangee;
+        width: auto;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "suivant" 
+            "precedent  ";
+        align-content: space-evenly;
+        justify-items: center;
+        padding: 0 1rem;
+    }
+
+    .bibliotheque-suivante {
+        transform: rotate(90deg);
+        grid-area: suivant;
+    }
+
+    .bibliotheque-precedente {
+        transform: rotate(-90deg);
+        grid-area: precedent;
+    }
+
+    .retour-bibliotheque {
+        grid-area: retour;
+    }
+}

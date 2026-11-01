@@ -237,6 +237,9 @@ modifMouvementEquipement.addEventListener("blur", verifierModifMouvementEquipeme
 
 
 formulaireEquipement.addEventListener("submit", function(event) {
+    if (event.submitter && event.submitter.value === "equipementSupprimer") {
+        return;
+    }
     let formulaireEquipementValide = true;
     if (!verifierNomEquipement()) {
         formulaireEquipementValide = false;

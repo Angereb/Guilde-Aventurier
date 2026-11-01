@@ -47,5 +47,9 @@ class RequisCaracteristiqueCompetenceModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($caracteristiqueId, $competenceId);
     }
+
+    public function supprimerParCompetence(int $competenceId): void {
+        parent::supprimerLiaisonsParSecondId($competenceId);
+    }
 }
 ?>

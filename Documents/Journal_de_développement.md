@@ -712,7 +712,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## 21 au ... Octobre
+## 21 Octobre au 01 Novembre
 
 ### Objectifs
 
@@ -736,6 +736,12 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création du livre des équipements d'une catégorie, avec pour chaque équipement ses prérequis, ses modificateurs et ses caractéristiques secondaires, affiché en pages grâce aux colonnes CSS et feuilleté avec des flèches en JavaScript (une page en mobile, une double page en desktop)
 - Ajout d'une modale de modification et de suppression des équipements réservée aux administrateurs, pré-remplie à partir de données JSON (interface JsonSerializable sur l'objet Equipement), avec un fichier JavaScript chargé uniquement pour les administrateurs
 - Modification d'un équipement dans une transaction, en supprimant puis en recréant ses liaisons (ajout d'une fonction de suppression de toutes les liaisons dans ModeleLiaison), et suppression d'un équipement s'appuyant sur les ON DELETE CASCADE de la base
+- Création d'une classe de service pour les compétences permettant le classement des compétences dans des recueils en fonction de leurs prérequis.
+- Création de la page de sélection de recueils de compétences avec pour particularité de n’afficher les bibliothèques que si des recueils sont visibles et si l'utilisateur a bien débloqué une compétence dans ce recueil ou si il est administrateur
+- Organisation des recueils en bibliothèques de trois et en rangées de quatre (array_chunk), affichées une bibliothèque à la fois en mobile (display: contents sur les rangées) et une rangée à la fois en desktop, avec des flèches gauche/droite ou haut/bas selon l'écran (matchMedia)
+- Création de la page d'affichage du livre des compétences sous le même modèle que celui des équipements avec vérification des compétences affichables selon déblocage
+- Ajout de JsonSerializable sur l'objet Competence, et regroupement du JavaScript de navigation des deux livres dans un fichier commun
+- Envoi du bouton de suppression sans passer par la validation JavaScript du formulaire (event.submitter)
 
 ### Difficultés
 
@@ -746,6 +752,8 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Décalage progressif des pages à chaque clic sur les flèches
 - Éléments positionnés (plume, flèche de retour) mal placés ou basculés sur une autre page du livre
 - Pages dépassant la hauteur de l'écran selon sa taille
+- Nombre de recueils variable, dépendant des maîtrises et des caractéristiques utilisées
+- Restriction des compétences visibles selon le compte connecté
 
 ### Solutions
 
@@ -756,6 +764,8 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Mesure exacte de la largeur avec getBoundingClientRect() et calcul du numéro de page avant un scrollTo(), au lieu d'additionner des distances arrondies
 - Séparation du décor (le livre) et de la zone qui défile, et positionnement de chaque élément par rapport au bon parent
 - Ajout d'une niche (container-type: size) pour dimensionner les meubles sur la place réellement disponible, au lieu de la hauteur de l'écran
+- Classement calculé à partir des prérequis par une classe de service, sans colonne supplémentaire en base, et affichage des seuls recueils non vides
+- Filtrage dans la classe de service à partir de la table de déblocage, l'administrateur voyant tout et les compétences de base restant visibles par tous
 
 ---
 

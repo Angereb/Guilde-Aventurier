@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . "/../../Modeles/Utilisateurs/Utilisateur.php";
-require_once __DIR__ . "/../../Modeles/ZonnesEffets/ZoneEffetModele.php";
+require_once __DIR__ . "/../../Modeles/ZonesEffets/ZoneEffetModele.php";
 require_once __DIR__ . "/../../Modeles/Equipements/EquipementModele.php";
 require_once __DIR__ . "/../../Modeles/Caracteristiques/CaracteristiqueModele.php";
 require_once __DIR__ . "/../../Modeles/Maitrises/MaitriseModele.php";

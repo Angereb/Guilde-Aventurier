@@ -47,5 +47,9 @@ class ModifMaitriseCompetenceModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($maitriseId, $competenceId);
     }
+
+    public function supprimerParCompetence(int $competenceId): void {
+        parent::supprimerLiaisonsParSecondId($competenceId);
+    }
 }
 ?>

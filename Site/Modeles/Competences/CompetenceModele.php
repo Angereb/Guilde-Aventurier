@@ -111,6 +111,16 @@ class CompetenceModele extends ModeleBase {
         return $competences;
     }
 
+    public function rechercherToutes(): array {
+        $competences = [];
+        $requete = $this->pdo->prepare("SELECT * FROM competences ORDER BY nom ASC");
+        $requete->execute();
+        while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $competences[] = $this->creerCompetenceDepuisDonnees($donnees);
+        }
+        return $competences;
+    }
+
     public function modifier(Competence $competence): void {
         if ($competence->getCompetenceId() === null) {
             throw new Exception("Impossible de modifier une compétence inexistante.");

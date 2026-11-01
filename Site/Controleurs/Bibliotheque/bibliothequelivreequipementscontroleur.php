@@ -6,7 +6,7 @@ require_once __DIR__ . "/../../Modeles/Maitrises/MaitriseModele.php";
 require_once __DIR__ . "/../../Modeles/RequisMaitrisesEquipements/RequisMaitriseEquipementModele.php";
 require_once __DIR__ . "/../../Modeles/ModifCaracteristiquesEquipements/ModifCaracteristiqueEquipementModele.php";
 require_once __DIR__ . "/../../Modeles/ModifMaitrisesEquipements/ModifMaitriseEquipementModele.php";
-require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
+require_once __DIR__ . "/../../Modeles/Utilisateurs/Utilisateur.php";
 
 if (!isset($_SESSION["utilisateur"])) {
     header("Location: ?page=entree");
@@ -25,9 +25,9 @@ $titre = "Bibliothèque : Équipements-" . Equipement::LIBELLES_CATEGORIE[$categ
 
 $css = ["Bibliotheque/bibliothequelivreequipements.css"];
 
-$javascript = ["Bibliotheque/bibliothequelivreequipements.js"];
+$javascript = ["Bibliotheque/bibliothequelivrenavigation.js"];
 if (in_array(Utilisateur::ROLE_ADMINISTRATEUR, $roles)) {
-    $javascript[] = "Bibliotheque/bibliothequelivremodalemodification.js";
+    $javascript[] = "Bibliotheque/bibliothequelivremodalemodificationequipement.js";
 }
 
 $equipementModele = new EquipementModele();

@@ -85,6 +85,14 @@ switch ($page)
     case "bibliothequelivreequipements":
         require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequelivreequipementscontroleur.php';
         break;
+
+    case "bibliothequecompetences":
+        require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequecompetencescontroleur.php';
+        break;
+
+    case "bibliothequelivrecompetences":
+        require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequelivrecompetencescontroleur.php';
+        break;
         
     default:
         echo "Page introuvable";
