@@ -57,9 +57,11 @@
                     <input type="number" class="quantite-input" min="1">
                 </label>
                 <p class="equipement-etat"></p>
+                <p class="equipement-cout"></p>
                 <button type="button" class="supprimer-equipement">Supprimer</button>
             </li>
         </template>
+        <p class="total-pc" id="totalPC"></p>
     </div>
     <div class="zone-navigation-magasin">
         <button type="button" class="retour-magasin" id="fermetureMagasin">Annuler</button>

@@ -16,6 +16,9 @@ const modeleEquipementInventaire = document.getElementById("modeleEquipementInve
 const equipementCatalogue = document.getElementById("equipementCatalogue");
 const equipementInventaire = document.getElementById("equipementInventaire");
 
+// Constante du total du coût en PC
+const totalPC = document.getElementById("totalPC");
+
 let inventaireActuel = [];
 let renvoyerPanier = null;
 let inventairePanier = [];
@@ -96,15 +99,20 @@ filtreMaitrise.addEventListener("change", afficherCatalogue);
 
 function afficherPanier() {
     equipementInventaire.innerHTML = "";
+    let total = 0;
     for (const equipement of inventairePanier) {
         const ficheInventaire = modeleEquipementInventaire.content.cloneNode(true);
         ficheInventaire.querySelector(".equipement-nom").textContent = equipement.nom;
         ficheInventaire.querySelector(".quantite-input").value = equipement.quantite;
         ficheInventaire.querySelector(".quantite-input").dataset.equipementId = equipement.equipementId;
         ficheInventaire.querySelector(".equipement-etat").textContent = equipement.etat;
+        let coutEquipements = equipement.coutPC * equipement.quantite;
+        ficheInventaire.querySelector(".equipement-cout").textContent = coutEquipements + " PC";
         ficheInventaire.querySelector(".supprimer-equipement").dataset.equipementId = equipement.equipementId;
         equipementInventaire.appendChild(ficheInventaire);
+        total = total + coutEquipements;
     }
+    totalPC.textContent = "Total coût : " + total + " PC";
 }
 
 function ajouterPanier(equipementId) {
@@ -121,9 +129,11 @@ function ajouterPanier(equipementId) {
             if (objetCatalogue.equipement.equipementId === equipementId) {
                 inventairePanier.push({
                     equipementId: objetCatalogue.equipement.equipementId,
+                    categorie: objetCatalogue.equipement.categorie,
                     nom: objetCatalogue.equipement.nom,
                     quantite: 1,
-                    etat: "inventaire"
+                    etat: "inventaire",
+                    coutPC: objetCatalogue.equipement.coutPC
                 });
             }
         }

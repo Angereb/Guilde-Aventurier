@@ -28,7 +28,10 @@ if (!isset($_SESSION["utilisateur"])) {
 
 $titre = "Taverne : Création aventurier";
 
-$css = ["Taverne/aventuriercreation.css"];
+$css = [
+    "Magasin/magasin.css",
+    "Taverne/aventuriercreation.css"
+    ];
 
 $javascript = [
     "Magasin/magasin.js",
