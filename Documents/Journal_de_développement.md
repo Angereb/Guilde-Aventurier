@@ -784,6 +784,25 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 01 au ... Novembre
+
+### Objectifs
+
+- Création de la Taverne
+- Mise en place des règles d'évolution des aventuriers
+
+### Réalisations
+
+- Création de la page de la taverne avec sa vue dirigeant vers la fiche de création d'aventurier, son contrôleur, et son css ayant une disposition mobile et une disposition desktop
+- Création d'un fichier de configuration qui reprend les bases de l’évolution des caractéristiques principales, maîtrises et caractéristiques secondaires
+- Création d'une classe Regles regroupant les calculs fixes (coût en PC d'une caractéristique ou d'une maîtrise par paliers, PV et PE de base), lisant ses valeurs dans le fichier de configuration
+- Ajout d'une fonction rechercherTous() dans EquipementModele
+- Création du contrôleur de la fiche de création d'aventurier, qui récupère toutes les informations des caractéristiques, maîtrises, compétences, zones d'effet et équipements, avec un chargement unique des noms des caractéristiques et des maîtrises, rangés par identifiant, pour éviter une requête par prérequis et par modificateur
+
+---
+
 ## Prochaine étape
 
-- Bibliothèque
+- Taverne
+- Magasin
+- Dortoir

@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $titre ?? 'Guilde des Aventuriers' ?></title>
+    <title><?= htmlspecialchars($titre ?? 'Guilde des Aventuriers') ?></title>
 
     <link rel="stylesheet" href="/Site/Publique/CSS/style.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/style.css") ?>">
     <link rel="stylesheet" href="/Site/Publique/CSS/Composants/entete.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/Composants/entete.css") ?>">

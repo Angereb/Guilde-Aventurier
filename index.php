@@ -1,5 +1,4 @@
 <?php
-
 // Nom personnalisé du cookie de session
 session_name("guilde_session");
 
@@ -92,6 +91,14 @@ switch ($page)
 
     case "bibliothequelivrecompetences":
         require_once __DIR__ . '/Site/Controleurs/Bibliotheque/bibliothequelivrecompetencescontroleur.php';
+        break;
+
+    case "taverne":
+        require_once __DIR__ . '/Site/Controleurs/Taverne/tavernecontroleur.php';
+        break;
+
+    case "aventuriercreation":
+        require_once __DIR__ . '/Site/Controleurs/Taverne/aventuriercreationcontroleur.php';
         break;
         
     default:

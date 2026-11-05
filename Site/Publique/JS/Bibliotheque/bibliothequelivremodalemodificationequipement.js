@@ -39,7 +39,6 @@ function activerLignesDynamiques(zone, modele) {
         const lignes = zone.querySelectorAll(".ligne-requis, .ligne-modificateur");
         const derniereLigne = lignes[lignes.length - 1];
         const ligneModifiee = event.target.closest(".ligne-requis, .ligne-modificateur");
-
         if (ligneModifiee === derniereLigne && event.target.value !== "") {
             ajouterLigne(zone, modele);
         }
@@ -92,7 +91,6 @@ for (const bouton of ouvertureModaleEquipement) {
     bouton.addEventListener("click", function () {
         const donnees = JSON.parse(bouton.dataset.equipement);
         const equipement = donnees.equipement;
-
         equipementId.value = equipement.equipementId;
         nomEquipement.value = equipement.nom;
         categorieEquipement.value = equipement.categorie;
@@ -104,10 +102,8 @@ for (const bouton of ouvertureModaleEquipement) {
         modifPEEquipement.value = equipement.modifPE ?? "";
         modifInitiativeEquipement.value = equipement.modifInitiative ?? "";
         modifMouvementEquipement.value = equipement.modifMouvement ?? "";
-
         remplirLignes(zoneRequisEquipement, modeleLigneRequisEquipement, donnees.requis);
         remplirLignes(zoneModificateurEquipement, modeleLigneModificateurEquipement, donnees.modificateurs);
-
         modaleEquipement.classList.remove("modale-cachee");
         modaleEquipement.classList.add("modale-visible");
     });
@@ -234,7 +230,6 @@ modifPVEquipement.addEventListener("blur", verifierModifPVEquipement);
 modifPEEquipement.addEventListener("blur", verifierModifPEEquipement);
 modifInitiativeEquipement.addEventListener("blur", verifierModifInitiativeEquipement);
 modifMouvementEquipement.addEventListener("blur", verifierModifMouvementEquipement);
-
 
 formulaireEquipement.addEventListener("submit", function(event) {
     if (event.submitter && event.submitter.value === "equipementSupprimer") {

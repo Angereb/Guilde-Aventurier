@@ -1,0 +1,71 @@
+body {
+    height: 100vh;
+}
+
+.taverne-page {
+    height: 100%;
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
+}
+
+.taverne-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.navigation-taverne {
+    min-height: 0;
+    container-type: size;
+    display: grid;
+    place-items: center;
+    padding: 0 5% 0 5%;
+}
+
+.zone-creation-aventurier {
+    width: min(100cqw, 100cqh * 323 / 206);
+    aspect-ratio: 323/206;
+    background-image: url(../../Images/comptoir-taverne-mobile.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.nav-taverne {
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    top: 2.5%;
+    left: 30%;
+    background-image: url(../../Images/carte-taverne.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: scaleX(-1);
+}
+
+@media (min-width: 768px) {
+    .navigation-taverne {
+        padding: 15vh 5% 15vh 5%;
+    }
+
+    .zone-creation-aventurier {
+        width: min(100cqw, 100cqh * 1008 / 515);
+        aspect-ratio: 1008/515;
+        background-image: url(../../Images/comptoir-taverne-desktop.svg);
+    }
+
+    .nav-taverne {
+        width: 28%;
+        height: 28%;
+        top: 7%;
+        left: 32%;
+        transform: scaleX(1);
+    }
+}

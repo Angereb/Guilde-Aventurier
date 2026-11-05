@@ -102,6 +102,16 @@ class EquipementModele extends ModeleBase {
         return $equipements;
     }
 
+    public function rechercherTous(): array {
+        $equipements = [];
+        $requete = $this->pdo->prepare("SELECT * FROM equipements ORDER BY nom ASC");
+        $requete->execute();
+        while ($donnees = $requete->fetch(PDO::FETCH_ASSOC)) {
+            $equipements[] = $this->creerEquipementDepuisDonnees($donnees);
+        }
+        return $equipements;
+    }
+
     public function modifier(Equipement $equipement): void {
         if ($equipement->getEquipementId() === null) {
             throw new Exception("Impossible de modifier un équipement inexistant.");
