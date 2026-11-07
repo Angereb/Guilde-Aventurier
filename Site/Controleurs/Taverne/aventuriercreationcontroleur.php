@@ -52,6 +52,12 @@ $modifCaracteristiqueEquipementModele = new ModifCaracteristiqueEquipementModele
 $requisMaitriseEquipementModele = new RequisMaitriseEquipementModele();
 $modifMaitriseEquipementModele = new ModifMaitriseEquipementModele();
 $classementCompetences = new ClassementCompetences();
+$aventurierModele = new AventurierModele();
+$caracteristiqueAventurierModele = new CaracteristiqueAventurierModele();
+$maitriseAventurierModele = new MaitriseAventurierModele();
+$competenceAventurierModele = new CompetenceAventurierModele();
+$equipementAventurierModele = new EquipementAventurierModele();
+$deblocageCompetenceUtilisateurModele = new DeblocageCompetenceUtilisateurModele();
 
 $caracteristiques = $caracteristiqueModele->rechercherToutes();
 $nomsCaracteristiques = [];
@@ -163,6 +169,155 @@ foreach ($equipements as $equipement) {
 
 $recueils = $classementCompetences->rechercherRecueils();
 
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    $formulaire = $_POST['action'] ?? null;
+    try{
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
+        switch($formulaire){
+            case 'aventurierEnvoyer':
+                $nomNouvelAventurier = $_POST["aventurierNom"];
+                $iconeNouvelAventurier = null;
+                $erreurEnvoi = $_FILES["aventurierIcone"]["error"] ?? UPLOAD_ERR_NO_FILE;
+                if ($erreurEnvoi !== UPLOAD_ERR_NO_FILE) {
+                    if ($erreurEnvoi !== UPLOAD_ERR_OK || !is_uploaded_file($_FILES["aventurierIcone"]["tmp_name"])) {
+                        throw new Exception("L'envoi de l'icône a échoué.");
+                    }
+                    $iconeNouvelAventurier = file_get_contents($_FILES["aventurierIcone"]["tmp_name"]);
+                }
+                $valeursNouvelAventurier = [];
+                $caracteristiquesNouvelAventurier = $_POST["caracteristiques"] ?? [];
+                if (!is_array($caracteristiquesNouvelAventurier)) {
+                    throw new Exception("Les valeurs des caractéristiques doivent être incluses dans un tableau.");
+                }
+                if (count($caracteristiquesNouvelAventurier) !== count($nomsCaracteristiques)) {
+                    throw new Exception("Toutes les caractéristiques doivent être présentes.");
+                }
+                foreach ($caracteristiquesNouvelAventurier as $caracteristiqueIdNouvelAventurier => $valeurCaracteristiqueNouvelAventurier) {
+                    if (!isset($nomsCaracteristiques[$caracteristiqueIdNouvelAventurier])) {
+                        throw new Exception("Une des caractéristiques indiquées n'existe pas.");
+                    }
+                    if (filter_var($valeurCaracteristiqueNouvelAventurier, FILTER_VALIDATE_INT, ["options" => ["min_range" => REGLES["caracteristiques"]["minimum"],"max_range" => REGLES["caracteristiques"]["maximum"]]]) === false) {
+                        throw new Exception("Les valeurs des caractéristiques doivent être comprises entre " . REGLES["caracteristiques"]["minimum"] . " et " . REGLES["caracteristiques"]["maximum"] . ".");
+                    }
+                    $valeursNouvelAventurier["caracteristique-" . $caracteristiqueIdNouvelAventurier] = (int)$valeurCaracteristiqueNouvelAventurier;
+                }
+                $maitrisesNouvelAventurier = $_POST["maitrises"] ?? [];
+                if (!is_array($maitrisesNouvelAventurier)) {
+                    throw new Exception("Les valeurs des maîtrises doivent être incluses dans un tableau.");
+                }
+                foreach ($maitrisesNouvelAventurier as $maitriseIdNouvelAventurier => $valeurMaitriseNouvelAventurier) {
+                    if (!isset($nomsMaitrises[$maitriseIdNouvelAventurier])) {
+                        throw new Exception("Une des maîtrises indiquées n'existe pas.");
+                    }
+                    if (filter_var($valeurMaitriseNouvelAventurier, FILTER_VALIDATE_INT, ["options" => ["min_range" => REGLES["maitrises"]["minimum"],"max_range" => REGLES["maitrises"]["maximum"]]]) === false) {
+                        throw new Exception("Les valeurs des maîtrises doivent être comprises entre " . REGLES["maitrises"]["minimum"] . " et " . REGLES["maitrises"]["maximum"] . ".");
+                    }
+                    $valeursNouvelAventurier["maitrise-" . $maitriseIdNouvelAventurier] = (int)$valeurMaitriseNouvelAventurier;
+                }
+                $equipementsNouvelAventurier = $_POST["inventaireAventurier"] ?? "[]";
+                $equipementsNouvelAventurier = json_decode($equipementsNouvelAventurier, true);
+                if (!is_array($equipementsNouvelAventurier)) {
+                    throw new Exception("Les équipements doivent être inclus dans un tableau.");
+                }
+                foreach ($equipementsNouvelAventurier as $equipementNouvelAventurier) {
+                    if (!is_array($equipementNouvelAventurier) || !isset($equipementNouvelAventurier["equipementId"]) || !isset($equipementNouvelAventurier["quantite"])) {
+                        throw new Exception("Un des équipements n'est pas valide.");
+                    }
+                    if (filter_var($equipementNouvelAventurier["equipementId"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false || filter_var($equipementNouvelAventurier["quantite"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false) {
+                        throw new Exception("Un des équipements ou sa quantité n'est pas valide.");
+                    }
+                }
+                $competencesAtteintes = [];
+                foreach ($competencesDetailles as $competenceDetaillee) {
+                    $competenceAtteinte = true;
+                    foreach ($competenceDetaillee["requis"] as $requis) {
+                        if (!isset($valeursNouvelAventurier[$requis["cible"]]) || $valeursNouvelAventurier[$requis["cible"]] < $requis["valeur"]) {
+                            $competenceAtteinte = false;
+                        }
+                    }
+                    if ($competenceAtteinte) {
+                        $competencesAtteintes[] = [
+                            "competenceId" => $competenceDetaillee["competence"]->getCompetenceId(),
+                            "aDesRequis" => count($competenceDetaillee["requis"]) > 0
+                        ];
+                    }
+                }
+                $pdo = BaseDeDonnees::connexion();
+                $pdo->beginTransaction();
+                try {
+                    $nouvelAventurier = new Aventurier(
+                        null,
+                        $nomNouvelAventurier,
+                        $iconeNouvelAventurier,
+                        null,
+                        null,
+                        (int)$_SESSION["utilisateur"]["id"]
+                    );
+                    $aventurierCreer = $aventurierModele->ajouter($nouvelAventurier);
+                    foreach ($caracteristiquesNouvelAventurier as $caracteristiqueIdNouvelAventurier => $valeurCaracteristiqueNouvelAventurier) {
+                        $caracteristiqueAventurierModele->ajouter(
+                            (int)($caracteristiqueIdNouvelAventurier),
+                            $aventurierCreer,
+                            (int)($valeurCaracteristiqueNouvelAventurier)
+                        );
+                    }
+                    foreach ($maitrisesNouvelAventurier as $maitriseIdNouvelAventurier => $valeurMaitriseNouvelAventurier) {
+                        $maitriseAventurierModele->ajouter(
+                            (int)($maitriseIdNouvelAventurier),
+                            $aventurierCreer,
+                            (int)($valeurMaitriseNouvelAventurier)
+                        );
+                    }
+                    foreach ($equipementsNouvelAventurier as $equipementNouvelAventurier) {
+                        $equipementAventurierModele->ajouter(
+                            $equipementNouvelAventurier["equipementId"],
+                            $aventurierCreer,
+                            $equipementNouvelAventurier["quantite"],
+                            "inventaire"
+                        );
+                    }
+                    $competenceDebloqueUtilisateur = $deblocageCompetenceUtilisateurModele->rechercherParUtilisateur($_SESSION["utilisateur"]["id"]);
+                    $competencesIdDebloquees = [];
+                    foreach ($competenceDebloqueUtilisateur as $ligneDeblocage) {
+                        $competencesIdDebloquees[] = $ligneDeblocage["competenceId"];
+                    }
+                    foreach ($competencesAtteintes as $competenceAventurier) {
+                        $competenceAventurierModele->ajouter(
+                            $competenceAventurier["competenceId"],
+                            $aventurierCreer
+                        );
+                        
+                        if ($competenceAventurier["aDesRequis"] && !in_array($competenceAventurier["competenceId"], $competencesIdDebloquees, true)) {
+                            $deblocageCompetenceUtilisateurModele->ajouter(
+                                $competenceAventurier["competenceId"],
+                                (int)$_SESSION["utilisateur"]["id"]
+                            );
+                        }
+                    }
+                    $pdo->commit();
+                } catch (Exception $e) {
+                    $pdo->rollBack();
+                    throw new Exception("Une erreur est survenue lors de la création de l'aventurier : " . $e->getMessage());
+                }
+                $_SESSION["notificationMessage"] = "Votre nouvel aventurier a bien été créé.";
+                $_SESSION["typeNotification"] = "succes";
+                break;
+
+            default:
+                throw new Exception("Action non reconnue.");
+        }
+        header("Location: ?page=taverne");
+        exit;
+    }
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+        header("Location: ?page=aventuriercreation");
+        exit;
+    }
+}
 
 ob_start();
 require __DIR__ . '/../../Vus/Taverne/aventuriercreation.php';

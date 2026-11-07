@@ -93,7 +93,6 @@ for (const bouton of ouvertureModaleCompetence) {
     bouton.addEventListener("click", function () {
         const donnees = JSON.parse(bouton.dataset.competence);
         const competence = donnees.competence;
-
         competenceId.value = competence.competenceId;
         nomCompetence.value = competence.nom;
         typeCompetence.value = competence.types;
@@ -106,10 +105,8 @@ for (const bouton of ouvertureModaleCompetence) {
         modifPECompetence.value = competence.modifPE ?? "";
         modifInitiativeCompetence.value = competence.modifInitiative ?? "";
         modifMouvementCompetence.value = competence.modifMouvement ?? "";
-
         remplirLignes(zoneRequisCompetence, modeleLigneRequisCompetence, donnees.requis);
         remplirLignes(zoneModificateurCompetence, modeleLigneModificateurCompetence, donnees.modificateurs);
-
         modaleCompetence.classList.remove("modale-cachee");
         modaleCompetence.classList.add("modale-visible");
     });

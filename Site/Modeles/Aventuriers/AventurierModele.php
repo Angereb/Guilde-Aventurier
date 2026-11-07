@@ -26,7 +26,7 @@ class AventurierModele extends ModeleBase {
         return $aventurier;
     }
 
-    public function ajouter(Aventurier $aventurier): void {
+    public function ajouter(Aventurier $aventurier): int {
         $requete = $this->pdo->prepare(
             "INSERT INTO aventuriers (nom, icone, typeIcone, creerParId) VALUES (?, ?, ?, ?)");
         $requete->execute([
@@ -35,6 +35,7 @@ class AventurierModele extends ModeleBase {
             $aventurier->getTypeIcone(),
             $aventurier->getCreerParId()
         ]);
+        return (int)$this->pdo->lastInsertId();
     }
 
     public function rechercherParId(int $aventurierId): Aventurier {

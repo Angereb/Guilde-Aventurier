@@ -1,4 +1,5 @@
 <?php
+/**@var array $nomsCaracteristiques */
 /**@var array $competencesDetailles */
 /**@var array $equipementsDetailles */
 /**@var array $nomsZonesEffets */
@@ -10,6 +11,7 @@
 <script>
     const DONNEES_FICHE = <?= json_encode([
         "regles" => REGLES,
+        "nomsCaracteristiques" => $nomsCaracteristiques,
         "competences" => $competencesDetailles,
         "equipements" => $equipementsDetailles,
         "nomsZonesEffets" => $nomsZonesEffets,
@@ -99,17 +101,18 @@
             <div class="zone-bouton-magasin">
                 <button type="button" class="ouverture-modale-magasin" id="ouvertureModaleMagasin"><span>Magasin</span></button>
             </div>
-                <?php foreach (Equipement::CATEGORIES_VALIDES as $categorie): ?>
-                    <p class="label-categorie-equipement" id="nom<?= $categorie ?>"><?php $libelleCategorie = Equipement::LIBELLES_CATEGORIE[$categorie]; ?><?= htmlspecialchars($libelleCategorie) ?></p>
-                    <ul data-categorie="<?= $categorie ?>" aria-labelledby="nom<?= $categorie ?>"></ul>
-                <?php endforeach ?>
-                <template id="modeleLigneEquipement">
-                    <li class="ligne-equipement">
-                        <p class="equipement-nom"></p>
-                        <p class="equipement-quantite"></p>
-                        <p class="equipement-etat"></p>
-                    </li>
-                </template>
+            <?php foreach (Equipement::CATEGORIES_VALIDES as $categorie): ?>
+                <p class="label-categorie-equipement" id="nom<?= $categorie ?>"><?php $libelleCategorie = Equipement::LIBELLES_CATEGORIE[$categorie]; ?><?= htmlspecialchars($libelleCategorie) ?></p>
+                <ul data-categorie="<?= $categorie ?>" aria-labelledby="nom<?= $categorie ?>"></ul>
+            <?php endforeach ?>
+            <template id="modeleLigneEquipement">
+                <li class="ligne-equipement">
+                    <p class="equipement-nom"></p>
+                    <p class="equipement-quantite"></p>
+                    <p class="equipement-etat"></p>
+                </li>
+            </template>
+            <input type="hidden" id="inventaireAventurier" name="inventaireAventurier" value="[]"> 
         </fieldset>
         <fieldset class="zone-information-competence">
             <legend>Compétences</legend>
@@ -119,6 +122,13 @@
                     <h3 class="nom-competence"></h3>
                     <p class="recueil-competence"></p>
                     <p class="descriptions-competence"></p>
+                    <ul class="modificateur-principaux-competence"></ul>
+                    <p class="modificateur-attaque-competence"></p>
+                    <p class="modificateur-defense-competence"></p>
+                    <p class="modificateur-pv-competence"></p>
+                    <p class="modificateur-pe-competence"></p>
+                    <p class="modificateur-initiative-competence"></p>
+                    <p class="modificateur-mouvement-competence"></p>
                     <img class="icone-zone-effet-competence" alt="Zone d'effet">
                     <p class="cout-pe-competence"></p>
                 </li>
@@ -128,7 +138,6 @@
             <a href="?page=taverne" class="fleche-retour" aria-label="Retour vers la taverne"></a>
         </nav>
         <div class="zone-pc">
-            <span class="aventurier-label">PC :</span>
             <output id="pcAventurier" class="aventurier-pc" aria-label="Points de compagnie"></output>
         </div>
         <div class="zone-signature">
