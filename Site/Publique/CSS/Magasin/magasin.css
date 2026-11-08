@@ -1,0 +1,174 @@
+#modaleMagasin {
+    z-index: 10;
+}
+
+.fenetre-magasin {
+    width: 95vw;
+    height: 95dvh;
+    background-image: url(../../Images/parchemin-aventurier.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 2.5rem 1rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+    grid-template-areas:
+        "filtre"
+        "catalogue"
+        "inventaire"
+        "navigation";
+    gap: 0.75rem;
+}
+
+.fenetre-magasin button,
+.bouton-filtre {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.3em 1.2em;
+    background-color: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+.zone-filtre {
+    grid-area: filtre;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.zone-catalogue {
+    grid-area: catalogue;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+#equipementCatalogue {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 0.5rem;
+}
+
+.zone-equipement-detaille {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.5rem 0.75rem;
+}
+
+.affichage-requis {
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.affichage-cout {
+    font-weight: bold;
+    text-align: right;
+}
+
+.ajouter-equipement {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.zone-inventaire {
+    grid-area: inventaire;
+    max-height: 35dvh;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid black;
+    padding-top: 0.5rem;
+    overflow-y: hidden;
+}
+
+.affichage-requis,
+.affichage-modificateur-principaux {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#equipementInventaire {
+    display: grid;
+    gap: 0.5rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 0.75rem;
+}
+
+.equipement-inventaire {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas:
+        "nom      nom  cout"
+        "quantite etat supprimer";
+    align-items: center;
+    column-gap: 0.5rem;
+}
+
+.equipement-inventaire .equipement-nom {
+    grid-area: nom;
+    font-weight: bold;
+}
+
+.equipement-inventaire .quantite-label {
+    grid-area: quantite;
+}
+
+.equipement-inventaire .equipement-etat {
+    grid-area: etat;
+}
+
+.equipement-inventaire .equipement-cout {
+    grid-area: cout;
+    text-align: right;
+}
+
+.equipement-inventaire .supprimer-equipement {
+    grid-area: supprimer;
+}
+
+.quantite-input {
+    width: 3.5rem;
+}
+
+.total-pc {
+    font-weight: bold;
+    text-align: right;
+}
+
+.zone-navigation-magasin {
+    grid-area: navigation;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ===== Desktop ===== */
+@media (min-width: 768px) {
+    .fenetre-magasin {
+        width: min(90vw, 75rem);
+        height: 90dvh;
+        padding: 3rem 2rem;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        grid-template-areas:
+            "filtre     filtre"
+            "catalogue  inventaire"
+            "navigation navigation";
+        column-gap: 2rem;
+    }
+
+    .zone-inventaire {
+        border-top: none;
+        border-left: 1px solid black;
+        padding-top: 0;
+        padding-left: 1rem;
+    }
+}

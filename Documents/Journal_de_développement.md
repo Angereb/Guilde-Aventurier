@@ -784,12 +784,14 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## 01 au ... Novembre
+## 01 au 08 Novembre
 
 ### Objectifs
 
 - Création de la Taverne
 - Mise en place des règles d'évolution des aventuriers
+- Création de la fiche de création d'aventurier
+- Création du magasin, réutilisable pour le dortoir
 
 ### Réalisations
 
@@ -798,11 +800,31 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création d'une classe Regles regroupant les calculs fixes (coût en PC d'une caractéristique ou d'une maîtrise par paliers, PV et PE de base), lisant ses valeurs dans le fichier de configuration
 - Ajout d'une fonction rechercherTous() dans EquipementModele
 - Création du contrôleur de la fiche de création d'aventurier, qui récupère toutes les informations des caractéristiques, maîtrises, compétences, zones d'effet et équipements, avec un chargement unique des noms des caractéristiques et des maîtrises, rangés par identifiant, pour éviter une requête par prérequis et par modificateur
+- Réutilisation de la classe ClassementCompetences pour indiquer le recueil de chaque compétence sur la fiche
+- Ajout de l'interface JsonSerializable aux classes Competence et Equipement, pour transmettre les données au JavaScript avec json_encode (avec les options JSON_HEX pour sécuriser l'insertion dans une balise script)
+- Création de la vue de la fiche : nom, icône avec aperçu, caractéristiques secondaires dans des balises output, lignes de caractéristiques et de maîtrises avec boutons ±1 et ±10, tiroirs d'équipements par catégorie, liste des compétences, total des PC et bouton de signature
+- Création de la vue du magasin, incluse dans une modale de la fiche, avec filtres par catégorie, caractéristique et maîtrise, catalogue, panier et total
+- Création du JavaScript du magasin, séparé de celui de la fiche pour être réutilisé dans le dortoir : filtrage du catalogue, ajout au panier, modification de la quantité, suppression, coût par ligne et total, annulation, et renvoi du panier à la fiche par une fonction de rappel à la validation
+- Création du JavaScript de la fiche :
+  - affichage de l'inventaire dans les tiroirs de chaque catégorie au retour du magasin
+  - modification des valeurs par les boutons et par la saisie, bornées entre le minimum et le maximum des règles
+  - blocage de la touche Entrée dans les champs pour éviter un envoi accidentel
+  - affichage des compétences dont les prérequis sont atteints, avec leurs modificateurs, recalculé à chaque changement de valeur
+  - calcul du coût total en PC (caractéristiques et maîtrises par paliers, équipements selon leur prix et leur quantité)
+  - calcul des caractéristiques secondaires, avec les bonus des compétences passives débloquées, y compris leurs bonus de Robustesse pour les PV et les PE
+  - envoi du panier dans un champ caché au format JSON
+  - validation du nom, de l'icône et des valeurs avant l'envoi, avec les bornes lues dans les règles
+- Modification de la fonction ajouter() d'AventurierModele pour qu'elle retourne l'identifiant du nouvel aventurier
+- Traitement du formulaire de création :
+  - vérification des caractéristiques (toutes présentes, existantes, entières et dans les bornes des règles) et des maîtrises (existantes, entières et dans les bornes)
+  - décodage et vérification de la structure du panier JSON
+  - recalcul côté serveur des compétences atteintes, sans faire confiance au navigateur
+  - transaction unique : création de l'aventurier, liaisons des caractéristiques, maîtrises, équipements (en inventaire) et compétences, puis déblocage pour le compte des compétences à prérequis non encore débloquées, avec retour en arrière complet en cas d'erreur
+- Création du style css de la page de la feuille d'aventurier en version mobile et desktop, avec l'image de fond utilisant une copie de la feuille utilisée sur d'autres pages, mais avec un preserveAspectRatio="none", l'icône de l'aventurier intégrée dans un octogone créé via clip-path et avec un défilement interne des colonnes en desktop
+- Création du style css de la modale du magasin en version mobile et desktop, avec un défilement du panier en mobile
 
 ---
 
 ## Prochaine étape
 
-- Taverne
-- Magasin
 - Dortoir

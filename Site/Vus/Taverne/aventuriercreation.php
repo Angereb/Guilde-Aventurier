@@ -33,10 +33,12 @@
             </div>
             <div class="zone-icone">
                 <input type="file" class="visuellement-cache" id="iconeAventurier" accept="image/png, image/jpeg, image/webp" name="aventurierIcone" aria-describedby="iconeAventurierErreur">
-                <label for="iconeAventurier" class="bouton-icone">
-                    <img id="apercuIconeAventurier" class="apercu-icone" alt="" hidden>
-                    <span class="visuellement-cache">Choisir une icône</span>
-                </label>
+                <div class="cadre-icone">
+                    <label for="iconeAventurier" class="bouton-icone">
+                        <img id="apercuIconeAventurier" class="apercu-icone" alt="" hidden>
+                        <span class="visuellement-cache">Choisir une icône</span>
+                    </label>
+                </div>
                 <p id="iconeAventurierErreur" class="message-champ"></p>
             </div>
             <div class="zone-pv">
@@ -73,11 +75,13 @@
             <?php foreach ($caracteristiques as $caracteristique): ?>
                 <div class="ligne-valeur">
                     <label for="caracteristique-<?= $caracteristique->getCaracteristiqueId() ?>"><?= htmlspecialchars($caracteristique->getNom()) ?> : </label>
-                    <button type="button" class="diminuer" data-pas="-10" aria-label="Diminuer <?= htmlspecialchars($caracteristique->getNom()) ?> de 10">▼▼</button>
-                    <button type="button" class="diminuer" data-pas="-1" aria-label="Diminuer <?= htmlspecialchars($caracteristique->getNom()) ?> de 1">▼</button>
-                    <input type="number" id="caracteristique-<?= $caracteristique->getCaracteristiqueId() ?>" name="caracteristiques[<?= $caracteristique->getCaracteristiqueId() ?>]" value="<?= REGLES["caracteristiques"]["depart"] ?>" min="<?= REGLES["caracteristiques"]["minimum"] ?>" max="<?= REGLES["caracteristiques"]["maximum"] ?>" class="valeur-caracteristique" aria-describedby="caracteristiquesErreur">
-                    <button type="button" class="augmenter" data-pas="1" aria-label="Augmenter <?= htmlspecialchars($caracteristique->getNom()) ?> de 1">▲</button>
-                    <button type="button" class="augmenter" data-pas="10" aria-label="Augmenter <?= htmlspecialchars($caracteristique->getNom()) ?> de 10">▲▲</button>
+                    <div class="zone-valeur">
+                        <button type="button" class="diminuer" data-pas="-10" aria-label="Diminuer <?= htmlspecialchars($caracteristique->getNom()) ?> de 10">▼▼</button>
+                        <button type="button" class="diminuer" data-pas="-1" aria-label="Diminuer <?= htmlspecialchars($caracteristique->getNom()) ?> de 1">▼</button>
+                        <input type="number" id="caracteristique-<?= $caracteristique->getCaracteristiqueId() ?>" name="caracteristiques[<?= $caracteristique->getCaracteristiqueId() ?>]" value="<?= REGLES["caracteristiques"]["depart"] ?>" min="<?= REGLES["caracteristiques"]["minimum"] ?>" max="<?= REGLES["caracteristiques"]["maximum"] ?>" class="valeur-caracteristique" aria-describedby="caracteristiquesErreur">
+                        <button type="button" class="augmenter" data-pas="1" aria-label="Augmenter <?= htmlspecialchars($caracteristique->getNom()) ?> de 1">▲</button>
+                        <button type="button" class="augmenter" data-pas="10" aria-label="Augmenter <?= htmlspecialchars($caracteristique->getNom()) ?> de 10">▲▲</button>
+                    </div>
                 </div>
             <?php endforeach ?>
             <p id="caracteristiquesErreur" class="message-champ"></p>
@@ -87,11 +91,13 @@
             <?php foreach ($maitrises as $maitrise): ?>
                 <div class="ligne-valeur">
                     <label for="maitrise-<?= $maitrise->getMaitriseId() ?>"><?= htmlspecialchars($maitrise->getNom()) ?> : </label>
-                    <button type="button" class="diminuer" data-pas="-10" aria-label="Diminuer <?= htmlspecialchars($maitrise->getNom()) ?> de 10">▼▼</button>
-                    <button type="button" class="diminuer" data-pas="-1" aria-label="Diminuer <?= htmlspecialchars($maitrise->getNom()) ?> de 1">▼</button>
-                    <input type="number" id="maitrise-<?= $maitrise->getMaitriseId() ?>" name="maitrises[<?= $maitrise->getMaitriseId() ?>]" value="<?= REGLES["maitrises"]["depart"] ?>" min="<?= REGLES["maitrises"]["minimum"] ?>" max="<?= REGLES["maitrises"]["maximum"] ?>" class="valeur-maitrise" aria-describedby="maitrisesErreur">
-                    <button type="button" class="augmenter" data-pas="1" aria-label="Augmenter <?= htmlspecialchars($maitrise->getNom()) ?> de 1">▲</button>
-                    <button type="button" class="augmenter" data-pas="10" aria-label="Augmenter <?= htmlspecialchars($maitrise->getNom()) ?> de 10">▲▲</button>
+                    <div class="zone-valeur">
+                        <button type="button" class="diminuer" data-pas="-10" aria-label="Diminuer <?= htmlspecialchars($maitrise->getNom()) ?> de 10">▼▼</button>
+                        <button type="button" class="diminuer" data-pas="-1" aria-label="Diminuer <?= htmlspecialchars($maitrise->getNom()) ?> de 1">▼</button>
+                        <input type="number" id="maitrise-<?= $maitrise->getMaitriseId() ?>" name="maitrises[<?= $maitrise->getMaitriseId() ?>]" value="<?= REGLES["maitrises"]["depart"] ?>" min="<?= REGLES["maitrises"]["minimum"] ?>" max="<?= REGLES["maitrises"]["maximum"] ?>" class="valeur-maitrise" aria-describedby="maitrisesErreur">
+                        <button type="button" class="augmenter" data-pas="1" aria-label="Augmenter <?= htmlspecialchars($maitrise->getNom()) ?> de 1">▲</button>
+                        <button type="button" class="augmenter" data-pas="10" aria-label="Augmenter <?= htmlspecialchars($maitrise->getNom()) ?> de 10">▲▲</button>
+                    </div>
                 </div>
             <?php endforeach ?>
             <p id="maitrisesErreur" class="message-champ"></p>
@@ -122,26 +128,30 @@
                     <h3 class="nom-competence"></h3>
                     <p class="recueil-competence"></p>
                     <p class="descriptions-competence"></p>
-                    <ul class="modificateur-principaux-competence"></ul>
-                    <p class="modificateur-attaque-competence"></p>
-                    <p class="modificateur-defense-competence"></p>
-                    <p class="modificateur-pv-competence"></p>
-                    <p class="modificateur-pe-competence"></p>
-                    <p class="modificateur-initiative-competence"></p>
-                    <p class="modificateur-mouvement-competence"></p>
+                    <div class="modificateur-competence">
+                        <ul class="modificateur-principaux-competence"></ul>
+                        <p class="modificateur-attaque-competence"></p>
+                        <p class="modificateur-defense-competence"></p>
+                        <p class="modificateur-pv-competence"></p>
+                        <p class="modificateur-pe-competence"></p>
+                        <p class="modificateur-initiative-competence"></p>
+                        <p class="modificateur-mouvement-competence"></p>
+                    </div>
                     <img class="icone-zone-effet-competence" alt="Zone d'effet">
                     <p class="cout-pe-competence"></p>
                 </li>
             </template>            
         </fieldset>
-        <nav class="retour-taverne" aria-label="Retour">
-            <a href="?page=taverne" class="fleche-retour" aria-label="Retour vers la taverne"></a>
-        </nav>
-        <div class="zone-pc">
-            <output id="pcAventurier" class="aventurier-pc" aria-label="Points de compagnie"></output>
-        </div>
-        <div class="zone-signature">
-            <button type="submit" class="envoyer-aventurier" name="action" value="aventurierEnvoyer">Signature</button>
+        <div class="bas-de-fiche">
+            <nav class="retour-taverne" aria-label="Retour">
+                <a href="?page=taverne" class="fleche-retour" aria-label="Retour vers la taverne"></a>
+            </nav>
+            <div class="zone-pc">
+                <output id="pcAventurier" class="aventurier-pc" aria-label="Points de compagnie"></output>
+            </div>
+            <div class="zone-signature">
+                <button type="submit" class="envoyer-aventurier" name="action" value="aventurierEnvoyer">Signature</button>
+            </div>
         </div>
     </form>
 </main>
