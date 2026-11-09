@@ -1,0 +1,186 @@
+body {
+    height: 100vh;
+}
+
+.dortoir-page {
+    display: grid;
+    grid-template-rows: 
+        auto
+        1fr;
+    min-height: 0;
+    flex: 1;
+}
+
+.dortoir-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.niche-dortoir {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 
+        1fr
+        auto;
+}
+
+.zone-lits {
+    min-height: 0;
+}
+
+.lits-aventuriers {
+    height: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    overflow-x: hidden;
+}
+
+.dortoir {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 10vw;
+    overflow: clip;
+}
+
+.colonne-lits {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    place-items: center;
+    container-type: size;
+}
+
+.lit-aventurier {
+    width: min(175cqw, 100cqh / 3 * 415 / 221);
+    height: auto;
+    aspect-ratio: 415/221;
+    background-image: url(../../Images/lit-dortoir.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: grid;
+    place-items: center;
+}
+
+.colonne-lits:nth-child(odd) .lit-aventurier {
+    justify-self: unsafe end;
+}
+
+.colonne-lits:nth-child(even) .lit-aventurier {
+    justify-self: start;
+    transform: scaleX(-1);
+}
+
+.lit-aventurier span {
+    justify-self: end;
+    width: 100cqw;
+    box-sizing: border-box;
+    padding-inline: 0.5rem;
+    text-align: center;
+    margin: 0 1rem 1rem 0;
+}
+
+.colonne-lits:nth-child(even) .lit-aventurier span {
+    transform: scaleX(-1);
+}
+
+.navigation-dortoir {
+    width: min(100%, 30rem);
+    display: flex;
+    justify-self: center;
+    justify-content: space-around;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.dortoir-precedent, .dortoir-suivant {
+    width: min(40vw, 10rem);
+    height: auto;
+    aspect-ratio: 97 / 24;
+    background-image: url(../../Images/fleche-directionnel.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: none;
+    padding: 0;
+}
+
+.dortoir-suivant {
+    transform: scaleX(-1);
+}
+
+.message-pas-aventurier {
+    place-self: center;
+    width: min(90%, 35rem);
+    padding: 2rem;
+    background-image: url(../../Images/affichage-bibliotheque.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    place-content: center;
+    text-align: center;
+}
+
+.message-pas-aventurier p {
+    font-size: clamp(1rem, 4vw, 1.6rem);
+    color: white;
+}
+
+.message-pas-aventurier p a{
+    display: inline;
+    color: inherit;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .dortoir {
+        column-gap: 20vw;
+    }
+
+    .lit-aventurier {
+        width: min(100cqw, 100cqh / 3 * 415 / 221);
+    }
+
+    .colonne-lits:nth-child(odd) .lit-aventurier,
+    .colonne-lits:nth-child(even) .lit-aventurier {
+        justify-self: center;
+    }
+
+    .lit-aventurier span {
+        justify-self: center;
+        width: auto;
+        margin: 0 0 2rem 0;
+        font-size: clamp(1rem, 4cqw, 1.6rem);
+    }
+
+    .colonne-lits:nth-child(odd) .lit-aventurier {
+        justify-self: unsafe end;
+    }
+
+    .colonne-lits:nth-child(odd) .lit-aventurier:nth-child(2) {
+        margin-right: 10cqw;
+    }
+
+    .colonne-lits:nth-child(odd) .lit-aventurier:nth-child(3) {
+        margin-right: 20cqw;
+    }
+
+    .colonne-lits:nth-child(even) .lit-aventurier {
+        justify-self: unsafe start;
+    }
+
+    .colonne-lits:nth-child(even) .lit-aventurier:nth-child(2) {
+        margin-left: 10cqw;
+    }
+
+    .colonne-lits:nth-child(even) .lit-aventurier:nth-child(3) {
+        margin-left: 20cqw;
+    }
+}

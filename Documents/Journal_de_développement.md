@@ -825,6 +825,21 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 08 au .. Novembre
+
+### Objectifs
+
+- Création du dortoir
+- Création de la fiche de modification/suppression d'aventurier
+
+### Réalisations
+
+- Création de la page du dortoir avec découpage des aventuriers du compte en colonnes de 3 lits, elles-mêmes regroupées en dortoirs de 2 colonnes (réutilisant le modèle de découpage de la bibliothèque des compétences)
+- Création du style du dortoir avec un lit par aventurier ayant un découpage pour une partie hors écran, retournement pour la deuxième colonne et décalage progressif des lits pour simuler une perspective en version desktop
+- Réutilisation de la navigation de la bibliothèque pour passer d'un dortoir à l'autre, chaque dortoir faisant la largeur de l'écran
+
+---
+
 ## Prochaine étape
 
 - Dortoir
