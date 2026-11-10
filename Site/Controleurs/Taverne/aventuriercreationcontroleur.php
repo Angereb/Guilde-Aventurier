@@ -167,8 +167,6 @@ foreach ($equipements as $equipement) {
     ];
 }
 
-$recueils = $classementCompetences->rechercherRecueils();
-
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     $formulaire = $_POST['action'] ?? null;
     try{
@@ -222,7 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     throw new Exception("Les équipements doivent être inclus dans un tableau.");
                 }
                 foreach ($equipementsNouvelAventurier as $equipementNouvelAventurier) {
-                    if (!is_array($equipementNouvelAventurier) || !isset($equipementNouvelAventurier["equipementId"]) || !isset($equipementNouvelAventurier["quantite"])) {
+                    if (!is_array($equipementNouvelAventurier) || !isset($equipementNouvelAventurier["equipementId"]) || !isset($equipementNouvelAventurier["quantite"]) || !isset($equipementNouvelAventurier["etat"]) || !is_string($equipementNouvelAventurier["etat"])) {
                         throw new Exception("Un des équipements n'est pas valide.");
                     }
                     if (filter_var($equipementNouvelAventurier["equipementId"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false || filter_var($equipementNouvelAventurier["quantite"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false) {
@@ -275,7 +273,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                             $equipementNouvelAventurier["equipementId"],
                             $aventurierCreer,
                             $equipementNouvelAventurier["quantite"],
-                            "inventaire"
+                            $equipementNouvelAventurier["etat"]
                         );
                     }
                     $competenceDebloqueUtilisateur = $deblocageCompetenceUtilisateurModele->rechercherParUtilisateur($_SESSION["utilisateur"]["id"]);

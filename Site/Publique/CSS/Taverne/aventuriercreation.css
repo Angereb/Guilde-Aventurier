@@ -168,16 +168,38 @@ body {
 .ligne-equipement {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 3rem 6rem;
+    grid-template-areas:
+        "nom    quantite etat"
+        "bouton bouton   bouton";
     align-items: center;
-    margin: 0 0.5rem 0 1rem;
+    row-gap: 0.2rem;
+    margin: 0 0.5rem 0.4rem 1rem;
+}
+
+.equipement-nom {
+    grid-area: nom;
 }
 
 .equipement-quantite {
+    grid-area: quantite;
     text-align: center;
 }
 
 .equipement-etat {
+    grid-area: etat;
     text-align: right;
+}
+
+.equiper-equipement {
+    grid-area: bouton;
+    justify-self: end;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.1em 0.9em;
+    background-color: transparent;
+    font: inherit;
+    font-size: 0.9em;
+    cursor: pointer;
 }
 
 .zone-information-competence ul {
@@ -202,7 +224,7 @@ body {
     gap: 0.5rem;
 }
 
-.retour-taverne {
+.retour-taverne, .retour-dortoir {
     display: block;
     width: 40px;
     height: 40px;
@@ -216,12 +238,21 @@ body {
     font-weight: bold;
 }
 
-.envoyer-aventurier {
+.zone-signature {
+    display: flex;
+    gap: 1rem;
+}
+
+.envoyer-aventurier, .modifier-aventurier, .supprimer-aventurier {
     justify-self: center;
     border: 1px solid black;
     border-radius: 20px;
     padding: 0.3em 1.5em;
     cursor: pointer;
+}
+
+.supprimer-aventurier {
+    color: var(--alerte);
 }
 
 @media (min-width: 768px) {
@@ -283,5 +314,12 @@ body {
     .zone-information-competence {
         min-height: 0;
         overflow-y: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .ligne-equipement {
+        grid-template-columns: minmax(0, 1fr) 3rem 6rem 7rem;
+        grid-template-areas: "nom quantite etat bouton";
     }
 }

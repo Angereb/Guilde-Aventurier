@@ -9,6 +9,11 @@ class EquipementAventurierModele extends ModeleBase {
     }
 
     public const ETATS_VALIDES = ["equipe", "inventaire"];
+    
+    public const LIBELLES_ETATS = [
+        "equipe" => "Équipé",
+        "inventaire" => "Inventaire"
+    ];
 
     public function ajouter(int $equipementId, int $aventurierId, int $quantite, string $etat): void {
         if (!$this->valeurExisteDeja("equipements", "equipementId", $equipementId)){

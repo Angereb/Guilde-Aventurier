@@ -15,7 +15,8 @@
         "competences" => $competencesDetailles,
         "equipements" => $equipementsDetailles,
         "nomsZonesEffets" => $nomsZonesEffets,
-        "iconesZonesEffets" => $iconesZonesEffets
+        "iconesZonesEffets" => $iconesZonesEffets,
+        "libellesEtats" => EquipementAventurierModele::LIBELLES_ETATS
     ], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
 </script>
 
@@ -116,8 +117,10 @@
                     <p class="equipement-nom"></p>
                     <p class="equipement-quantite"></p>
                     <p class="equipement-etat"></p>
+                    <button type="button" class="equiper-equipement"></button>
                 </li>
             </template>
+            <p id="messageEquipement" aria-live="polite"></p>
             <input type="hidden" id="inventaireAventurier" name="inventaireAventurier" value="[]"> 
         </fieldset>
         <fieldset class="zone-information-competence">

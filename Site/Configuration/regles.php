@@ -35,6 +35,12 @@ const REGLES = [
         "pe" => ["base" => 5, "niveauxParPoint" => 5],
         "initiative" => ["base" => 5],
         "mouvement" => ["base" => 6]
+    ],
+    "emplacements" => [
+        "arme" => 1,
+        "secondaire" => 1,
+        "armure" => 1,
+        "bijou" => 2
     ]
 ];
 ?>

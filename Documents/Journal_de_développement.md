@@ -837,6 +837,12 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création de la page du dortoir avec découpage des aventuriers du compte en colonnes de 3 lits, elles-mêmes regroupées en dortoirs de 2 colonnes (réutilisant le modèle de découpage de la bibliothèque des compétences)
 - Création du style du dortoir avec un lit par aventurier ayant un découpage pour une partie hors écran, retournement pour la deuxième colonne et décalage progressif des lits pour simuler une perspective en version desktop
 - Réutilisation de la navigation de la bibliothèque pour passer d'un dortoir à l'autre, chaque dortoir faisant la largeur de l'écran
+- Création de la fiche de modification d'aventurier basée sur la fiche de création, récupérant le même css et le même javascript en modifiant juste les valeurs des champs par celles récupérées, les boutons de fin de formulaire et en adaptant le javascript à la récupération des informations de l'inventaire
+- Création du contrôleur de la fiche de modification d'aventurier avec accès sécurisé par vérification de l'aventurier et de l'utilisateur et préparation des informations pour le préremplissage de la fiche
+- Ajout de l'équipement et du déséquipement des objets dans les deux fiches, avec limitation des emplacements par catégorie (définie dans le fichier de règles), vérification des prérequis sur les valeurs effectives (valeurs brutes, bonus des compétences passives et des autres objets portés) et retrait automatique en cascade des objets dont les prérequis ne sont plus atteints, signalé par un message
+- Prise en compte des bonus des objets portés dans le calcul des caractéristiques secondaires
+- Ajout de libellés d'affichage pour les états des équipements
+- Regroupement de toutes les mises à jour de la fiche dans une seule fonction
 
 ---
 

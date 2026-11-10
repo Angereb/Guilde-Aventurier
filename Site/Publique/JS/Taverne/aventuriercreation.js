@@ -23,12 +23,14 @@ const apercuIconeAventurier = document.getElementById("apercuIconeAventurier");
 
 // Éléments pour l'ouverture du magasin
 const ouvertureModaleMagasin = document.getElementById("ouvertureModaleMagasin");
-let inventaireFiche = [];
+let inventaireFiche = DONNEES_FICHE["inventaire"] ?? [];
 
 // Constante pour l'affichage des équipements
+const zoneInformationEquipement = document.querySelector(".zone-information-equipement");
 const toutesZonesCategories = document.querySelectorAll("[data-categorie]");
 const modeleLigneEquipement = document.getElementById("modeleLigneEquipement");
 const inventaireAventurier = document.getElementById("inventaireAventurier");
+const messageEquipement = document.getElementById("messageEquipement");
 
 // Constante pour l'affichage des compétences
 const zoneCompetence = document.getElementById("competence");
@@ -147,8 +149,7 @@ function calculerStatistiquesSecondaires() {
         }
     }
     const idChampVitalite = "caracteristique-" + vitaliteId;
-    const champVitalite = document.getElementById(idChampVitalite);
-    let valeurVitalite = Number(champVitalite.value);
+    let valeurVitalite = calculerValeursEffectives(null)[idChampVitalite];
     let pv = DONNEES_FICHE.regles.secondaires.pv.base;
     let pe = DONNEES_FICHE.regles.secondaires.pe.base;
     let attaque = DONNEES_FICHE.regles.secondaires.attaque.base;
@@ -157,11 +158,6 @@ function calculerStatistiquesSecondaires() {
     let mouvement = DONNEES_FICHE.regles.secondaires.mouvement.base;
     for (const competence of DONNEES_FICHE["competences"]) {
         if (competence.competence.zoneEffetId === null && competenceDebloquee(competence)) {
-            for (const modificateur of competence.modificateurs) {
-                if (modificateur.cible === idChampVitalite) {
-                    valeurVitalite = valeurVitalite + Number(modificateur.valeur);
-                }
-            }
             if (competence.competence.modifPV !== null) {
                 pv = pv + competence.competence.modifPV;
             }
@@ -182,6 +178,29 @@ function calculerStatistiquesSecondaires() {
             }
         }
     }
+    for (const equipement of inventaireFiche) {
+        if (equipement.etat === "equipe") {
+            const detailEquipement = trouverDetailsEquipement(equipement.equipementId);
+            if (detailEquipement.equipement.modifPV !== null) {
+                pv = pv + detailEquipement.equipement.modifPV;
+            }
+            if (detailEquipement.equipement.modifPE !== null) {
+                pe = pe + detailEquipement.equipement.modifPE;
+            }
+            if (detailEquipement.equipement.modifAttaque !== null) {
+                attaque = attaque + detailEquipement.equipement.modifAttaque;
+            }
+            if (detailEquipement.equipement.modifDefense !== null) {
+                defense = defense + detailEquipement.equipement.modifDefense;
+            }
+            if (detailEquipement.equipement.modifInitiative !== null) {
+                initiative = initiative + detailEquipement.equipement.modifInitiative;
+            }
+            if (detailEquipement.equipement.modifMouvement !== null) {
+                mouvement = mouvement + detailEquipement.equipement.modifMouvement;
+            }
+        }
+    }
     pv = pv + DONNEES_FICHE.regles.secondaires.pv.parNiveau * valeurVitalite;
     pe = pe + Math.floor(valeurVitalite / DONNEES_FICHE.regles.secondaires.pe.niveauxParPoint);
     pvActuelAventurier.textContent = pv;
@@ -192,12 +211,6 @@ function calculerStatistiquesSecondaires() {
     defenseAventurier.textContent = defense;
     initiativeAventurier.textContent = initiative;
     mouvementAventurier.textContent = mouvement;
-}
-
-function mettreAjourFiche() {
-    afficherCompetence();
-    calculerStatistiquesSecondaires();
-    calculerCoutPC();
 }
 
 // Action de modification des valeurs de caractéristiques et de maîtrises
@@ -235,8 +248,79 @@ formulaireAventurier.addEventListener("keydown", (evenement) => {
     }
 });
 
+// Fonction de recherche des détails des équipements
+function trouverDetailsEquipement(equipementId) {
+    for (const equipement of DONNEES_FICHE.equipements) {
+        if (equipement.equipement.equipementId === equipementId) {
+            return equipement;
+        }
+    }
+    return null;
+}
+
+// Fonction permettant de lires les valeurs de caractéristiques et maîtrises utilisable pour s'équiper d'un équipement
+function calculerValeursEffectives(equipementExcluId) {
+    let valeurs = {};
+    for (const lignes of toutesLignesValeurs) {
+        const champValeur = lignes.querySelector("input");
+        valeurs[champValeur.id] = Number(champValeur.value);
+    }
+    for (const competence of DONNEES_FICHE.competences) {
+        if (competence.competence.zoneEffetId === null && competenceDebloquee(competence) === true) {
+            for (const modificateur of competence.modificateurs) {
+                valeurs[modificateur.cible] = (valeurs[modificateur.cible] ?? 0) + modificateur.valeur;
+            }
+        }
+    }
+    for (const equipement of inventaireFiche) {
+        if (equipement.etat === "equipe" && equipement.equipementId !== equipementExcluId) {
+            const detailEquipement = trouverDetailsEquipement(equipement.equipementId);
+            for (const modificateur of detailEquipement.modificateurs) {
+                valeurs[modificateur.cible] = (valeurs[modificateur.cible] ?? 0) + modificateur.valeur;
+            }
+        }
+    }
+    return valeurs;
+}
+
+// Fonction vérifiant la possiblité de s'équipé ou non d'un équipement
+function equipementUtilisable(equipementId) {
+    const valeursEffectives = calculerValeursEffectives(equipementId);
+    const detailEquipement = trouverDetailsEquipement(equipementId);
+    for (const requis of detailEquipement.requis) {
+        const valeurCible = valeursEffectives[requis.cible] ?? 0;
+        if (valeurCible < requis.valeur) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Fonction retirant les équipements en fonction de leur requis
+function verifierEquipementsPortes() {
+    let equipementsRetires = [];
+    let changement = true;
+    while (changement === true) {
+        changement = false;
+        for (const equipement of inventaireFiche) {
+            if (equipement.etat === "equipe" && equipementUtilisable(equipement.equipementId) === false) {
+                equipement.etat = "inventaire";
+                equipementsRetires.push(equipement.nom);
+                changement = true;
+            }
+        }
+    }
+    return equipementsRetires;
+}
+
 // Fonction permettant d'affiché l'inventaire
 function afficherEquipement(inventaire) {
+    const compteurCategorie = {};
+    for (const equipement of inventaire) {
+        if (equipement.etat === "equipe") {
+            compteurCategorie[equipement.categorie] = (compteurCategorie[equipement.categorie] ?? 0) +1;
+        }
+    }
     for (const zoneCategorie of toutesZonesCategories) {
         zoneCategorie.innerHTML = "";
     }
@@ -244,23 +328,67 @@ function afficherEquipement(inventaire) {
         const ficheInventaire = modeleLigneEquipement.content.cloneNode(true);
         ficheInventaire.querySelector(".equipement-nom").textContent = equipementAchete.nom;
         ficheInventaire.querySelector(".equipement-quantite").textContent = equipementAchete.quantite;
-        ficheInventaire.querySelector(".equipement-etat").textContent = equipementAchete.etat;
+        ficheInventaire.querySelector(".equipement-etat").textContent = DONNEES_FICHE.libellesEtats[equipementAchete.etat];
         const zoneCategorie = document.querySelector('[data-categorie="' + equipementAchete.categorie + '"]');
+        const equiperEquipement = ficheInventaire.querySelector(".equiper-equipement");
+        equiperEquipement.dataset.equipementId = equipementAchete.equipementId;
+        if (equipementAchete.etat === "equipe") {
+            equiperEquipement.textContent = "Déséquiper";
+        } else {
+            equiperEquipement.textContent = "Équiper";
+            if ((compteurCategorie[equipementAchete.categorie] ?? 0) >= DONNEES_FICHE.regles.emplacements[equipementAchete.categorie] || !equipementUtilisable(equipementAchete.equipementId)) {
+                equiperEquipement.hidden = true;
+            }
+        }
         zoneCategorie.appendChild(ficheInventaire);
     }
+}
+
+// Fonction de mise à jour de toute la fiche
+function mettreAjourFiche() {
+    const listeEquipementSupprimer = verifierEquipementsPortes();
+    if (listeEquipementSupprimer.length > 0) {
+        messageEquipement.textContent = "Les équipements suivants ont été déséquipés : " + listeEquipementSupprimer.join(", ") + ".";
+    } else {
+        messageEquipement.textContent = "";
+    }
+    inventaireAventurier.value = JSON.stringify(inventaireFiche);
+    afficherEquipement(inventaireFiche);
+    afficherCompetence();
+    calculerStatistiquesSecondaires();
+    calculerCoutPC();
 }
 
 // Fonction permettant de récupérer les données du magasin
 function recupererPanier(panierRecu) {
     inventaireFiche = panierRecu;
-    inventaireAventurier.value = JSON.stringify(panierRecu);
-    afficherEquipement(inventaireFiche);
     mettreAjourFiche();
 }
 
 // Action d'ouverture de l'inventaire avec mise en paramètre de la fonction de récupération
 ouvertureModaleMagasin.addEventListener("click", function () {
     ouvrirMagasin(inventaireFiche, recupererPanier);
+});
+
+// Action d'équipé / déséquipé un équipement
+zoneInformationEquipement.addEventListener("click", function(event) {
+    const equiperEquipement = event.target.closest(".equiper-equipement");
+    if (equiperEquipement === null) {
+        return;
+    }
+    const equipementEquipeId = Number(equiperEquipement.dataset.equipementId);
+    let equipementInventaireTrouve = null;
+    for (const equipement of inventaireFiche) {
+        if (equipement.equipementId === equipementEquipeId) {
+            equipementInventaireTrouve = equipement;
+        }
+    }
+    if (equipementInventaireTrouve.etat === "equipe") {
+        equipementInventaireTrouve.etat = "inventaire";
+    } else {
+        equipementInventaireTrouve.etat = "equipe";
+    }
+    recupererPanier(inventaireFiche);
 });
 
 // Validation des champs du formulaire
