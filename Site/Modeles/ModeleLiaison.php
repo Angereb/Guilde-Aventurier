@@ -69,5 +69,5 @@ abstract class ModeleLiaison extends ModeleBase {
         $requete = $this->pdo->prepare("DELETE FROM $this->table WHERE $this->secondeColonne = ?");
         $requete->execute([$secondId]);
     }
-    }
+}
 ?>

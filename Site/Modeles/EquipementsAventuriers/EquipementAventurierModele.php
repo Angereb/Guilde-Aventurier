@@ -105,5 +105,10 @@ class EquipementAventurierModele extends ModeleBase {
             $aventurierId
             ]);
     }
+
+    public function supprimerParAventurier(int $aventurierId): void {
+        $requete = $this->pdo->prepare("DELETE FROM equipements_aventuriers WHERE aventurierId = ?");
+        $requete->execute([$aventurierId]);
+    }
 }
 ?>

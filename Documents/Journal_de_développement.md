@@ -843,6 +843,8 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Prise en compte des bonus des objets portés dans le calcul des caractéristiques secondaires
 - Ajout de libellés d'affichage pour les états des équipements
 - Regroupement de toutes les mises à jour de la fiche dans une seule fonction
+- Ajout des fonctions supprimerParAventurier dans les modèles de liaison des caractéristiques, maîtrises, compétences et équipements des aventuriers
+- Création de la classe de service FicheAventurier, regroupant la logique commune aux fiches de création et de modification : lecture et vérification des caractéristiques, maîtrises et du panier, calcul des valeurs brutes, recherche des compétences atteintes, vérification côté serveur des emplacements et des prérequis des objets portés, et enregistrement de toutes les liaisons
 
 ---
 

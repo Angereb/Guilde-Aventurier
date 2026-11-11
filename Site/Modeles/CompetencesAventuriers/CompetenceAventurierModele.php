@@ -34,5 +34,9 @@ class CompetenceAventurierModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($competenceId, $aventurierId);
     }
+
+    public function supprimerParAventurier(int $aventurierId): void {
+        parent::supprimerLiaisonsParSecondId($aventurierId);
+    }
 }
 ?>

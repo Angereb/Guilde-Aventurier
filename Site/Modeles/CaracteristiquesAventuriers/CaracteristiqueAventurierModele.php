@@ -41,5 +41,9 @@ class CaracteristiqueAventurierModele extends ModeleLiaison {
         }
         parent::supprimerLiaison($caracteristiqueId, $aventurierId);
     }
+
+    public function supprimerParAventurier(int $aventurierId): void {
+        parent::supprimerLiaisonsParSecondId($aventurierId);
+    }
 }
 ?>
