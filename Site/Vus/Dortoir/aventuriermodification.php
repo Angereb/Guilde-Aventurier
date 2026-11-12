@@ -164,7 +164,7 @@
             </div>
             <div class="zone-signature">
                 <button type="submit" class="modifier-aventurier" name="action" value="aventurierModifier">Signature</button>
-                <button type="submit" class="supprimer-aventurier" name="action" value="aventurierSupprimer">Supprimer</button>
+                <button type="button" class="supprimer-aventurier" id="ouvrirSuppressionAventurier">Supprimer</button>
             </div>
         </div>
     </form>
@@ -172,4 +172,17 @@
 
 <div id="modaleMagasin" class="modale-cachee">
     <?php require_once __DIR__ . "/../Magasin/magasin.php" ?>
+</div>
+
+<div id="modaleSuppressionAventurier" class="modale-cachee">
+    <section class="fenetre-suppression-aventurier">
+        <h3 class="entete-suppression-aventurier">Suppression de l'aventurier <?= htmlspecialchars($aventurier->getNom()) ?></h3>
+        <p class="message-preventif-aventurier">ATTENTION : êtes-vous sûr de vouloir supprimer cet aventurier ?</p>
+        <p class="message-preventif-aventurier">Cet aventurier, ses valeurs et son inventaire seront définitivement supprimés. Les compétences débloquées restent acquises pour votre compte.</p>
+        <form id="formulaireSupprimerAventurier" class="supprimer-aventurier-formulaire" method="post">
+            <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">
+            <button type="submit" class="supprimer-aventurier" name="action" value="aventurierSupprimer">Supprimer</button>
+            <button type="button" id="fermerSuppressionAventurier" class="retour-suppression-aventurier">Annuler</button>
+        </form>
+    </section>
 </div>

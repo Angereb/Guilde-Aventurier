@@ -107,6 +107,7 @@ if (boutonSuppressionOuvrir) {
     boutonSuppressionOuvrir.addEventListener("click", function(){
         modaleSuppressionAnnonce.classList.remove("modale-cachee");
         modaleSuppressionAnnonce.classList.add("modale-visible");
+        boutonfermerSuppressionAnnonce.focus();
         modaleLecture.classList.remove("modale-visible");
         modaleLecture.classList.add("modale-cachee");
     });

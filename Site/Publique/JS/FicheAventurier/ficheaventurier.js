@@ -39,6 +39,28 @@ const modeleZoneCompetence = document.getElementById("modeleZoneCompetence");
 // Constante du total du coût en PC
 const pcAventurier = document.getElementById("pcAventurier");
 
+// Constante pour la modale de suppression
+const ouvrirSuppressionAventurier = document.getElementById("ouvrirSuppressionAventurier");
+const fermerSuppressionAventurier = document.getElementById("fermerSuppressionAventurier");
+const modaleSuppressionAventurier = document.getElementById("modaleSuppressionAventurier");
+
+// Ouverture modale de suppression d'aventurier
+if (ouvrirSuppressionAventurier) {
+    ouvrirSuppressionAventurier.addEventListener("click", function(){
+        modaleSuppressionAventurier.classList.remove("modale-cachee");
+        modaleSuppressionAventurier.classList.add("modale-visible");
+        fermerSuppressionAventurier.focus();
+    });
+}    
+
+// Fermeture de modale de suppression d'aventurier
+if (fermerSuppressionAventurier) {
+    fermerSuppressionAventurier.addEventListener("click", function(){
+        modaleSuppressionAventurier.classList.remove("modale-visible");
+        modaleSuppressionAventurier.classList.add("modale-cachee");
+    });
+}
+
 // Fonction de vérification de déblocage d'une compétence
 function competenceDebloquee(competence) {
     for (const requis of competence.requis) {

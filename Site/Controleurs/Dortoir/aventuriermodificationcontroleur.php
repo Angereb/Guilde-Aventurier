@@ -20,6 +20,7 @@ require_once __DIR__ . "/../../Modeles/MaitrisesAventuriers/MaitriseAventurierMo
 require_once __DIR__ . "/../../Modeles/CompetencesAventuriers/CompetenceAventurierModele.php";
 require_once __DIR__ . "/../../Modeles/EquipementsAventuriers/EquipementAventurierModele.php";
 require_once __DIR__ . "/../../Modeles/DeblocageCompetencesUtilisateurs/DeblocageCompetenceUtilisateurModele.php";
+require_once __DIR__ . "/../../Modeles/Aventuriers/FicheAventurier.php";
 
 if (!isset($_SESSION["utilisateur"])) {
     header("Location: ?page=entree");
@@ -57,12 +58,12 @@ $titre = "Dortoir : " . $aventurier->getNom() . " - modification" ;
 
 $css = [
     "Magasin/magasin.css",
-    "Taverne/aventuriercreation.css"
+    "FicheAventurier/ficheaventurier.css"
     ];
 
 $javascript = [
     "Magasin/magasin.js",
-    "Taverne/aventuriercreation.js"
+    "FicheAventurier/ficheaventurier.js"
     ];
 
 $caracteristiqueModele = new CaracteristiqueModele();
@@ -221,6 +222,83 @@ foreach ($equipementAventurierModele->rechercherParAventurier($aventurierId) as 
 $iconeAventurier = null;
 if ($aventurier->getIcone() !== null) {
     $iconeAventurier = "data:" . $aventurier->getTypeIcone() . ";base64," . base64_encode($aventurier->getIcone());
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    $formulaire = $_POST['action'] ?? null;
+    try{
+        if (!hash_equals($_SESSION["jetonCsrf"] ?? "", $_POST["jetonCsrf"] ?? "")) {
+            throw new Exception("Le formulaire n'est pas valide. Veuillez réessayer.");
+        }
+        switch($formulaire){
+            case 'aventurierModifier':
+                $nomAventurierModifie = $_POST["aventurierNom"] ?? "";
+                $iconeAventurierModifie = $aventurier->getIcone();
+                $erreurEnvoi = $_FILES["aventurierIcone"]["error"] ?? UPLOAD_ERR_NO_FILE;
+                if ($erreurEnvoi !== UPLOAD_ERR_NO_FILE) {
+                    if ($erreurEnvoi !== UPLOAD_ERR_OK || !is_uploaded_file($_FILES["aventurierIcone"]["tmp_name"])) {
+                        throw new Exception("L'envoi de l'icône a échoué.");
+                    }
+                    $iconeAventurierModifie = file_get_contents($_FILES["aventurierIcone"]["tmp_name"]);
+                }
+                $ficheAventurier = new FicheAventurier($nomsCaracteristiques, $nomsMaitrises, $competencesDetailles, $equipementsDetailles);
+                $caracteristiquesAventurierModifie = $ficheAventurier->lireCaracteristiques($_POST["caracteristiques"] ?? []);
+                $maitrisesAventurierModifie = $ficheAventurier->lireMaitrises($_POST["maitrises"] ?? []);
+                $valeursAventurierModifie = $ficheAventurier->calculerValeursBrutes($caracteristiquesAventurierModifie, $maitrisesAventurierModifie);
+                $equipementsAventurierModifie = $ficheAventurier->lirePanier($_POST["inventaireAventurier"] ?? "[]");
+                $competencesAtteintes = $ficheAventurier->rechercherCompetencesAtteintes($valeursAventurierModifie);
+                $ficheAventurier->verifierEquipementsPortes($equipementsAventurierModifie, $valeursAventurierModifie, $competencesAtteintes);
+                $pdo = BaseDeDonnees::connexion();
+                $pdo->beginTransaction();
+                try {
+                    $aventurierModifie = new Aventurier(
+                        $aventurierId,
+                        $nomAventurierModifie,
+                        $iconeAventurierModifie,
+                        $aventurier->getCreerLe(),
+                        null,
+                        (int)$_SESSION["utilisateur"]["id"]
+                    );
+                    $aventurierModele->modifier($aventurierModifie);
+                    $caracteristiqueAventurierModele->supprimerParAventurier($aventurierId);
+                    $maitriseAventurierModele->supprimerParAventurier($aventurierId);
+                    $equipementAventurierModele->supprimerParAventurier($aventurierId);
+                    $competenceAventurierModele->supprimerParAventurier($aventurierId);
+                    $ficheAventurier->enregistrerLiaisons(
+                        $aventurierId,
+                        (int)$_SESSION["utilisateur"]["id"],
+                        $caracteristiquesAventurierModifie,
+                        $maitrisesAventurierModifie,
+                        $equipementsAventurierModifie,
+                        $competencesAtteintes
+                    );
+                    $pdo->commit();
+                } catch (Exception $e) {
+                    $pdo->rollBack();
+                    throw new Exception("Une erreur est survenue lors de la modification de l'aventurier : " . $e->getMessage());
+                }
+                $_SESSION["notificationMessage"] = "Votre aventurier a bien été modifié.";
+                $_SESSION["typeNotification"] = "succes";
+                break;
+
+            case 'aventurierSupprimer':
+                $aventurierModele->supprimer($aventurierId);
+                $_SESSION["notificationMessage"] = "Votre aventurier a bien été supprimé.";
+                $_SESSION["typeNotification"] = "succes";
+                break;
+
+            default:
+                throw new Exception("Action non reconnue.");
+        }
+        header("Location: ?page=dortoir");
+        exit;
+    }
+    catch(Exception $e){
+        $_SESSION["notificationMessage"] = $e->getMessage();
+        $_SESSION["typeNotification"] = "erreur";
+        header("Location: ?page=aventuriermodification&aventurier=" . $aventurierId);
+        exit;
+    }
 }
 
 ob_start();

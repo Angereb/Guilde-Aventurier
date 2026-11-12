@@ -20,6 +20,7 @@ require_once __DIR__ . "/../../Modeles/MaitrisesAventuriers/MaitriseAventurierMo
 require_once __DIR__ . "/../../Modeles/CompetencesAventuriers/CompetenceAventurierModele.php";
 require_once __DIR__ . "/../../Modeles/EquipementsAventuriers/EquipementAventurierModele.php";
 require_once __DIR__ . "/../../Modeles/DeblocageCompetencesUtilisateurs/DeblocageCompetenceUtilisateurModele.php";
+require_once __DIR__ . "/../../Modeles/Aventuriers/FicheAventurier.php";
 
 if (!isset($_SESSION["utilisateur"])) {
     header("Location: ?page=entree");
@@ -30,12 +31,12 @@ $titre = "Taverne : Création aventurier";
 
 $css = [
     "Magasin/magasin.css",
-    "Taverne/aventuriercreation.css"
+    "FicheAventurier/ficheaventurier.css"
     ];
 
 $javascript = [
     "Magasin/magasin.js",
-    "Taverne/aventuriercreation.js"
+    "FicheAventurier/ficheaventurier.js"
     ];
 
 $caracteristiqueModele = new CaracteristiqueModele();
@@ -175,7 +176,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         }
         switch($formulaire){
             case 'aventurierEnvoyer':
-                $nomNouvelAventurier = $_POST["aventurierNom"];
+                $nomNouvelAventurier = $_POST["aventurierNom"] ?? "";
                 $iconeNouvelAventurier = null;
                 $erreurEnvoi = $_FILES["aventurierIcone"]["error"] ?? UPLOAD_ERR_NO_FILE;
                 if ($erreurEnvoi !== UPLOAD_ERR_NO_FILE) {
@@ -184,64 +185,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                     }
                     $iconeNouvelAventurier = file_get_contents($_FILES["aventurierIcone"]["tmp_name"]);
                 }
-                $valeursNouvelAventurier = [];
-                $caracteristiquesNouvelAventurier = $_POST["caracteristiques"] ?? [];
-                if (!is_array($caracteristiquesNouvelAventurier)) {
-                    throw new Exception("Les valeurs des caractéristiques doivent être incluses dans un tableau.");
-                }
-                if (count($caracteristiquesNouvelAventurier) !== count($nomsCaracteristiques)) {
-                    throw new Exception("Toutes les caractéristiques doivent être présentes.");
-                }
-                foreach ($caracteristiquesNouvelAventurier as $caracteristiqueIdNouvelAventurier => $valeurCaracteristiqueNouvelAventurier) {
-                    if (!isset($nomsCaracteristiques[$caracteristiqueIdNouvelAventurier])) {
-                        throw new Exception("Une des caractéristiques indiquées n'existe pas.");
-                    }
-                    if (filter_var($valeurCaracteristiqueNouvelAventurier, FILTER_VALIDATE_INT, ["options" => ["min_range" => REGLES["caracteristiques"]["minimum"],"max_range" => REGLES["caracteristiques"]["maximum"]]]) === false) {
-                        throw new Exception("Les valeurs des caractéristiques doivent être comprises entre " . REGLES["caracteristiques"]["minimum"] . " et " . REGLES["caracteristiques"]["maximum"] . ".");
-                    }
-                    $valeursNouvelAventurier["caracteristique-" . $caracteristiqueIdNouvelAventurier] = (int)$valeurCaracteristiqueNouvelAventurier;
-                }
-                $maitrisesNouvelAventurier = $_POST["maitrises"] ?? [];
-                if (!is_array($maitrisesNouvelAventurier)) {
-                    throw new Exception("Les valeurs des maîtrises doivent être incluses dans un tableau.");
-                }
-                foreach ($maitrisesNouvelAventurier as $maitriseIdNouvelAventurier => $valeurMaitriseNouvelAventurier) {
-                    if (!isset($nomsMaitrises[$maitriseIdNouvelAventurier])) {
-                        throw new Exception("Une des maîtrises indiquées n'existe pas.");
-                    }
-                    if (filter_var($valeurMaitriseNouvelAventurier, FILTER_VALIDATE_INT, ["options" => ["min_range" => REGLES["maitrises"]["minimum"],"max_range" => REGLES["maitrises"]["maximum"]]]) === false) {
-                        throw new Exception("Les valeurs des maîtrises doivent être comprises entre " . REGLES["maitrises"]["minimum"] . " et " . REGLES["maitrises"]["maximum"] . ".");
-                    }
-                    $valeursNouvelAventurier["maitrise-" . $maitriseIdNouvelAventurier] = (int)$valeurMaitriseNouvelAventurier;
-                }
-                $equipementsNouvelAventurier = $_POST["inventaireAventurier"] ?? "[]";
-                $equipementsNouvelAventurier = json_decode($equipementsNouvelAventurier, true);
-                if (!is_array($equipementsNouvelAventurier)) {
-                    throw new Exception("Les équipements doivent être inclus dans un tableau.");
-                }
-                foreach ($equipementsNouvelAventurier as $equipementNouvelAventurier) {
-                    if (!is_array($equipementNouvelAventurier) || !isset($equipementNouvelAventurier["equipementId"]) || !isset($equipementNouvelAventurier["quantite"]) || !isset($equipementNouvelAventurier["etat"]) || !is_string($equipementNouvelAventurier["etat"])) {
-                        throw new Exception("Un des équipements n'est pas valide.");
-                    }
-                    if (filter_var($equipementNouvelAventurier["equipementId"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false || filter_var($equipementNouvelAventurier["quantite"], FILTER_VALIDATE_INT, ["options" => ["min_range" => 1]]) === false) {
-                        throw new Exception("Un des équipements ou sa quantité n'est pas valide.");
-                    }
-                }
-                $competencesAtteintes = [];
-                foreach ($competencesDetailles as $competenceDetaillee) {
-                    $competenceAtteinte = true;
-                    foreach ($competenceDetaillee["requis"] as $requis) {
-                        if (!isset($valeursNouvelAventurier[$requis["cible"]]) || $valeursNouvelAventurier[$requis["cible"]] < $requis["valeur"]) {
-                            $competenceAtteinte = false;
-                        }
-                    }
-                    if ($competenceAtteinte) {
-                        $competencesAtteintes[] = [
-                            "competenceId" => $competenceDetaillee["competence"]->getCompetenceId(),
-                            "aDesRequis" => count($competenceDetaillee["requis"]) > 0
-                        ];
-                    }
-                }
+                $ficheAventurier = new FicheAventurier($nomsCaracteristiques, $nomsMaitrises, $competencesDetailles, $equipementsDetailles);
+                $caracteristiquesNouvelAventurier = $ficheAventurier->lireCaracteristiques($_POST["caracteristiques"] ?? []);
+                $maitrisesNouvelAventurier = $ficheAventurier->lireMaitrises($_POST["maitrises"] ?? []);
+                $valeursNouvelAventurier = $ficheAventurier->calculerValeursBrutes($caracteristiquesNouvelAventurier, $maitrisesNouvelAventurier);
+                $equipementsNouvelAventurier = $ficheAventurier->lirePanier($_POST["inventaireAventurier"] ?? "[]");
+                $competencesAtteintes = $ficheAventurier->rechercherCompetencesAtteintes($valeursNouvelAventurier);
+                $ficheAventurier->verifierEquipementsPortes($equipementsNouvelAventurier, $valeursNouvelAventurier, $competencesAtteintes);
                 $pdo = BaseDeDonnees::connexion();
                 $pdo->beginTransaction();
                 try {
@@ -254,46 +204,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                         (int)$_SESSION["utilisateur"]["id"]
                     );
                     $aventurierCreer = $aventurierModele->ajouter($nouvelAventurier);
-                    foreach ($caracteristiquesNouvelAventurier as $caracteristiqueIdNouvelAventurier => $valeurCaracteristiqueNouvelAventurier) {
-                        $caracteristiqueAventurierModele->ajouter(
-                            (int)($caracteristiqueIdNouvelAventurier),
-                            $aventurierCreer,
-                            (int)($valeurCaracteristiqueNouvelAventurier)
-                        );
-                    }
-                    foreach ($maitrisesNouvelAventurier as $maitriseIdNouvelAventurier => $valeurMaitriseNouvelAventurier) {
-                        $maitriseAventurierModele->ajouter(
-                            (int)($maitriseIdNouvelAventurier),
-                            $aventurierCreer,
-                            (int)($valeurMaitriseNouvelAventurier)
-                        );
-                    }
-                    foreach ($equipementsNouvelAventurier as $equipementNouvelAventurier) {
-                        $equipementAventurierModele->ajouter(
-                            $equipementNouvelAventurier["equipementId"],
-                            $aventurierCreer,
-                            $equipementNouvelAventurier["quantite"],
-                            $equipementNouvelAventurier["etat"]
-                        );
-                    }
-                    $competenceDebloqueUtilisateur = $deblocageCompetenceUtilisateurModele->rechercherParUtilisateur($_SESSION["utilisateur"]["id"]);
-                    $competencesIdDebloquees = [];
-                    foreach ($competenceDebloqueUtilisateur as $ligneDeblocage) {
-                        $competencesIdDebloquees[] = $ligneDeblocage["competenceId"];
-                    }
-                    foreach ($competencesAtteintes as $competenceAventurier) {
-                        $competenceAventurierModele->ajouter(
-                            $competenceAventurier["competenceId"],
-                            $aventurierCreer
-                        );
-                        
-                        if ($competenceAventurier["aDesRequis"] && !in_array($competenceAventurier["competenceId"], $competencesIdDebloquees, true)) {
-                            $deblocageCompetenceUtilisateurModele->ajouter(
-                                $competenceAventurier["competenceId"],
-                                (int)$_SESSION["utilisateur"]["id"]
-                            );
-                        }
-                    }
+                    $ficheAventurier->enregistrerLiaisons(
+                        $aventurierCreer,
+                        (int)$_SESSION["utilisateur"]["id"],
+                        $caracteristiquesNouvelAventurier,
+                        $maitrisesNouvelAventurier,
+                        $equipementsNouvelAventurier,
+                        $competencesAtteintes
+                    );
                     $pdo->commit();
                 } catch (Exception $e) {
                     $pdo->rollBack();

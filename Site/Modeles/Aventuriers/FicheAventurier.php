@@ -6,27 +6,6 @@ require_once __DIR__ . "/../EquipementsAventuriers/EquipementAventurierModele.ph
 require_once __DIR__ . "/../CompetencesAventuriers/CompetenceAventurierModele.php";
 require_once __DIR__ . "/../DeblocageCompetencesUtilisateurs/DeblocageCompetenceUtilisateurModele.php";
 
-/*
- * PLAN DES DONNÉES UTILISÉES PAR CETTE CLASSE
- *
- * $this->equipementsParId[id]          (construit dans le constructeur)
- *   ["equipement"    => objet Equipement,
- *    "requis"        => [ ["cible" => "caracteristique-3", "nom" => "Force", "valeur" => 52], ... ],
- *    "modificateurs" => [ ["cible" => "caracteristique-1", "nom" => "Agilité", "valeur" => -12], ... ]]
- *
- * $this->competencesDetailles          (liste)
- *   [ ["competence" => objet Competence, "requis" => [...], "modificateurs" => [...], "recueil" => "Force"], ... ]
- *
- * $panier                              (sortie de lirePanier)
- *   [ ["equipementId" => 3, "quantite" => 1, "etat" => "equipe"], ... ]
- *
- * $valeursBrutes                       (sortie de calculerValeursBrutes)
- *   ["caracteristique-1" => 10, ..., "maitrise-2" => 500]
- *
- * $competencesAtteintes                (sortie de rechercherCompetencesAtteintes)
- *   [ ["competenceId" => 5, "aDesRequis" => true, "passive" => true, "modificateurs" => [...]], ... ]
- */
-
 class FicheAventurier {
     private array $nomsCaracteristiques;
     private array $nomsMaitrises;

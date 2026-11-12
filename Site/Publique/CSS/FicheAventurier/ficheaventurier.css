@@ -243,7 +243,7 @@ body {
     gap: 1rem;
 }
 
-.envoyer-aventurier, .modifier-aventurier, .supprimer-aventurier {
+.envoyer-aventurier, .modifier-aventurier, .supprimer-aventurier, .retour-suppression-aventurier {
     justify-self: center;
     border: 1px solid black;
     border-radius: 20px;
@@ -253,6 +253,30 @@ body {
 
 .supprimer-aventurier {
     color: var(--alerte);
+}
+
+.fenetre-suppression-aventurier {
+    position: relative;
+    width: min(80vw, 600px, 90vh * 40 / 63);
+    aspect-ratio: 40 / 63;
+    border-radius:10px;
+    padding:2rem;
+    background-image: url(../../Images/parchemin-info.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: safe center;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.supprimer-aventurier-formulaire {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -314,6 +338,10 @@ body {
     .zone-information-competence {
         min-height: 0;
         overflow-y: auto;
+    }
+
+    .fenetre-suppression-aventurier {
+        width: min(80vw, 600px, 60vh * 40 / 63);
     }
 }
 

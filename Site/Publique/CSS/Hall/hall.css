@@ -191,6 +191,12 @@ body {
     cursor: pointer;
 }
 
+.supprimer-annonce-formulaire {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .ouvrir-suppression-annonce, .envoyer-suppression-annonce {
     color: var(--alerte);
 }

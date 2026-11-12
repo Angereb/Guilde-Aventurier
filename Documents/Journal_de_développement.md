@@ -845,6 +845,10 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Regroupement de toutes les mises à jour de la fiche dans une seule fonction
 - Ajout des fonctions supprimerParAventurier dans les modèles de liaison des caractéristiques, maîtrises, compétences et équipements des aventuriers
 - Création de la classe de service FicheAventurier, regroupant la logique commune aux fiches de création et de modification : lecture et vérification des caractéristiques, maîtrises et du panier, calcul des valeurs brutes, recherche des compétences atteintes, vérification côté serveur des emplacements et des prérequis des objets portés, et enregistrement de toutes les liaisons
+- Branchement de la classe FicheAventurier dans le traitement de la fiche de création, remplaçant les blocs de lecture, de vérification et d'insertion, avec ajout de la vérification côté serveur des objets portés (emplacements et prérequis)
+- Traitement du formulaire de modification d'aventurier : conservation de l'icône actuelle si aucune nouvelle n'est envoyée, puis dans une transaction mise à jour de l'aventurier, suppression de toutes ses liaisons et réenregistrement avec la classe FicheAventurier, les compétences débloquées pour le compte étant conservées
+- Suppression d'un aventurier via une modale de confirmation contenant son propre formulaire, avec le focus placé sur le bouton d'annulation, les liaisons étant supprimées en cascade par la base de données
+- Déplacement et renommage du JavaScript et du CSS de la fiche dans un dossier FicheAventurier commun aux fiches de création et de modification
 
 ---
 
