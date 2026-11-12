@@ -157,15 +157,19 @@ body {
     width: 4rem;
 }
 
-.bouton-fichier, .envoyer-zone-effet, .retour-zone-effet, 
+.bouton-fichier, .envoyer-zone-effet, .supprimer-zone-effet, .retour-zone-effet, 
 .envoyer-equipement, .retour-equipement,
-.envoyer-maitrise, .retour-maitrise,
+.envoyer-maitrise, .supprimer-maitrise, .retour-maitrise,
 .envoyer-competence, .retour-competence {
     justify-self: center;
     border: 1px solid black;
     border-radius: 20px;
     padding: 0.3em 1.5em;
     cursor: pointer;
+}
+
+.supprimer-zone-effet, .supprimer-maitrise {
+    color: var(--alerte);
 }
 
 .visuellement-cache:focus-visible + .bouton-fichier {

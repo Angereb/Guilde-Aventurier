@@ -63,6 +63,7 @@
             <img id="iconeZoneEffetImage" class="icone-zone-effet-image" alt="Icône actuelle de la zone d'effet" hidden>
             <p id="iconeZoneEffetAvertissement" class="avertissement-icone" hidden>En cas de non modification de l'image, laissez le champ d'entrée de l'icône vide.</p>
             <button type="submit" class="envoyer-zone-effet" id="envoyerZoneEffet" name="action" value="zoneEffetEnvoyer">Envoyer</button>
+            <button type="submit" class="supprimer-zone-effet" id="supprimerZoneEffet" name="action" value="zoneEffetSupprimer" hidden>Supprimer</button>
             <button type="button" class="retour-zone-effet" id="fermetureModaleZoneEffet">Annuler</button>
         </form>
     </section>
@@ -176,13 +177,23 @@
         <h2 class="titre-modale">Maîtrises</h2>
         <form id="formulaireMaitrise" class="formulaire-maitrise" method="post" novalidate>
             <input type="hidden" name="jetonCsrf" value="<?= htmlspecialchars($_SESSION["jetonCsrf"]) ?>">
+            <div class="champ-select">
+                <label for="selectionMaitrise" class="selection-maitrise-label">Maîtrise : </label>
+                <select class="selection-maitrise" id="selectionMaitrise" name="maitriseId">
+                    <option value="">Nouvelle Maîtrise</option>
+                    <?php foreach ($maitrises as $maitrise): ?>
+                        <option value="<?= $maitrise->getMaitriseId() ?>" data-maitrise-nom="<?= htmlspecialchars($maitrise->getNom()) ?>" data-maitrise-descriptions="<?= htmlspecialchars($maitrise->getDescriptions()) ?>"><?= htmlspecialchars($maitrise->getNom()) ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
             <label for="nomMaitrise" class="maitrise-label">Nom : </label>
             <input type="text" class="maitrise-input" id="nomMaitrise" placeholder="Nom de la maîtrise" name="maitriseNom" aria-describedby="nomMaitriseErreur" required>
             <p id="nomMaitriseErreur" class="message-champ"></p>
             <label for="descriptionsMaitrise" class="maitrise-label">Description : </label>
             <textarea class="maitrise-input" id="descriptionsMaitrise" name="maitriseDescriptions" rows="10" maxlength="2500" aria-describedby="descriptionsMaitriseErreur"></textarea>
             <p id="descriptionsMaitriseErreur" class="message-champ"></p>
-            <button type="submit" class="envoyer-maitrise" name="action" value="maitriseEnvoyer">Envoyer</button>
+            <button type="submit" class="envoyer-maitrise" id="envoyerMaitrise" name="action" value="maitriseEnvoyer">Envoyer</button>
+            <button type="submit" class="supprimer-maitrise" id="supprimerMaitrise" name="action" value="maitriseSupprimer" hidden>Supprimer</button>
             <button type="button" class="retour-maitrise" id="fermetureModaleMaitrise">Annuler</button>
         </form>
     </section>

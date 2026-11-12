@@ -1,0 +1,49 @@
+body {
+    height: 100vh;
+}
+
+.salle-de-guerre-page {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: 
+        auto
+        minmax(0, 1fr);
+}
+
+.salle-de-guerre-titre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.zone-table-de-guerre {
+    min-height: 0;
+    width: 90%;
+    display: grid;
+    justify-self: center;
+    place-items: center;
+    container-type: size;
+}
+
+.table-de-guerre {
+    position: relative;
+    width: min(100cqw, 100cqh * 1056 / 433);
+    aspect-ratio: 1056/433;
+    background-image: url(../../Images/table-de-guerre.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    container-type: inline-size;
+}
+
+.message-salle-de-guerre {
+    position: absolute;
+    inset: 3% 25% 64% 22.5%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-size: clamp(0.8rem, 3.5cqw, 1.6rem);
+    overflow: hidden;
+}

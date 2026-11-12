@@ -55,11 +55,16 @@ const iconeZoneEffetImage = document.getElementById("iconeZoneEffetImage");
 const iconeZoneEffetAvertissement = document.getElementById("iconeZoneEffetAvertissement");
 const envoyerZoneEffet = document.getElementById("envoyerZoneEffet");
 const nomFichierZoneEffet = document.getElementById("nomFichierZoneEffet");
+const supprimerZoneEffet = document.getElementById("supprimerZoneEffet");
 
 const zoneRequisEquipement = document.getElementById("zoneRequisEquipement");
 const modeleLigneRequisEquipement = document.getElementById("modeleLigneRequisEquipement");
 const zoneModificateurEquipement = document.getElementById("zoneModificateurEquipement");
 const modeleLigneModificateurEquipement = document.getElementById("modeleLigneModificateurEquipement");
+
+const selectionMaitrise = document.getElementById("selectionMaitrise");
+const envoyerMaitrise = document.getElementById("envoyerMaitrise");
+const supprimerMaitrise = document.getElementById("supprimerMaitrise");
 
 const typeCompetence = document.getElementById("typeCompetence");
 const zoneRequisCompetence = document.getElementById("zoneRequisCompetence");
@@ -93,6 +98,7 @@ selectionZoneEffet.addEventListener("change", function() {
         iconeZoneEffetImage.hidden = true;
         iconeZoneEffetAvertissement.hidden = true;
         envoyerZoneEffet.textContent = "Créer";
+        supprimerZoneEffet.hidden = true;
         iconeZoneEffet.value = "";
         nomFichierZoneEffet.textContent = "Aucun fichier choisi";
     } else {
@@ -110,6 +116,7 @@ selectionZoneEffet.addEventListener("change", function() {
         }
         iconeZoneEffetAvertissement.hidden = false;
         envoyerZoneEffet.textContent = "Modifier";
+        supprimerZoneEffet.hidden = false;
         iconeZoneEffet.value = "";
         nomFichierZoneEffet.textContent = "Aucun fichier choisi";
     }
@@ -185,7 +192,10 @@ directionsZoneEffet.addEventListener("change", verifierDirectionZone);
 porteeZoneEffet.addEventListener("blur", verifierPorteeZone);
 iconeZoneEffet.addEventListener("change", verifierIconeZone);
 
-formulaireZoneEffet.addEventListener("submit", function(event) {
+formulaireZoneEffet.addEventListener("submit", function(event) {    
+    if (event.submitter && event.submitter.value === "zoneEffetSupprimer") {
+        return;
+    }
     let formulaireZoneEffetValide = true;
     if (!verifierNomZone()) {
         formulaireZoneEffetValide = false;
@@ -441,6 +451,21 @@ if (fermetureModaleMaitrise) {
     });
 };
 
+selectionMaitrise.addEventListener("change", function() {
+    const optionChoisie = selectionMaitrise.selectedOptions[0];
+    if (selectionMaitrise.value === "") {
+        nomMaitrise.value = "";
+        descriptionsMaitrise.value = "";
+        envoyerMaitrise.textContent = "Créer";
+        supprimerMaitrise.hidden = true;
+    } else {
+        nomMaitrise.value = optionChoisie.dataset.maitriseNom;
+        descriptionsMaitrise.value = optionChoisie.dataset.maitriseDescriptions;
+        envoyerMaitrise.textContent = "Modifier";
+        supprimerMaitrise.hidden = false;
+    }
+})
+
 function verifierNomMaitrise() {
     const nomMaitriseTrim = nomMaitrise.value.trim();
     if (nomMaitriseTrim === "") {
@@ -473,6 +498,9 @@ nomMaitrise.addEventListener("blur", verifierNomMaitrise);
 descriptionsMaitrise.addEventListener("blur", verifierDescriptionsMaitrise);
 
 formulaireMaitrise.addEventListener("submit", function(event) {
+    if (event.submitter && event.submitter.value === "maitriseSupprimer") {
+        return;
+    }
     let formulaireMaitriseValide = true;
     if (!verifierNomMaitrise()) {
         formulaireMaitriseValide = false;

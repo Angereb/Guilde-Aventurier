@@ -825,7 +825,7 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
-## 08 au .. Novembre
+## 08 au 12 Novembre
 
 ### Objectifs
 
@@ -852,6 +852,22 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 12 Novembre
+
+### Objectifs
+
+- Création de la salle de guerre
+- Modification de la création dans la bibliothèque
+
+### Réalisations
+
+- Création d'une page d'entrée pour la salle de guerre avec son contrôleur, sa vue et son css, et indiquant que cette fonctionnalité arrivera plus tard
+- Modification de la modale des maîtrises dans la salle de création de la bibliothèque ajoutant la possibilité de sélectionner une maîtrise existante pour la modifier ou la supprimer, ajout d'une option de suppression dans la modale de zones d'effet
+- Modification du javascript de la salle de création de la bibliothèque pour inclure l'apparition du bouton de suppression selon le select de zones d'effet, pareil pour le select de maîtrises tout en ajoutant toute la logique de remplissage suite au select
+- Ajout dans le contrôleur de la création de la bibliothèque des traitements de modification et de suppression des maîtrises, et de suppression des zones d'effet
+
+---
+
 ## Prochaine étape
 
-- Dortoir
+- Déploiement

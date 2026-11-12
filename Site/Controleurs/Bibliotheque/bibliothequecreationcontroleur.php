@@ -93,6 +93,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                 $_SESSION["typeNotification"] = "succes";
                 break;
 
+            case 'zoneEffetSupprimer':
+                $idZoneEffetSupprimer = (int)($_POST["zoneEffetId"] ?? 0);
+                $zoneEffetModele->supprimer($idZoneEffetSupprimer);
+                $_SESSION["notificationMessage"] = "Votre zone d'effet a bien été supprimée.";
+                $_SESSION["typeNotification"] = "succes";
+                break;
+
             case 'equipementEnvoyer':
                 $nomNouvelEquipement = $_POST["equipementNom"] ?? "";
                 $categorieNouvelEquipement = $_POST["equipementCategorie"] ?? "";
@@ -179,15 +186,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
                 break;
 
             case 'maitriseEnvoyer':
+                $idMaitrise = (int)($_POST["maitriseId"] ?? 0);
                 $nomNouvelleMaitrise = $_POST["maitriseNom"] ?? "";
                 $descriptionsNouvelleMaitrise = $_POST["maitriseDescriptions"] ?? "";
-                $nouvelleMaitrise = new Maitrise(
-                    null,
-                    $nomNouvelleMaitrise,
-                    $descriptionsNouvelleMaitrise
-                );
-                $maitriseModele->ajouter($nouvelleMaitrise);
-                $_SESSION["notificationMessage"] = "Votre nouvelle maîtrise a bien été créée.";
+                if ($idMaitrise === 0) {
+                    $nouvelleMaitrise = new Maitrise(
+                        null,
+                        $nomNouvelleMaitrise,
+                        $descriptionsNouvelleMaitrise
+                    );
+                    $maitriseModele->ajouter($nouvelleMaitrise);
+                    $_SESSION["notificationMessage"] = "Votre nouvelle maîtrise a bien été créée.";
+                } else {
+                    $maitriseModifiee = new Maitrise(
+                        $idMaitrise,
+                        $nomNouvelleMaitrise,
+                        $descriptionsNouvelleMaitrise
+                    );
+                    $maitriseModele->modifier($maitriseModifiee);
+                    $_SESSION["notificationMessage"] = "Votre maîtrise a bien été modifiée.";
+                }
+                $_SESSION["typeNotification"] = "succes";
+                break;
+
+            case 'maitriseSupprimer':
+                $idMaitriseSupprimer = (int)($_POST["maitriseId"] ?? 0);
+                $maitriseModele->supprimer($idMaitriseSupprimer);
+                $_SESSION["notificationMessage"] = "Votre maîtrise a bien été supprimée.";
                 $_SESSION["typeNotification"] = "succes";
                 break;
 

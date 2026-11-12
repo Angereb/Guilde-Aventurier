@@ -109,6 +109,10 @@ switch ($page)
         require_once __DIR__ . '/Site/Controleurs/Dortoir/aventuriermodificationcontroleur.php';
         break;
 
+    case "salledeguerre":
+        require_once __DIR__ . '/Site/Controleurs/SalleDeGuerre/salledeguerrecontroleur.php';
+        break;
+
     default:
         echo "Page introuvable";
 }
