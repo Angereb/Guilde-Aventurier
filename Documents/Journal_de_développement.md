@@ -881,6 +881,9 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 - Création d'un compte MongoDB à droits limités pour le site et script d'initialisation de Mongo pour prendre en compte que le site est limité en écriture et lecture, mais uniquement dans la base du site, avec le compte créé pour lui
 - Suppression totale des bases de données et des conteneurs Docker pour partir sur de nouvelles bases solides
 - Ajout de Caractéristiques dans le Schema.sql du site pour qu'elles soit recréées en même temps que la base lors du lancement du conteneur Docker
+- Remplacement de la règle CSS globale des liens (display block, largeur et hauteur à 100 %) par une classe lien-remplissant appliquée seulement aux liens-images qui doivent remplir leur zone, et suppression des contre-règles devenues inutiles
+- Correction des boutons d'ouverture des modales de création de la bibliothèque, dont la zone cliquable couvrait toute la largeur de l'écran en mobile
+- Affichage des flèches de navigation de la bibliothèque des compétences, des livres et du dortoir uniquement lorsque le contenu dépasse de la zone visible, avec mise à jour au redimensionnement de la fenêtre
 
 ---
 

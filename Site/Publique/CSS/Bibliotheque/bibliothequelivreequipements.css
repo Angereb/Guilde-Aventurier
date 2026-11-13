@@ -115,7 +115,6 @@ body {
 
 .page-suivante, .page-precedente {
     width: min(40vw, 10rem);
-    height: auto;
     aspect-ratio: 97 / 24;
     background-image: url(../../Images/fleche-directionnel-papier.svg);
     background-size: 100% 100%;

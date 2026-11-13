@@ -41,6 +41,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     position:relative;
+    cursor: pointer;
 }
 
 .nav-bibliotheque {
@@ -102,6 +103,7 @@ body {
     border: none;
     padding: 0;
     background-color: var(--ecriteau);
+    cursor: pointer;
 }
 
 .zone-annonces {
@@ -162,6 +164,12 @@ body {
     justify-content: safe center;
     text-align: center;
     overflow-y: auto;
+    gap: 0.3rem;
+}
+
+.annonce-formulaire {
+    display: grid;
+    gap: 0.3rem;
 }
 
 .lecture-contenu-annonce {

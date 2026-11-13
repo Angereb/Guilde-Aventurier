@@ -51,7 +51,6 @@ body {
 
 .etagere-categorie {
     width: 40cqw;
-    height: auto;
     aspect-ratio: 150/50;
     background-image: url("../../Images/affichage-bibliotheque.svg");
     background-size: 100% 100%;
@@ -59,6 +58,7 @@ body {
     background-position: center;
     place-self: center;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .etagere-categorie-arme {
@@ -92,7 +92,6 @@ body {
 
 .retour-fleche-droite {
     width: min(40vw, 10rem);
-    height: auto;
     aspect-ratio: 97 / 24;
     background-image: url(../../Images/fleche-directionnel.svg);
     background-size: 100% 100%;

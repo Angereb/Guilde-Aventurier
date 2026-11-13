@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . "/../../Modeles/Annonces/Annonce.php";
 require_once __DIR__ . "/../../Modeles/Annonces/AnnonceModele.php";
-require_once __DIR__ . "/../../Modeles/Utilisateurs/Utilisateur.php";
 require_once __DIR__ . "/../../Modeles/Utilisateurs/UtilisateurModele.php";
 
 if (!isset($_SESSION["utilisateur"])) {
@@ -14,6 +12,8 @@ $titre = "Hall";
 $css = ["Hall/hall.css"];
 
 $javascript = ["Hall/hall.js"];
+
+$roles = $_SESSION["utilisateur"]["roles"] ?? [];
 
 $annonceModele = new AnnonceModele();
 $annonces = $annonceModele->rechercherDernieres(6);

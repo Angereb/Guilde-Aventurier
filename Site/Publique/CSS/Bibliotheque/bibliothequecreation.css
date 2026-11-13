@@ -29,13 +29,15 @@ body {
 .ouverture-modale-equipement,
 .ouverture-modale-maitrise,
 .ouverture-modale-competence {
+    width: min(100cqw, 21cqh * 265 / 201);
+    aspect-ratio: 265 / 201;
+    place-self: center; 
     border: none;
     padding: 0;
     background-image: url("../../Images/livre.svg");
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    margin: 2cqh 0 2cqh 0;
     cursor: pointer;
 }
 
@@ -60,7 +62,6 @@ body {
 
 .retour-fleche-droite {
     width: min(25vw, 6rem);
-    height: auto;
     aspect-ratio: 35 / 24;
     background-image: url(../../Images/fleche-directionnel-bas-papier.svg);
     background-size: 100% 100%;

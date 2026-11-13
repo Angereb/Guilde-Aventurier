@@ -65,8 +65,8 @@
         </div>
     </div>
     <nav class="navigation-pages" aria-label="Pages du livre">
-        <button type="button" id="pagePrecedente" class="page-precedente" aria-label="Page précédente"></button>
-        <button type="button" id="pageSuivante" class="page-suivante" aria-label="Page suivante"></button>
+        <button type="button" id="pagePrecedente" class="page-precedente" aria-label="Page précédente" hidden></button>
+        <button type="button" id="pageSuivante" class="page-suivante" aria-label="Page suivante" hidden></button>
     </nav>
 </main>
 

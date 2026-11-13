@@ -1,6 +1,6 @@
 const etageresCompetences = document.querySelector(".etageres-competences");
-const rangeePrecedente = document.getElementById("rangeePrecedente");
-const rangeeSuivante = document.getElementById("rangeeSuivante");
+const bibliothequePrecedente = document.getElementById("bibliothequePrecedente");
+const bibliothequeSuivante = document.getElementById("bibliothequeSuivante");
 
 function allerALaRangee(decalage) {
     const vertical = window.matchMedia("(min-width: 768px)").matches;
@@ -14,10 +14,30 @@ function allerALaRangee(decalage) {
     }
 }
 
-rangeeSuivante.addEventListener("click", function () {
+function afficherFlecheNavigation() {
+    const vertical = window.matchMedia("(min-width: 768px)").matches;
+    let contenuDepasse;
+    if (vertical) {
+        contenuDepasse = etageresCompetences.scrollHeight > etageresCompetences.clientHeight + 1;
+    } else {
+        contenuDepasse = etageresCompetences.scrollWidth > etageresCompetences.clientWidth + 1;
+    }
+    if (contenuDepasse) {
+        bibliothequePrecedente.hidden = false;
+        bibliothequeSuivante.hidden = false;
+    } else {
+        bibliothequePrecedente.hidden = true;
+        bibliothequeSuivante.hidden = true;
+    }
+}
+
+bibliothequeSuivante.addEventListener("click", function () {
     allerALaRangee(1);
 });
 
-rangeePrecedente.addEventListener("click", function () {
+bibliothequePrecedente.addEventListener("click", function () {
     allerALaRangee(-1);
 });
+
+window.addEventListener("resize", afficherFlecheNavigation);
+afficherFlecheNavigation();

@@ -1,7 +1,5 @@
 <?php
-require_once __DIR__ . '/../../Modeles/Utilisateurs/Utilisateur.php';
-$roles = $_SESSION["utilisateur"]["roles"] ?? [];
-
+/**@var array $roles */
 /**@var array $annonces */
 /**@var array $auteurs */
 ?>

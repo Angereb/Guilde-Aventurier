@@ -26,8 +26,8 @@
                 </nav>
             </div>
             <nav class="navigation-dortoir" aria-label="Dortoirs">
-                <button type="button" id="dortoirPrecedent" class="dortoir-precedent" aria-label="Dortoir précédent"></button>
-                <button type="button" id="dortoirSuivant" class="dortoir-suivant" aria-label="Dortoir suivant"></button>
+                <button type="button" id="dortoirPrecedent" class="dortoir-precedent" aria-label="Dortoir précédent" hidden></button>
+                <button type="button" id="dortoirSuivant" class="dortoir-suivant" aria-label="Dortoir suivant" hidden></button>
             </nav>
         <?php else: ?>
             <div class="message-pas-aventurier">

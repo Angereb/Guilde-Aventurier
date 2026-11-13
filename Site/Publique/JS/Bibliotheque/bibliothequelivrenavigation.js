@@ -14,6 +14,16 @@ function allerALaPage(decalage) {
     zoneLivre.scrollTo({ left: (pageActuelle + decalage) * pas, behavior: "smooth" });
 }
 
+function afficherFlecheNavigation() {
+    if (zoneLivre.scrollWidth > zoneLivre.clientWidth + 1) {
+        pagePrecedente.hidden = false;
+        pageSuivante.hidden = false;
+    } else {
+        pagePrecedente.hidden = true;
+        pageSuivante.hidden = true;
+    }
+}
+
 pageSuivante.addEventListener("click", function () {
     allerALaPage(1);
 });
@@ -21,3 +31,6 @@ pageSuivante.addEventListener("click", function () {
 pagePrecedente.addEventListener("click", function () {
     allerALaPage(-1);
 });
+
+window.addEventListener("resize", afficherFlecheNavigation);
+afficherFlecheNavigation();

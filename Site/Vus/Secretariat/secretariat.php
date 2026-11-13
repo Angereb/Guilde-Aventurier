@@ -7,13 +7,13 @@
             <div class="plateau-bureau">
                 <nav class="secretariat-livre">
                     <div class="secretariat-inscription">
-                        <a href="?page=inscription"><span>Inscription</span></a>
+                        <a class="lien-remplissant" href="?page=inscription"><span>Inscription</span></a>
                     </div>
                     <div class="secretariat-connexion">
-                        <a href="?page=connexion"><span>Connexion</span></a>
+                        <a class="lien-remplissant" href="?page=connexion"><span>Connexion</span></a>
                     </div>
                     <div class="secretariat-inscription-connexion">
-                        <a href="?page=inscriptionetconnexion"><span>Inscription</span><span>Connexion</span></a>
+                        <a class="lien-remplissant" href="?page=inscriptionetconnexion"><span>Inscription</span><span>Connexion</span></a>
                     </div>
                 </nav>
             </div>

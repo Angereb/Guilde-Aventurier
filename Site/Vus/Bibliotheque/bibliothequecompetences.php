@@ -24,8 +24,8 @@
         </nav>
     </div>
     <nav class="navigation-bibliotheques" aria-label="Bibliothèque">
-        <button type="button" id="bibliothequePrecedente" class="bibliotheque-precedente" aria-label="Bibliothèques précédente"></button>
-        <button type="button" id="bibliothequeSuivante" class="bibliotheque-suivante" aria-label="Bibliothèques suivante"></button>
+        <button type="button" id="bibliothequePrecedente" class="bibliotheque-precedente" aria-label="Bibliothèque précédente" hidden></button>
+        <button type="button" id="bibliothequeSuivante" class="bibliotheque-suivante" aria-label="Bibliothèque suivante" hidden></button>
     </nav>
     <nav class="retour-bibliotheque" aria-label="Retour">
         <a href="?page=bibliothequeentree" class="retour-fleche-gauche" aria-label="Retour vers l'entrée de la bibliothèque"></a>

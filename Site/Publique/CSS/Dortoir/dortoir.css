@@ -58,14 +58,14 @@ body {
 }
 
 .lit-aventurier {
-    width: min(175cqw, 100cqh / 3 * 415 / 221);
-    height: auto;
+    width: min(175cqw, 100cqh / 3 * 415 / 221);    
     aspect-ratio: 415/221;
     background-image: url(../../Images/lit-dortoir.svg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     display: grid;
     place-items: center;
+    text-decoration: none;
 }
 
 .colonne-lits:nth-child(odd) .lit-aventurier {
@@ -101,7 +101,6 @@ body {
 
 .dortoir-precedent, .dortoir-suivant {
     width: min(40vw, 10rem);
-    height: auto;
     aspect-ratio: 97 / 24;
     background-image: url(../../Images/fleche-directionnel.svg);
     background-size: 100% 100%;
@@ -133,8 +132,6 @@ body {
 }
 
 .message-pas-aventurier p a{
-    display: inline;
-    color: inherit;
     text-decoration: underline;
     font-weight: bold;
 }
@@ -146,11 +143,6 @@ body {
 
     .lit-aventurier {
         width: min(100cqw, 100cqh / 3 * 415 / 221);
-    }
-
-    .colonne-lits:nth-child(odd) .lit-aventurier,
-    .colonne-lits:nth-child(even) .lit-aventurier {
-        justify-self: center;
     }
 
     .lit-aventurier span {
