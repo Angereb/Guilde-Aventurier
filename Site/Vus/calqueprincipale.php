@@ -12,7 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars($titre ?? 'Guilde des Aventuriers') ?></title>
-
+    <link rel="icon" type="image/svg+xml" href="/Site/Publique/Images/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Site/Publique/Images/favicon.png">
     <link rel="stylesheet" href="/Site/Publique/CSS/style.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/style.css") ?>">
     <link rel="stylesheet" href="/Site/Publique/CSS/Composants/entete.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/Composants/entete.css") ?>">
     <link rel="stylesheet" href="/Site/Publique/CSS/Composants/notification.css?v=<?= filemtime(__DIR__ . "/../Publique/CSS/Composants/notification.css") ?>">

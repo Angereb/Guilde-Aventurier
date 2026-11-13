@@ -868,6 +868,22 @@ Ce journal a été rédigé au cour du développement du projet Guilde des Avent
 
 ---
 
+## 13 Novembre
+
+### Objectifs
+
+- Diverses finalisations avant v1.0
+
+### Réalisations
+
+- Création d'un logo pour l'icône du site sur Figma
+- Insertion du logo dans le head du calque principal
+- Création d'un compte MongoDB à droits limités pour le site et script d'initialisation de Mongo pour prendre en compte que le site est limité en écriture et lecture, mais uniquement dans la base du site, avec le compte créé pour lui
+- Suppression totale des bases de données et des conteneurs Docker pour partir sur de nouvelles bases solides
+- Ajout de Caractéristiques dans le Schema.sql du site pour qu'elles soit recréées en même temps que la base lors du lancement du conteneur Docker
+
+---
+
 ## Prochaine étape
 
 - Déploiement

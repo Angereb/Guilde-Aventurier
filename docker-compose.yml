@@ -13,8 +13,8 @@ services:
       MONGO_HOST: ${MONGO_HOST}
       MONGO_PORT: ${MONGO_PORT}
       MONGO_DATABASE: ${MONGO_DATABASE}
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_UTILISATEUR_SITE: ${MONGO_UTILISATEUR_SITE}
+      MONGO_MOT_DE_PASSE_SITE: ${MONGO_MOT_DE_PASSE_SITE}
     volumes:
       - ./:/var/www/html
     depends_on:
@@ -44,8 +44,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_UTILISATEUR_SITE: ${MONGO_UTILISATEUR_SITE}
+      MONGO_MOT_DE_PASSE_SITE: ${MONGO_MOT_DE_PASSE_SITE}
+      MONGO_DATABASE: ${MONGO_DATABASE}
     volumes:
       - donnees_mongo:/data/db
+      - ./Docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
   mongo-express:
     image: mongo-express

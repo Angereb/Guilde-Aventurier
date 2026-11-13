@@ -297,3 +297,15 @@ CREATE TABLE relations_utilisateurs(
         REFERENCES utilisateurs(utilisateurId)
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO caracteristiques (nom, descriptions)
+VALUES ('Force', 'Caractéristique musculaire d\'un aventurier.');
+
+INSERT INTO caracteristiques (nom, descriptions)
+VALUES ('Robustesse', 'Caractéristique de la capacité d\'un aventurier à être robuste.');
+
+INSERT INTO caracteristiques (nom, descriptions)
+VALUES ('Esprit', 'Caractéristique d\'un aventurier pour l\'utilisation de ses sens et de sa réflexion.');
+
+INSERT INTO caracteristiques (nom, descriptions)
+VALUES ('Agilité', 'Caractéristique d\'un aventurier pour les jeux d\'adresse et son habileté de mouvement.');

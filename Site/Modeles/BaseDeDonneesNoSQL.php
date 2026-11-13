@@ -38,7 +38,7 @@ class BaseDeDonneesNoSQL {
                 . rawurlencode(self::$utilisateurBaseNoSql) . ":"
                 . rawurlencode(self::$motDePasseBaseNoSql) . "@"
                 . self::$serveurNoSql . ":"
-                . self::$portNoSql . "/?authSource=admin";
+                . self::$portNoSql . "/?authSource=" . rawurlencode(self::$baseNoSql);
             try {
                 $client = new Client($uri);
                 self::$base = $client->selectDatabase(self::$baseNoSql);
