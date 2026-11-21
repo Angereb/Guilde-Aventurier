@@ -45,7 +45,7 @@
                         <?php if ($iconeAventurier): ?>
                             <img src="<?= htmlspecialchars($iconeAventurier) ?>" id="apercuIconeAventurier" class="apercu-icone" alt="Icône de l'aventurier">
                         <?php else: ?>
-                            <img id="apercuIconeAventurier" class="apercu-icone" alt="" hidden>
+                            <img id="apercuIconeAventurier" class="apercu-icone" src="data:," alt="" hidden>
                         <?php endif ?>
                         <span class="visuellement-cache">Choisir une icône</span>
                     </label>
@@ -138,7 +138,7 @@
             <ul id="competence" aria-live="polite"></ul>
             <template id="modeleZoneCompetence">
                 <li class="zone-competence">
-                    <h3 class="nom-competence"></h3>
+                    <h2 class="nom-competence"></h2>
                     <p class="recueil-competence"></p>
                     <p class="descriptions-competence"></p>
                     <div class="modificateur-competence">

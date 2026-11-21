@@ -213,6 +213,10 @@ body {
     padding: 0.5rem;
 }
 
+.nom-competence {
+    font-size: 1.1rem;
+}
+
 .cout-pe-competence {
     justify-self: right;
 }
