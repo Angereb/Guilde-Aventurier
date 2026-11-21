@@ -147,7 +147,7 @@
         </fieldset>
         <div class="bas-de-fiche">
             <nav class="retour-taverne" aria-label="Retour">
-                <a href="?page=taverne" class="fleche-retour" aria-label="Retour vers la taverne"></a>
+                <a href="?page=taverne" class="fleche-retour lien-remplissant" aria-label="Retour vers la taverne"></a>
             </nav>
             <div class="zone-pc">
                 <output id="pcAventurier" class="aventurier-pc" aria-label="Points de compagnie"></output>

@@ -157,7 +157,7 @@
         </fieldset>
         <div class="bas-de-fiche">
             <nav class="retour-dortoir" aria-label="Retour">
-                <a href="?page=dortoir" class="fleche-retour" aria-label="Retour vers le dortoir"></a>
+                <a href="?page=dortoir" class="fleche-retour lien-remplissant" aria-label="Retour vers le dortoir"></a>
             </nav>
             <div class="zone-pc">
                 <output id="pcAventurier" class="aventurier-pc" aria-label="Points de compagnie"></output>
