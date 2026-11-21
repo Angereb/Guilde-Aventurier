@@ -3,7 +3,7 @@ services:
   site:
     build: .
     ports:
-      - "8080:80"
+      - "${PORT_SITE:-8080}:80"
     environment:
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
